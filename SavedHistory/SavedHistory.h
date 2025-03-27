@@ -19,7 +19,7 @@ class SavedHistory
         SavedHistory();
         
     private:
-        std::unordered_map<Date,int,int,int> dates;
+        std::unordered_map<Date,int> dates;
 
 };
 #endif
