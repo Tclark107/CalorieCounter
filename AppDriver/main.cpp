@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "FoodItem.h"
+#include "SavedHistory.h"
 
 int main()
 {
