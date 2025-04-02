@@ -17,9 +17,9 @@ class Date
         unsigned char getMonth() const { return month; }
         unsigned char getDay() const { return day; }
 
-    bool operator==(const Date& other) const {
-        return (year == other.year) && (month == other.month) && (day == other.day);
-    }
+        bool operator==(const Date& other) const {
+         return (year == other.year) && (month == other.month) && (day == other.day);
+        }
 
     private:
         int year;
@@ -40,11 +40,15 @@ class CalorieHistory
     public:
         CalorieHistory();
         Date getCurrentDate();
+
+        int getTotalDaysCalories(Date date);
+        
         bool checkDate(Date date); // This might be an unneeded function
                                     // Why would the user want to check if the current date
                                     // is there a reason to have this?
                                     // I could see the user maybe wanting to get a specific date??
         void saveDate(Date date);
+        void saveDate(Date date, FoodItem item);
         
     private:
         std::vector<std::pair<Date,std::vector<FoodItem>>> history;

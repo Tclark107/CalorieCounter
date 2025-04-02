@@ -31,14 +31,35 @@ void CalorieHistory::saveDate(Date date)
     //TODO: write a date output overwritten function"
     //TODO: do this using error calls or exceptions
 
-    if(checkDate(date))
-    {
-        std::cout << "Why are you trying to save a date that is "
-            << "already saved" << std::endl;
-        return;
-    }
+    //if(checkDate(date))
+    //{
+    //    std::cout << "Why are you trying to save a date that is "
+    //        << "already saved" << std::endl;
+    //    return;
+    //}
 
     history.push_back(std::make_pair(date,std::vector<FoodItem>()));
+}
+
+void CalorieHistory::saveDate(Date date, FoodItem item)
+{
+    // TODO:findDate Function that returns an Index of where the date is
+    // If date found then do this
+    bool dateFound = false;
+    for(int i = i = history.size() - 1; i >= 0; i--)
+    {
+        if(date == history[i].first)
+        {
+            history[i].second.push_back(item);
+            dateFound = true;
+        }
+    }
+    if(!dateFound)
+    {
+        std::vector<FoodItem> newEntry;
+        newEntry.push_back(item);
+        history.push_back(std::make_pair(date, newEntry));
+    }
 }
 
 bool CalorieHistory::checkDate(Date date)
@@ -54,3 +75,19 @@ bool CalorieHistory::checkDate(Date date)
     return false;
 }
 
+int CalorieHistory::getTotalDaysCalories(Date date)
+{
+    int result = 0;
+    for(int i = history.size() - 1; i >= 0; i--)
+    {
+        // make a find date function
+        if(date == history[i].first)
+        {
+            for(auto entry : history[i].second)
+            {
+                result += entry.getCalories();
+            }
+        }
+    }
+    return result;
+}
