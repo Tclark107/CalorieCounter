@@ -6,6 +6,8 @@
 
 int main()
 {
+    //1) Load In History by calling DBInterface
+    //2) Kick of UserLoop
     std::string name = "Chicken";
     int calories = 45;
     double proteins = 8;
@@ -23,9 +25,10 @@ int main()
     FoodItem fish("fish", calories, proteins, fats, carbs);
 
     DBInterface dbInterface;
-
     CalorieHistory& ch = CalorieHistory::getInstance();
+
     std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
+    dbInterface.updateCalorieHistory();
 
     Date today = ch.getCurrentDate();
 

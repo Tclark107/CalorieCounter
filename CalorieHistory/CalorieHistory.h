@@ -29,8 +29,8 @@ class Date
 
 inline std::ostream& operator<<(std::ostream& os, const Date& date)
 {
-    os << std::setw(4) << std::setfill('0') << date.getYear() << '-'
-       << std::setw(2) << std::setfill('0') << static_cast<int>(date.getMonth()) << '-'
+    os << std::setw(4) << std::setfill('0') << date.getYear() << ' '
+       << std::setw(2) << std::setfill('0') << static_cast<int>(date.getMonth()) << ' '
        << std::setw(2) << std::setfill('0') << static_cast<int>(date.getDay());
     return os;
 }
@@ -58,6 +58,7 @@ class CalorieHistory
         void saveDate(Date date);
         void saveDate(Date date, FoodItem item);
         
+        void showHistory();
         std::vector<std::pair<Date,std::vector<FoodItem>>>& getHistory()
         {
             return history;

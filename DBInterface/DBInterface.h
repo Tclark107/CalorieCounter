@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #include "CalorieHistory.h"
@@ -11,7 +12,7 @@ class DBInterface {
     public:
         DBInterface();
         void saveCalorieHistory();
-        std::vector<std::pair<Date,std::vector<FoodItem>>> getCalorieHistory();
+        void updateCalorieHistory();
         //void getFoodHistory();
         //void saveFoodHistory();
 };

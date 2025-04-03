@@ -85,3 +85,9 @@ int CalorieHistory::getTotalDaysCalories(Date date)
     }
     return result;
 }
+
+void CalorieHistory::showHistory()
+{
+
+}
+

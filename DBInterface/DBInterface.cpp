@@ -20,12 +20,15 @@ void DBInterface::saveCalorieHistory()
     {
         outFile << entry.first << " "
                 << ch.getTotalDaysCalories(entry.first) << " ";
-        for(int i = 0; i < entry.second.size() - 1; i++)
+
+        int numberOfEntries = entry.second.size();
+        outFile << numberOfEntries << " ";
+        for(int i = 0; i < numberOfEntries; i++)
         {
-            outFile << entry.second[i].getName() << " "
-                    << entry.second[i].getCalories() << " "
-                    << entry.second[i].getProteins() << " "
-                    << entry.second[i].getFats() << " "
+            outFile << entry.second[i].getName() << "-"
+                    << entry.second[i].getCalories() << "-"
+                    << entry.second[i].getProteins() << "-"
+                    << entry.second[i].getFats() << "-"
                     << entry.second[i].getCarbohydrates() << " ";
         }
         outFile << "\n";
@@ -34,7 +37,7 @@ void DBInterface::saveCalorieHistory()
     outFile.close();
 }
 
-std::vector<std::pair<Date,std::vector<FoodItem>>> getCalorieHistory()
+void DBInterface::updateCalorieHistory()
 {
     std::ifstream inFile("../TristanDB/exampleHistoryIn.txt");
     if(!inFile)
@@ -42,18 +45,61 @@ std::vector<std::pair<Date,std::vector<FoodItem>>> getCalorieHistory()
         std::cerr << "Error opening file for reading. \n";
     }
 
-    std::vector<std::pair<Date,std::vector<FoodItem>>> result;
+    CalorieHistory& ch = CalorieHistory::getInstance();
+    std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
+
+    std::vector<std::vector<std::string>> historyData;
     
-    //TODO: save history
     std::string line;
+    std::string word;
     while(std::getline(inFile, line))
     {
-        std::cout << line << std::endl;
+        std::istringstream iss(line);
+        std::vector<std::string> words;
+        while(iss >> word)
+        {
+            words.push_back(word);
+        }
+        historyData.push_back(words);
     }
-
-    inFile.close();
     
-    return result;
-}
+    
+    for(int i = 0; i < historyData.size(); i++)
+    {
+        //Note: If string contains non-numeric characters stoi or stoul will throw std:invalid_argument
+        // perhaps do some error checking
+        int year = std::stoi(historyData[i][0]);
+        unsigned char month = static_cast<unsigned char>(std::stoul(historyData[i][1]));
+        unsigned char day = static_cast<unsigned char>(std::stoul(historyData[i][2]));
+        Date date(year, month, day);    
+        std::cout << "date = " << date << std::endl;
 
+        int numberOfEntries = std::stoi(historyData[i][4]);
+        for(int j = 5; j < historyData[i].size(); j++)
+        {
+            std::vector<std::string> foodItem;
+            std::cout << "hDik = " << historyData[i][j] << std::endl;
+            std::stringstream ss(historyData[i][j]);
+            std::string foodData;
+            while(std::getline(ss, foodData, '-'))
+            {
+                std::cout << "foodData - " << foodData << std::endl;
+                foodItem.push_back(foodData);
+            }
+            
+            std::cout << "fI1 " << foodItem[1] << std::endl;
+            FoodItem food(foodItem[0],
+                          std::stoi(foodItem[1]),
+                          std::stod(foodItem[2]),
+                          std::stod(foodItem[3]),
+                          std::stod(foodItem[4]));
+
+            ch.saveDate(date,food);
+
+        }
+            //std::cout << historyData[i][j] << " ";
+    }
+        //std::cout << "\n";
+    inFile.close();
+}
 
