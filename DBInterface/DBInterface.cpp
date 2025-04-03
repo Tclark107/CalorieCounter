@@ -18,7 +18,8 @@ void DBInterface::saveCalorieHistory()
 
     for(auto& entry : history)
     {
-        outFile << entry.first << " ";
+        outFile << entry.first << " "
+                << ch.getTotalDaysCalories(entry.first) << " ";
         for(int i = 0; i < entry.second.size() - 1; i++)
         {
             outFile << entry.second[i].getName() << " "
