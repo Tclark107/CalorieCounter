@@ -45,3 +45,12 @@ double FoodItem::getCarbohydrates()
 {
     return carbohydrates;
 }
+
+std::ostream& operator<<(std::ostream& os, const FoodItem& food) {
+        os << food.getName() << " ";
+           << food.getCalories() << " ";
+           << food.getProteins() << " ";
+           << food.getFats() << " ";
+           << food.getCarbohydrates() << "\n";
+        return os;
+}

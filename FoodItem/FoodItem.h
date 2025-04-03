@@ -2,6 +2,7 @@
 #define FOODITEM_H
 
 #include <string>
+#include <iostream>
 
 class FoodItem {
     public:
