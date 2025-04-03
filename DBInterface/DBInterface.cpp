@@ -72,22 +72,18 @@ void DBInterface::updateCalorieHistory()
         unsigned char month = static_cast<unsigned char>(std::stoul(historyData[i][1]));
         unsigned char day = static_cast<unsigned char>(std::stoul(historyData[i][2]));
         Date date(year, month, day);    
-        std::cout << "date = " << date << std::endl;
 
         int numberOfEntries = std::stoi(historyData[i][4]);
         for(int j = 5; j < historyData[i].size(); j++)
         {
             std::vector<std::string> foodItem;
-            std::cout << "hDik = " << historyData[i][j] << std::endl;
             std::stringstream ss(historyData[i][j]);
             std::string foodData;
             while(std::getline(ss, foodData, '-'))
             {
-                std::cout << "foodData - " << foodData << std::endl;
                 foodItem.push_back(foodData);
             }
             
-            std::cout << "fI1 " << foodItem[1] << std::endl;
             FoodItem food(foodItem[0],
                           std::stoi(foodItem[1]),
                           std::stod(foodItem[2]),
@@ -97,9 +93,7 @@ void DBInterface::updateCalorieHistory()
             ch.saveDate(date,food);
 
         }
-            //std::cout << historyData[i][j] << " ";
     }
-        //std::cout << "\n";
     inFile.close();
 }
 

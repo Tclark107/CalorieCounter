@@ -8,4 +8,5 @@ add_subdirectory(CalorieHistory)
 add_subdirectory(FoodItem)
 add_subdirectory(AppDriver)
 add_subdirectory(DBInterface)
+add_subdirectory(UserInterface)
 

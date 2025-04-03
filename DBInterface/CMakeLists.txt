@@ -1,4 +1,7 @@
-add_library(DBInterface DBInterface.cpp)
+add_library(DBInterface 
+            DBInterface.cpp
+            ${PROJECT_SOURCE_DIR}/CalorieHistory/CalorieHistory.cpp
+            ${PROJECT_SOURCE_DIR}/FoodItem/FoodItem.cpp)
 
 target_include_directories(DBInterface PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}
