@@ -6,12 +6,6 @@ Date::Date(int year, unsigned char month, unsigned char day) :
     day (day)
 {}
 
-CalorieHistory::CalorieHistory()
-{
-    Date today = getCurrentDate();
-    saveDate(today);
-}
-
 Date CalorieHistory::getCurrentDate()
 {
     std::time_t t = std::time(nullptr);

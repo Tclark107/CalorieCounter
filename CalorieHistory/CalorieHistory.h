@@ -38,7 +38,15 @@ inline std::ostream& operator<<(std::ostream& os, const Date& date)
 class CalorieHistory
 {
     public:
-        CalorieHistory();
+        static CalorieHistory& getInstance()
+        {
+            static CalorieHistory instance;
+            return instance;
+        }
+
+        CalorieHistory(const CalorieHistory&) = delete;
+        void operator=(const CalorieHistory&) = delete;
+
         Date getCurrentDate();
 
         int getTotalDaysCalories(Date date);
@@ -50,8 +58,16 @@ class CalorieHistory
         void saveDate(Date date);
         void saveDate(Date date, FoodItem item);
         
+        std::vector<std::pair<Date,std::vector<FoodItem>>>& getHistory()
+        {
+            return history;
+        }
+        
+        
     private:
         std::vector<std::pair<Date,std::vector<FoodItem>>> history;
+        CalorieHistory() {};
 
 };
+
 #endif

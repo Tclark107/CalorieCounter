@@ -2,6 +2,7 @@
 #include <ctime>
 
 #include "CalorieHistory.h"
+#include "DBInterface.h"
 
 int main()
 {
@@ -21,21 +22,27 @@ int main()
     FoodItem pbut("pbut", calories, proteins, fats, carbs);
     FoodItem fish("fish", calories, proteins, fats, carbs);
 
-    CalorieHistory history;
-    Date today = history.getCurrentDate();
-    
+    DBInterface dbInterface;
+
+    CalorieHistory& ch = CalorieHistory::getInstance();
+    std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
+
+    Date today = ch.getCurrentDate();
+
     std::cout << "Todays date is " << today << std::endl;
-    calories = history.getTotalDaysCalories(today);
+    calories = ch.getTotalDaysCalories(today);
     std::cout << "Today you ate " << calories << " calories. ";
     std::cout << "What would you like to do now? " << std:: endl;
-    history.saveDate(today,beef);
-    history.saveDate(today,yogurt);
-    history.saveDate(today,beef);
-    history.saveDate(today,shake);
-    history.saveDate(today,pbut);
+    ch.saveDate(today,beef);
+    ch.saveDate(today,yogurt);
+    ch.saveDate(today,beef);
+    ch.saveDate(today,shake);
+    ch.saveDate(today,pbut);
 
-    calories = history.getTotalDaysCalories(today);
+    calories = ch.getTotalDaysCalories(today);
     std::cout << "Today you ate " << calories << " calories. ";
+
+    dbInterface.saveCalorieHistory();
     //if(todaysCalories == 0)
     //{
     //    int userCal = 0;

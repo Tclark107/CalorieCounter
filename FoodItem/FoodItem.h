@@ -12,6 +12,7 @@ class FoodItem {
                  double fats, 
                  double carbohydrates);
 
+        std::string getName();
         int getCalories();
         double getProteins();
         double getFats();

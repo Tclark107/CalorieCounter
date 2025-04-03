@@ -21,6 +21,11 @@ FoodItem::FoodItem(std::string name,
     carbohydrates (carbohydrates)
 {}
 
+std::string FoodItem::getName()
+{
+    return name;
+}
+
 int FoodItem::getCalories()
 {
     return calories;
