@@ -7,14 +7,15 @@
 #include <string>
 
 #include "CalorieHistory.h"
+#include "FoodLibrary.h"
 
 class DBInterface {
     public:
         DBInterface();
         void saveCalorieHistory();
         void updateCalorieHistory();
-        //void getFoodHistory();
-        //void saveFoodHistory();
+        void updateFoodLibrary();
+        void saveFoodLibrary();
 };
 
 #endif

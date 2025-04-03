@@ -4,18 +4,11 @@
 #include "DBInterface.h"
 #include "UserInterface.h"
 
-void loadCalorieHistory()
-{
-    DBInterface dbInterface;
-    CalorieHistory& ch = CalorieHistory::getInstance();
-
-    std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
-    dbInterface.updateCalorieHistory();
-}
-
 int main()
 {
-    loadCalorieHistory();
+    DBInterface dbInterface;
+    dbInterface.updateCalorieHistory();
+    dbInterface.updateFoodLibrary();
 
     UserInterface UI;
     UI.UserInterfaceStart();

@@ -49,7 +49,10 @@ class CalorieHistory
 
         Date getCurrentDate();
 
-        int getTotalDaysCalories(Date date);
+        int getTotalCalories(Date date);
+        double getTotalProteins(Date date);
+        double getTotalFats(Date date);
+        double getTotalCarbohydrates(Date date);
         
         bool checkDate(Date date); // This might be an unneeded function
                                     // Why would the user want to check if the current date
@@ -59,6 +62,7 @@ class CalorieHistory
         void saveDate(Date date, FoodItem item);
         
         void showHistory();
+
         std::vector<std::pair<Date,std::vector<FoodItem>>>& getHistory()
         {
             return history;

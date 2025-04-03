@@ -19,7 +19,7 @@ void DBInterface::saveCalorieHistory()
     for(auto& entry : history)
     {
         outFile << entry.first << " "
-                << ch.getTotalDaysCalories(entry.first) << " ";
+                << ch.getTotalCalories(entry.first) << " ";
 
         int numberOfEntries = entry.second.size();
         outFile << numberOfEntries << " ";
@@ -95,5 +95,13 @@ void DBInterface::updateCalorieHistory()
         }
     }
     inFile.close();
+}
+
+void DBInterface::updateFoodLibrary()
+{
+}
+
+void DBInterface::saveFoodLibrary()
+{
 }
 
