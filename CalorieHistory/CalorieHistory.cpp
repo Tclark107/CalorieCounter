@@ -146,8 +146,9 @@ void CalorieHistory::showHistory()
     for(int i = history.size() - 1; i >= 0; i--)
     {
         std::cout << history[i].first << ": ";
-        for(int j = 0; j < history[i].second.size() - 1; j++)
+        for(int j = 0; j < history[i].second.size(); j++)
         {
+
             std::cout << history[i].second[j] << " - ";
         }
         std::cout << std::endl;
