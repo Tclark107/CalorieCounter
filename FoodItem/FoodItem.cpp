@@ -27,7 +27,7 @@ std::string FoodItem::getName()
 }
 
 int FoodItem::getCalories()
-{
+{ 
     return calories;
 }
 
@@ -44,13 +44,39 @@ double FoodItem::getFats()
 double FoodItem::getCarbohydrates()
 {
     return carbohydrates;
+} 
+
+void FoodItem::setName(std::string name)
+{
+	this->name = name;
 }
 
-std::ostream& operator<<(std::ostream& os, const FoodItem& food) {
-        os << food.getName() << " ";
-           << food.getCalories() << " ";
-           << food.getProteins() << " ";
-           << food.getFats() << " ";
+void FoodItem::setCalories(int calories)
+{
+	this->calories = calories;
+}
+
+void FoodItem::setProteins(double proteins)
+{
+	this->proteins = proteins;
+}
+
+void FoodItem::setFats(double fats)
+{
+	this->fats = fats;
+}
+
+void FoodItem::setCarbohydrates( double carbohydrates)
+{
+	this->carbohydrates = carbohydrates;
+}
+
+
+std::ostream& operator<<(std::ostream& os, FoodItem& food) {
+        os << food.getName() << " "
+           << food.getCalories() << " "
+           << food.getProteins() << " "
+           << food.getFats() << " "
            << food.getCarbohydrates() << "\n";
         return os;
 }

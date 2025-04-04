@@ -2,7 +2,7 @@
 #include <string>
 
 #include "CalorieHistory.h"
-//#include "FoodLibrary.h"
+#include "FoodLibrary.h"
 
 class UserInterface {
     public:

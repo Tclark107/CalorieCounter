@@ -7,7 +7,6 @@ void DBInterface::saveCalorieHistory()
     //TODO: if file exists, otherwise create it"
     //TODO: make this relative path
     std::ofstream outFile("../TristanDB/exampleHistoryOut.txt");
-
     if(!outFile)
     {
         std::cerr << "Error opening file for writing.\n";
@@ -99,9 +98,27 @@ void DBInterface::updateCalorieHistory()
 
 void DBInterface::updateFoodLibrary()
 {
+	std::ifstream inFile("../TristanDB/exampleFoodLibraryIn.txt");
+    if(!inFile)
+    {
+        std::cerr << "Error opening file for reading. \n";
+    }
+
+	FoodLibrary& fl = FoodLibrary::getInstance();
+	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
+
+	//std::string
+
 }
 
 void DBInterface::saveFoodLibrary()
 {
-}
+	std::ofstream outFile("../TristanDB/exampleFoodLibraryOut.txt");
+    if(!outFile)
+    {
+        std::cerr << "Error opening file for writing.\n";
+    }
 
+	FoodLibrary& fl = FoodLibrary::getInstance();
+	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
+}

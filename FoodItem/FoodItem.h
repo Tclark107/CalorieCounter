@@ -19,11 +19,11 @@ class FoodItem {
         double getFats();
         double getCarbohydrates();
 
-        //std::string setName(std::string name);
-        //void setCalories(int calories);
-        //void setProteins(double proteins);
-        //void setFats(double fats);
-        //void setCarbohydrates(double carbohydrates);
+        void setName(std::string name);
+        void setCalories(int calories);
+        void setProteins(double proteins);
+        void setFats(double fats);
+        void setCarbohydrates(double carbohydrates);
 
     private:
         std::string name;

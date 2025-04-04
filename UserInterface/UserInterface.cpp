@@ -17,13 +17,14 @@ void UserInterface::todaysData(Date today)
         << carbs << " grams of carbohydrates.\n";
 }
 
-
-
 void UserInterface::UserInterfaceStart()
 {
     std::cout << "Hello! I am your calorie tracker! \n";
     Date today = ch.getCurrentDate();
     todaysData(today);
+
+	FoodLibrary& fl = FoodLibrary::getInstance();
+	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
 
     bool exit = false;
     while(!exit)
@@ -39,29 +40,29 @@ void UserInterface::UserInterfaceStart()
             std::cout << "What would you like to track today?\n";
             std::string foodItem;
             std::cin >> foodItem;
-            //if(foodLibrary.find(foodItem) != foodLibrary.end())
-            //{
-            //    //std::cout << "What amount in oz did you eat?\n"; 
-            //    ch.saveDate(today, foodLibrary[foodItem]);
-            //}
-            //else
-            //{
-            //    std::cout << "I don't have that in my library yet.\n";
-            //    //std::cout << "What is the serving siz for " << foodItem;
-            //    //std::string servingSize;
-            //    //std::cin >> servingSize;
+            if(foodLibrary.find(foodItem) != foodLibrary.end())
+            {
+                //std::cout << "What amount in oz did you eat?\n"; 
+                ch.saveDate(today, foodLibrary[foodItem]);
+            }
+            else
+            {
+                std::cout << "I don't have that in my library yet.\n";
+                //std::cout << "What is the serving siz for " << foodItem;
+                //std::string servingSize;
+                //std::cin >> servingSize;
 
-            //    int calories = 0;
-            //    double proteins = 0;
-            //    double fats = 0;
-            //    double carbs = 0;
-            //    std::cout << "How many calories are in " << foodItem << "\n";
-            //    std::cin >> calories;
-            //    std::cout << "How many fats are in " << foodItem << "\n";
-            //    std::cin >> fats;
-            //    std::cout << "How many carbohydrates are in " << foodItem << "\n";
-            //    std::cin >> carbs;
-            //}
+                int calories = 0;
+                double proteins = 0;
+                double fats = 0;
+                double carbs = 0;
+                std::cout << "How many calories are in " << foodItem << "\n";
+                std::cin >> calories;
+                std::cout << "How many fats are in " << foodItem << "\n";
+                std::cin >> fats;
+                std::cout << "How many carbohydrates are in " << foodItem << "\n";
+                std::cin >> carbs;
+            }
         }
     }
 
