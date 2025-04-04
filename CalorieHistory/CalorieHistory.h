@@ -12,6 +12,7 @@
 class Date
 {
     public:
+        Date() {};
         Date(int year, unsigned char month, unsigned char day);
         int getYear() const { return year; }
         unsigned char getMonth() const { return month; }

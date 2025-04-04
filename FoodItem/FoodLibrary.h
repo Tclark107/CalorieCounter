@@ -23,12 +23,13 @@ class FoodLibrary
 
 		void showFoodLibrary()
 		{
-			std::cout << "showFoodLib" << std::endl;
+			std::cout << std::endl;
 			for(auto& pair : foodLibrary)
 			{
 				std::cout << pair.first << " "; 
 				std::cout << pair.second << std::endl;
 			}
+			std::cout << std::endl;
 		}
 
     private:

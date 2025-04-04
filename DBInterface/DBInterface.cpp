@@ -6,8 +6,8 @@ void DBInterface::saveCalorieHistory()
 {
     //TODO: if file exists, otherwise create it"
     //TODO: make this relative path
-    //std::ofstream outFile("../TristanDB/exampleHistoryOut.txt");
-    std::ofstream outFile("../TristanDB/History.txt");
+    std::ofstream outFile("../TristanDB/HistoryTest.txt");
+    //std::ofstream outFile("../TristanDB/History.txt");
     if(!outFile)
     {
         std::cerr << "Error opening file for writing.\n";
@@ -39,8 +39,8 @@ void DBInterface::saveCalorieHistory()
 
 void DBInterface::updateCalorieHistory()
 {
-    //std::ifstream inFile("../TristanDB/exampleHistoryIn.txt");
-    std::ifstream inFile("../TristanDB/History.txt");
+    std::ifstream inFile("../TristanDB/HistoryTest.txt");
+    //std::ifstream inFile("../TristanDB/History.txt");
     if(!inFile)
     {
         std::cerr << "Error opening file for reading. \n";
@@ -100,8 +100,8 @@ void DBInterface::updateCalorieHistory()
 
 void DBInterface::updateFoodLibrary()
 {
-	//std::ifstream inFile("../TristanDB/exampleFoodLibraryIn.txt");
-	std::ifstream inFile("../TristanDB/FoodLibrary.txt");
+	std::ifstream inFile("../TristanDB/FoodLibraryTest.txt");
+	//std::ifstream inFile("../TristanDB/FoodLibrary.txt");
     if(!inFile)
     {
         std::cerr << "Error opening file for reading. \n";
@@ -140,15 +140,12 @@ void DBInterface::updateFoodLibrary()
         FoodItem newFoodItem(name, calories, proteins, fats, carbs);
         foodLibrary[FoodLibraryData[i][0]] = newFoodItem;
     }
-
-    fl.showFoodLibrary();
-
 }
 
 void DBInterface::saveFoodLibrary()
 {
 	std::ofstream outFile("../TristanDB/FoodLibrary.txt");
-	//std::ofstream outFile("../TristanDB/exampleFoodLibraryOut.txt");
+	//std::ofstream outFile("../TristanDB/FoodLibrary.txt");
     if(!outFile)
     {
         std::cerr << "Error opening file for writing.\n";

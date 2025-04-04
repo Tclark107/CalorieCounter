@@ -143,6 +143,7 @@ double CalorieHistory::getTotalCarbohydrates(Date date)
 
 void CalorieHistory::showHistory()
 {
+    std::cout << std::endl;
     for(int i = history.size() - 1; i >= 0; i--)
     {
         std::cout << history[i].first << ": ";
@@ -152,6 +153,7 @@ void CalorieHistory::showHistory()
             std::cout << history[i].second[j] << " - ";
         }
         std::cout << std::endl;
-    }
+    }    
+    std::cout << std::endl;
 }
 

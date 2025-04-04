@@ -5,16 +5,26 @@
 #include "FoodLibrary.h"
 #include "DBInterface.h"
 
+enum Option 
+{
+    exitloop = 1,
+    track,
+    showLibrary,
+    showDateData,
+    showHistory,
+    invalidOption
+};
+
 class UserInterface {
     public:
         UserInterface();
         void UserInterfaceStart();
         void todaysData(Date today);
+        void trackItem();
     
     private:
+        Date today;
         CalorieHistory& ch = CalorieHistory::getInstance();
-        //std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
-
-
+	    FoodLibrary& fl = FoodLibrary::getInstance();
     
 };
