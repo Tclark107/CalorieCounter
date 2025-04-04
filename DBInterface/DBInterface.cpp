@@ -156,6 +156,6 @@ void DBInterface::saveFoodLibrary()
 
     for(auto& pair : foodLibrary)
     {
-        outFile << pair.second;
+        outFile << pair.second << "\n";
     }
 }

@@ -23,6 +23,8 @@ void UserInterface::UserInterfaceStart()
     Date today = ch.getCurrentDate();
     todaysData(today);
 
+    ch.showHistory();
+
 	FoodLibrary& fl = FoodLibrary::getInstance();
 	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
 
@@ -32,6 +34,9 @@ void UserInterface::UserInterfaceStart()
         std::cout << "What would you like to do today? "
                   << "[e] to exit, "
                   << "[t] to track calories.\n";
+                  // show Food Library
+                  // show me what I have eaten today
+                  // create a new item
         std::string userInput;
         std::cin >> userInput;
         if(userInput == "e") exit = true;

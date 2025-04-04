@@ -78,6 +78,6 @@ std::ostream& operator<<(std::ostream& os, FoodItem& food) {
            << food.getCalories() << " "
            << food.getProteins() << " "
            << food.getFats() << " "
-           << food.getCarbohydrates() << "\n";
+           << food.getCarbohydrates();
         return os;
 }
