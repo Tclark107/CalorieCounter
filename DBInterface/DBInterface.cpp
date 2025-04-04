@@ -98,6 +98,7 @@ void DBInterface::updateCalorieHistory()
 
 void DBInterface::updateFoodLibrary()
 {
+    std::cout << "In updateFoodLibrary" << std::endl;
 	std::ifstream inFile("../TristanDB/exampleFoodLibraryIn.txt");
     if(!inFile)
     {
@@ -106,8 +107,29 @@ void DBInterface::updateFoodLibrary()
 
 	FoodLibrary& fl = FoodLibrary::getInstance();
 	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
+    
+    std::vector<std::vector<std::string>> FoodLibraryData;
+    std::string line;
+    std::string word;
+    while(std::getline(inFile, line))
+    {
+        std::istringstream iss(line);
+        std::vector<std::string> words;
+        while(iss >> word)
+        {
+            words.push_back(word);
+        }
+        FoodLibraryData.push_back(words);
+    }
 
-	//std::string
+    for(int i = 0; i < FoodLibraryData.size(); i++)
+    {
+        for(int j = 0; j < FoodLibraryData[i].size(); j++)
+        {
+            std::cout << FoodLibraryData[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 
 }
 
@@ -121,4 +143,9 @@ void DBInterface::saveFoodLibrary()
 
 	FoodLibrary& fl = FoodLibrary::getInstance();
 	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
+
+    for(auto& pair : foodLibrary)
+    {
+        outFile << pair.second;
+    }
 }

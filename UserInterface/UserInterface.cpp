@@ -74,6 +74,8 @@ void UserInterface::UserInterfaceStart()
     }
 	
 	fl.showFoodLibrary();
+    DBInterface db;
+    db.saveFoodLibrary();
+    db.saveCalorieHistory();
 
-    //write the new history to the database
 }

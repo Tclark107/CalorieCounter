@@ -3,6 +3,7 @@
 
 #include "CalorieHistory.h"
 #include "FoodLibrary.h"
+#include "DBInterface.h"
 
 class UserInterface {
     public:

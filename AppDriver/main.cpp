@@ -8,7 +8,7 @@ int main()
 {
     DBInterface dbInterface;
     dbInterface.updateCalorieHistory();
-    //dbInterface.updateFoodLibrary();
+    dbInterface.updateFoodLibrary();
 
     UserInterface UI;
     UI.UserInterfaceStart();
