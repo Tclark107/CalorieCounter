@@ -21,6 +21,16 @@ class FoodLibrary
             return foodLibrary;
         }
 
+		void showFoodLibrary()
+		{
+			std::cout << "showFoodLib" << std::endl;
+			for(auto& pair : foodLibrary)
+			{
+				std::cout << pair.first << " "; 
+				std::cout << pair.second << std::endl;
+			}
+		}
+
     private:
         std::unordered_map<std::string, FoodItem> foodLibrary;
         FoodLibrary() {};

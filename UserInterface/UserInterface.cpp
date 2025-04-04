@@ -58,14 +58,22 @@ void UserInterface::UserInterfaceStart()
                 double carbs = 0;
                 std::cout << "How many calories are in " << foodItem << "\n";
                 std::cin >> calories;
+                std::cout << "How many proteins are in " << foodItem << "\n";
+                std::cin >> proteins;
                 std::cout << "How many fats are in " << foodItem << "\n";
                 std::cin >> fats;
                 std::cout << "How many carbohydrates are in " << foodItem << "\n";
                 std::cin >> carbs;
+
+				FoodItem newFoodItem(foodItem, calories, proteins, fats, carbs);
+				std::cout << "myfoodItem is " << newFoodItem << std::endl;
+				ch.saveDate(today, newFoodItem);
+				foodLibrary[foodItem] = newFoodItem;
             }
         }
     }
-
+	
+	fl.showFoodLibrary();
 
     //write the new history to the database
 }

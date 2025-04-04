@@ -25,6 +25,10 @@ class FoodItem {
         void setFats(double fats);
         void setCarbohydrates(double carbohydrates);
 
+		//google why we should use const here
+		//friend std::ostream& operator<<(std::ostream& os, const FoodItem& food);
+		friend std::ostream& operator<<(std::ostream& os, FoodItem& food);
+
     private:
         std::string name;
         int calories;
