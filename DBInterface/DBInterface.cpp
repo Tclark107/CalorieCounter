@@ -122,14 +122,24 @@ void DBInterface::updateFoodLibrary()
         FoodLibraryData.push_back(words);
     }
 
+    std::string name;
+    int calories = 0;
+    double proteins = 0;
+    double fats = 0;
+    double carbs = 0;
     for(int i = 0; i < FoodLibraryData.size(); i++)
     {
-        for(int j = 0; j < FoodLibraryData[i].size(); j++)
-        {
-            std::cout << FoodLibraryData[i][j] << " ";
-        }
-        std::cout << std::endl;
+        name = FoodLibraryData[i][0];
+        calories = std::stoi(FoodLibraryData[i][1]);
+        proteins = std::stod(FoodLibraryData[i][2]);
+        fats = std::stod(FoodLibraryData[i][3]);
+        carbs = std::stod(FoodLibraryData[i][4]);
+
+        FoodItem newFoodItem(name, calories, proteins, fats, carbs);
+        foodLibrary[FoodLibraryData[i][0]] = newFoodItem;
     }
+
+    fl.showFoodLibrary();
 
 }
 
@@ -141,7 +151,7 @@ void DBInterface::saveFoodLibrary()
         std::cerr << "Error opening file for writing.\n";
     }
 
-	FoodLibrary& fl = FoodLibrary::getInstance();
+    FoodLibrary& fl = FoodLibrary::getInstance();
 	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
 
     for(auto& pair : foodLibrary)

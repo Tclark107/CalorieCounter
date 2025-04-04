@@ -40,6 +40,12 @@ void UserInterface::UserInterfaceStart()
             std::cout << "What would you like to track today?\n";
             std::string foodItem;
             std::cin >> foodItem;
+
+
+            int calories = 0;
+            double proteins = 0;
+            double fats = 0;
+            double carbs = 0;
             if(foodLibrary.find(foodItem) != foodLibrary.end())
             {
                 //std::cout << "What amount in oz did you eat?\n"; 
@@ -48,14 +54,11 @@ void UserInterface::UserInterfaceStart()
             else
             {
                 std::cout << "I don't have that in my library yet.\n";
+                    
                 //std::cout << "What is the serving siz for " << foodItem;
                 //std::string servingSize;
                 //std::cin >> servingSize;
 
-                int calories = 0;
-                double proteins = 0;
-                double fats = 0;
-                double carbs = 0;
                 std::cout << "How many calories are in " << foodItem << "\n";
                 std::cin >> calories;
                 std::cout << "How many proteins are in " << foodItem << "\n";

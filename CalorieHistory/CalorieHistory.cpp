@@ -40,7 +40,7 @@ void CalorieHistory::saveDate(Date date, FoodItem item)
     // TODO:findDate Function that returns an Index of where the date is
     // If date found then do this
     bool dateFound = false;
-    for(int i = i = history.size() - 1; i >= 0; i--)
+    for(int i = history.size() - 1; i >= 0; i--)
     {
         if(date == history[i].first)
         {
