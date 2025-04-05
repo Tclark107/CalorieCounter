@@ -1,30 +1,17 @@
 #ifndef DBINTERFACE_H 
 #define DBINTERFACE_H 
 
-#include <fstream>
 #include <iostream>
-#include <sstream>
+#include <vector>
 #include <string>
 
-#include "CalorieHistory.h"
-#include "FoodLibrary.h"
-
 class DBInterface {
-    public:
-        DBInterface();
-
-        void saveCalorieHistory();
-        void updateCalorieHistory();
-        void saveFoodLibrary();
-        void updateFoodLibrary();
-
-    private:
-        bool devMode;
-        std::fstream historyDB;
-        std::fstream libraryDB;
-
-        void openFileIO();
-        void closeFileIO();
+public:
+    virtual ~DBInterface() {}
+    virtual bool connect() = 0;  // Connect to the database (or file)
+    virtual void loadData() = 0;  // Load data from the database
+    virtual void saveData() = 0;  // Save data to the database
+    virtual void displayData() = 0;  // Display the data
 };
 
 #endif

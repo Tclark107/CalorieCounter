@@ -1,5 +1,6 @@
 add_library(DBInterface 
-            DBInterface.cpp
+            DevDBInterface.cpp
+            RealDBInterface.cpp
             ${PROJECT_SOURCE_DIR}/CalorieHistory/CalorieHistory.cpp
             ${PROJECT_SOURCE_DIR}/FoodItem/FoodItem.cpp)
 
