@@ -6,4 +6,5 @@ target_include_directories(CalorieTrackerManager PUBLIC
     ${PROJECT_SOURCE_DIR}/CalorieHistory
     ${PROJECT_SOURCE_DIR}/CalorieCalculator
     ${PROJECT_SOURCE_DIR}/DBInterface
+    ${PROJECT_SOURCE_DIR}/UserInterface
     )

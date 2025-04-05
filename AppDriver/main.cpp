@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "DBInterface.h"
-#include "UserInterface.h"
+#include "CalorieTrackerManager.h"
 
 int main(int argc, char* argv[])
 {
@@ -15,10 +14,6 @@ int main(int argc, char* argv[])
         }
     }
 
-    DBInterface dbInterface(devMode);
-    dbInterface.updateCalorieHistory();
-    dbInterface.updateFoodLibrary();
-
-    UserInterface UI;
-    UI.UserInterfaceStart();
+    CalorieTrackerManager calorieTrackerManager(devMode);
+    calorieTrackerManager.startUp();
 }

@@ -52,8 +52,7 @@ void DBInterface::saveCalorieHistory()
         }
         historyDB << "\n";
     }
-
-    historyDB.close();
+    //call closefileio
 }
 
 void DBInterface::updateCalorieHistory()
