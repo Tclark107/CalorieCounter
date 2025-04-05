@@ -12,10 +12,22 @@
 class DBInterface {
     public:
         DBInterface();
+        DBInterface(bool devMode);
+
         void saveCalorieHistory();
         void updateCalorieHistory();
-        void updateFoodLibrary();
         void saveFoodLibrary();
+        void updateFoodLibrary();
+
+    private:
+        bool devMode;
+        std::ofstream historyDBOut;
+        std::ifstream historyDBIn;
+        std::ofstream libraryDBOut;
+        std::ifstream libraryDBIn;
+
+        void openFileIO();
+        void closeFileIO();
 };
 
 #endif

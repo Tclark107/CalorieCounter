@@ -2,13 +2,45 @@
 
 DBInterface::DBInterface() {}
 
+DBInterface::DBInterface(bool devMode) :
+devMode(devMode) 
+{
+    openFileIO();
+}
+
+void DBInterface::openFileIO()
+{
+    if(devMode)
+    {
+        std::cout << "Running in Dev Mode" << std::endl;
+        historyDBOut.open("../TristanDB/HistoryTest.txt");
+        historyDBIn.open("../TristanDB/HistoryTest.txt");
+        libraryDBOut.open("../TristanDB/FoodLibraryTest.txt");
+        libraryDBIn.open("../TristanDB/FoodLibraryTest.txt");
+    }
+    else
+    {
+        historyDBOut.open("../TristanDB/History.txt");
+        historyDBIn.open("../TristanDB/History.txt");
+        libraryDBOut.open("../TristanDB/FoodLibrary.txt");
+        libraryDBIn.open("../TristanDB/FoodLibrary.txt");
+    }
+}
+
+void DBInterface::closeFileIO()
+{
+    if(historyDBOut.is_open()) historyDBOut.close();
+    if(historyDBIn.is_open()) historyDBIn.close();
+    if(libraryDBOut.is_open()) libraryDBOut.close();
+    if(libraryDBIn.is_open()) libraryDBIn.close();
+}
+
+
 void DBInterface::saveCalorieHistory()
 {
     //TODO: if file exists, otherwise create it"
     //TODO: make this relative path
-    std::ofstream outFile("../TristanDB/HistoryTest.txt");
-    //std::ofstream outFile("../TristanDB/History.txt");
-    if(!outFile)
+    if(!historyDBOut)
     {
         std::cerr << "Error opening file for writing.\n";
     }
@@ -18,30 +50,28 @@ void DBInterface::saveCalorieHistory()
 
     for(auto& entry : history)
     {
-        outFile << entry.first << " "
+        historyDBOut << entry.first << " "
                 << ch.getTotalCalories(entry.first) << " ";
 
         int numberOfEntries = entry.second.size();
-        outFile << numberOfEntries << " ";
+        historyDBOut << numberOfEntries << " ";
         for(int i = 0; i < numberOfEntries; i++)
         {
-            outFile << entry.second[i].getName() << "-"
+            historyDBOut << entry.second[i].getName() << "-"
                     << entry.second[i].getCalories() << "-"
                     << entry.second[i].getProteins() << "-"
                     << entry.second[i].getFats() << "-"
                     << entry.second[i].getCarbohydrates() << " ";
         }
-        outFile << "\n";
+        historyDBOut << "\n";
     }
 
-    outFile.close();
+    historyDBOut.close();
 }
 
 void DBInterface::updateCalorieHistory()
 {
-    std::ifstream inFile("../TristanDB/HistoryTest.txt");
-    //std::ifstream inFile("../TristanDB/History.txt");
-    if(!inFile)
+    if(!historyDBIn)
     {
         std::cerr << "Error opening file for reading. \n";
     }
@@ -53,7 +83,7 @@ void DBInterface::updateCalorieHistory()
     
     std::string line;
     std::string word;
-    while(std::getline(inFile, line))
+    while(std::getline(historyDBIn, line))
     {
         std::istringstream iss(line);
         std::vector<std::string> words;
@@ -95,14 +125,12 @@ void DBInterface::updateCalorieHistory()
 
         }
     }
-    inFile.close();
+    historyDBIn.close();
 }
 
 void DBInterface::updateFoodLibrary()
 {
-	std::ifstream inFile("../TristanDB/FoodLibraryTest.txt");
-	//std::ifstream inFile("../TristanDB/FoodLibrary.txt");
-    if(!inFile)
+    if(!libraryDBIn)
     {
         std::cerr << "Error opening file for reading. \n";
     }
@@ -113,7 +141,7 @@ void DBInterface::updateFoodLibrary()
     std::vector<std::vector<std::string>> FoodLibraryData;
     std::string line;
     std::string word;
-    while(std::getline(inFile, line))
+    while(std::getline(libraryDBIn, line))
     {
         std::istringstream iss(line);
         std::vector<std::string> words;
@@ -144,9 +172,7 @@ void DBInterface::updateFoodLibrary()
 
 void DBInterface::saveFoodLibrary()
 {
-	std::ofstream outFile("../TristanDB/FoodLibrary.txt");
-	//std::ofstream outFile("../TristanDB/FoodLibrary.txt");
-    if(!outFile)
+    if(!libraryDBOut)
     {
         std::cerr << "Error opening file for writing.\n";
     }
@@ -156,6 +182,6 @@ void DBInterface::saveFoodLibrary()
 
     for(auto& pair : foodLibrary)
     {
-        outFile << pair.second << "\n";
+        libraryDBOut << pair.second << "\n";
     }
 }
