@@ -76,7 +76,6 @@ Option stringToOption(const std::string& input)
 void UserInterface::UserInterfaceStart()
 {
     std::cout << "Hello! I am your calorie tracker! \n";
-    std::cout << "Want to activate developer mode" << std::endl;
     today = ch.getCurrentDate();
     todaysData(today);
 

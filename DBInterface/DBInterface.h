@@ -21,10 +21,8 @@ class DBInterface {
 
     private:
         bool devMode;
-        std::ofstream historyDBOut;
-        std::ifstream historyDBIn;
-        std::ofstream libraryDBOut;
-        std::ifstream libraryDBIn;
+        std::fstream historyDB;
+        std::fstream libraryDB;
 
         void openFileIO();
         void closeFileIO();

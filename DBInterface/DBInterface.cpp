@@ -13,34 +13,21 @@ void DBInterface::openFileIO()
     if(devMode)
     {
         std::cout << "Running in Dev Mode" << std::endl;
-        historyDBOut.open("../TristanDB/HistoryTest.txt");
-        historyDBIn.open("../TristanDB/HistoryTest.txt");
-        libraryDBOut.open("../TristanDB/FoodLibraryTest.txt");
-        libraryDBIn.open("../TristanDB/FoodLibraryTest.txt");
+        historyDB.open("../TristanDB/HistoryTest.txt", std::ios::in | std::ios::out);
+        libraryDB.open("../TristanDB/FoodLibraryTest.txt", std::ios::in | std::ios::out);
     }
     else
     {
-        historyDBOut.open("../TristanDB/History.txt");
-        historyDBIn.open("../TristanDB/History.txt");
-        libraryDBOut.open("../TristanDB/FoodLibrary.txt");
-        libraryDBIn.open("../TristanDB/FoodLibrary.txt");
+        historyDB.open("../TristanDB/History.txt", std::ios::in | std::ios::out);
+        libraryDB.open("../TristanDB/FoodLibrary.txt", std::ios::in | std::ios::out);
     }
 }
-
-void DBInterface::closeFileIO()
-{
-    if(historyDBOut.is_open()) historyDBOut.close();
-    if(historyDBIn.is_open()) historyDBIn.close();
-    if(libraryDBOut.is_open()) libraryDBOut.close();
-    if(libraryDBIn.is_open()) libraryDBIn.close();
-}
-
 
 void DBInterface::saveCalorieHistory()
 {
     //TODO: if file exists, otherwise create it"
     //TODO: make this relative path
-    if(!historyDBOut)
+    if(!historyDB)
     {
         std::cerr << "Error opening file for writing.\n";
     }
@@ -50,28 +37,28 @@ void DBInterface::saveCalorieHistory()
 
     for(auto& entry : history)
     {
-        historyDBOut << entry.first << " "
+        historyDB << entry.first << " "
                 << ch.getTotalCalories(entry.first) << " ";
 
         int numberOfEntries = entry.second.size();
-        historyDBOut << numberOfEntries << " ";
+        historyDB << numberOfEntries << " ";
         for(int i = 0; i < numberOfEntries; i++)
         {
-            historyDBOut << entry.second[i].getName() << "-"
+            historyDB << entry.second[i].getName() << "-"
                     << entry.second[i].getCalories() << "-"
                     << entry.second[i].getProteins() << "-"
                     << entry.second[i].getFats() << "-"
                     << entry.second[i].getCarbohydrates() << " ";
         }
-        historyDBOut << "\n";
+        historyDB << "\n";
     }
 
-    historyDBOut.close();
+    historyDB.close();
 }
 
 void DBInterface::updateCalorieHistory()
 {
-    if(!historyDBIn)
+    if(!historyDB)
     {
         std::cerr << "Error opening file for reading. \n";
     }
@@ -83,7 +70,7 @@ void DBInterface::updateCalorieHistory()
     
     std::string line;
     std::string word;
-    while(std::getline(historyDBIn, line))
+    while(std::getline(historyDB, line))
     {
         std::istringstream iss(line);
         std::vector<std::string> words;
@@ -125,12 +112,12 @@ void DBInterface::updateCalorieHistory()
 
         }
     }
-    historyDBIn.close();
+    historyDB.close();
 }
 
 void DBInterface::updateFoodLibrary()
 {
-    if(!libraryDBIn)
+    if(!libraryDB)
     {
         std::cerr << "Error opening file for reading. \n";
     }
@@ -141,7 +128,7 @@ void DBInterface::updateFoodLibrary()
     std::vector<std::vector<std::string>> FoodLibraryData;
     std::string line;
     std::string word;
-    while(std::getline(libraryDBIn, line))
+    while(std::getline(libraryDB, line))
     {
         std::istringstream iss(line);
         std::vector<std::string> words;
@@ -172,7 +159,7 @@ void DBInterface::updateFoodLibrary()
 
 void DBInterface::saveFoodLibrary()
 {
-    if(!libraryDBOut)
+    if(!libraryDB)
     {
         std::cerr << "Error opening file for writing.\n";
     }
@@ -182,6 +169,6 @@ void DBInterface::saveFoodLibrary()
 
     for(auto& pair : foodLibrary)
     {
-        libraryDBOut << pair.second << "\n";
+        libraryDB << pair.second << "\n";
     }
 }

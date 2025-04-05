@@ -1,15 +1,18 @@
 #include <iostream>
-#include <ctime>
 
 #include "DBInterface.h"
 #include "UserInterface.h"
 
 int main(int argc, char* argv[])
 {
-    bool devMode = 0;
+    bool devMode = false;
     if(argc > 0)
     {
-        bool devMode = static_cast<bool>(argv[0]);
+        std::string arg = argv[1];
+        if(arg == "true" || arg == "1")
+        {
+            devMode = true;
+        }
     }
 
     DBInterface dbInterface(devMode);
