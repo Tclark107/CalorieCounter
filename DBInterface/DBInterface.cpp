@@ -5,7 +5,6 @@ DBInterface::DBInterface() {}
 DBInterface::DBInterface(bool devMode) :
 devMode(devMode) 
 {
-    openFileIO();
 }
 
 void DBInterface::openFileIO()
@@ -18,6 +17,7 @@ void DBInterface::openFileIO()
     }
     else
     {
+        std::cout << "Running Normal Mode" << std::endl;
         historyDB.open("../TristanDB/History.txt", std::ios::in | std::ios::out);
         libraryDB.open("../TristanDB/FoodLibrary.txt", std::ios::in | std::ios::out);
     }
@@ -27,6 +27,7 @@ void DBInterface::saveCalorieHistory()
 {
     //TODO: if file exists, otherwise create it"
     //TODO: make this relative path
+    if(devMode
     if(!historyDB)
     {
         std::cerr << "Error opening file for writing.\n";
@@ -53,10 +54,12 @@ void DBInterface::saveCalorieHistory()
         historyDB << "\n";
     }
     //call closefileio
+    historyDB.close();
 }
 
 void DBInterface::updateCalorieHistory()
 {
+    openFileIO();
     if(!historyDB)
     {
         std::cerr << "Error opening file for reading. \n";
@@ -116,6 +119,7 @@ void DBInterface::updateCalorieHistory()
 
 void DBInterface::updateFoodLibrary()
 {
+    openFileIO();
     if(!libraryDB)
     {
         std::cerr << "Error opening file for reading. \n";
@@ -158,12 +162,13 @@ void DBInterface::updateFoodLibrary()
 
 void DBInterface::saveFoodLibrary()
 {
+    openFileIO();
     if(!libraryDB)
     {
         std::cerr << "Error opening file for writing.\n";
     }
 
-    FoodLibrary& fl = FoodLibrary::getInstance();
+    FoodLibrary& fl = FoodLibrary::GetInstance();
 	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
 
     for(auto& pair : foodLibrary)

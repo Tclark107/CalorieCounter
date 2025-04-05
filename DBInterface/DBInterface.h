@@ -12,7 +12,6 @@
 class DBInterface {
     public:
         DBInterface();
-        DBInterface(bool devMode);
 
         void saveCalorieHistory();
         void updateCalorieHistory();

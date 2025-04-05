@@ -7,7 +7,7 @@
 class FoodLibrary
 {
     public:
-        static FoodLibrary& getInstance()
+        static FoodLibrary& GetInstance()
         {
             static FoodLibrary instance;
             return instance;
