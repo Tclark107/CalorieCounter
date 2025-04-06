@@ -1,5 +1,5 @@
 #include "CalorieTrackerManager.h"
-#include "DBInterface.h"
+#include "DBInterfaceFactory.h"
 #include "CalorieCalculator.h"
 #include "CalorieHistory.h"
 #include "FoodItem.h"
@@ -18,7 +18,7 @@ void CalorieTrackerManager::startUp()
 {
     try 
     {
-        dbi = new DBInterface();
+        dbi = DBInterfaceFactory::createDBInterface(devMode);
         ui = new UserInterface();
     }
     catch (const std::bad_alloc& e)

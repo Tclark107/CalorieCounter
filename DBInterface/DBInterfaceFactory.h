@@ -5,3 +5,5 @@ class DBInterfaceFactory
     public:
         static DBInterface* createDBInterface(bool devMode);
 };
+
+#endif
