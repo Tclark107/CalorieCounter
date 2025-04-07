@@ -185,6 +185,7 @@ void CalorieTrackerManager::run()
         input = ui->getUserInput(); 
         quit = handleInput(input);
     }
+    shutDown();
 }
 
 Option stringToOption(const std::string& input)
@@ -316,6 +317,7 @@ void CalorieTrackerManager::trackItem()
         ch.saveDate(today, food);
 
         addFoodToLibrary(food);
+
     }
 }
 
