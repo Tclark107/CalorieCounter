@@ -1,4 +1,5 @@
 #include "CalorieTrackerManager.h"
+#include "DBInterface.h"
 #include "DBInterfaceFactory.h"
 #include "CalorieCalculator.h"
 #include "CalorieHistory.h"
@@ -27,7 +28,6 @@ void CalorieTrackerManager::startUp()
             << e.what() 
             << std::endl;
     }
-
 
     dbi->updateCalorieHistory();
     dbi->updateFoodLibrary();

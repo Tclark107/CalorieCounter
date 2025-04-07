@@ -3,7 +3,8 @@
 class DBInterfaceFactory
 {
     public:
-        static DBInterface* createDBInterface(bool devMode);
+        static DBInterface* createLibraryDBInterface(bool devMode);
+        static DBInterface* createHistoryDBInterface(bool devMode);
 };
 
 #endif

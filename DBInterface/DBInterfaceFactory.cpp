@@ -2,14 +2,26 @@
 #include "DevDBInterface.h"
 #include "RealDBInterface.h"
 
-DBInterfaceFactory::createDBInterface(bool devMode)
+DBInterfaceFactory::createLibraryDBInterface(bool devMode)
 {
     if(devMode)
     {
-        return new DevDBInterface();
+        return new DevLibraryDBInterface();
     }
     else
     {
-        return new RealDBInterface();
+        return new RealLibraryDBInterface();
+    }
+}
+
+DBInterfaceFactory::createHistoryDBInterface(bool devMode)
+{
+    if(devMode)
+    {
+        return new DevHistoryDBInterface();
+    }
+    else
+    {
+        return new RealHistoryDBInterface();
     }
 }
