@@ -57,8 +57,10 @@ void RealHistoryDBInterface::saveData()
 
 void RealHistoryDBInterface::displayData()
 {
+    std::cout << "RealHistoryDBInterface::displayData()\n";
     for(int i = 0; i < historyData.size(); i++)
     {
         std::cout << historyData[i] << std::endl;
     }
+    std::cout << std::endl;
 }

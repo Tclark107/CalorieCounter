@@ -39,7 +39,7 @@ inline std::ostream& operator<<(std::ostream& os, const Date& date)
 class CalorieHistory
 {
     public:
-        static CalorieHistory& getInstance()
+        static CalorieHistory& GetInstance()
         {
             static CalorieHistory instance;
             return instance;

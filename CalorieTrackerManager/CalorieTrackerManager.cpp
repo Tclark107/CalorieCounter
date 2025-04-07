@@ -43,6 +43,11 @@ void CalorieTrackerManager::startUp()
     std::vector<std::string> libraryData;
     loadLibraryData(libraryData);
     saveLibraryDataToFoodLibrary(libraryData);
+
+    std::vector<std::string> historyData;
+    loadHistoryData(historyData);
+    saveHistoryDataToHistory(historyData);
+
     run();
 }
 
@@ -58,7 +63,6 @@ void CalorieTrackerManager::loadLibraryData(std::vector<std::string>& libraryDat
 void CalorieTrackerManager::saveLibraryDataToFoodLibrary(const std::vector<std::string>& libraryData)
 {
     std::cout << "Loading Data to FoodLibrary\n";
-    std::vector<std::vector<std::string>> parsedData;
     std::vector<std::string> parsedItem;
 
     FoodItem newFoodItem;
@@ -72,12 +76,56 @@ void CalorieTrackerManager::saveLibraryDataToFoodLibrary(const std::vector<std::
     }
 }
 
+void CalorieTrackerManager::loadHistoryData(std::vector<std::string>& historyData)
+{
+    historyDB->connect();
+
+    historyDB->loadData();
+    historyData = historyDB->getData();
+    historyDB->disconnect();
+}
+
+void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::string>& libraryData)
+{
+    std::cout << "Loading Data to History\n";
+    std::vector<std::string> parsedDateInfo;
+    std::vector<std::string> parsedItem;
+
+    Date date;
+    CalorieHistory& ch = CalorieHistory::GetInstance();
+
+    for(const auto& item : libraryData)
+    {
+        parsedDateInfo = splitBySpaces(item);       
+        date = createDate(parsedDateInfo);
+        for(int i = 5; i < parsedDateInfo.size(); i++)
+        {
+            parsedItem = splitByDashes(parsedDateInfo[i]);
+            FoodItem newFoodItem = createFoodItem(parsedItem);
+            ch.saveDate(date, newFoodItem);
+        }
+        std::cout << std::endl;
+    }
+}
+
 std::vector<std::string> CalorieTrackerManager::splitBySpaces(const std::string item)
 {
     std::istringstream iss(item);
     std::vector<std::string> words;
     std::string word;
     while(iss >> word)
+    {
+        words.push_back(word);
+    }
+    return words;
+}
+
+std::vector<std::string> CalorieTrackerManager::splitByDashes(const std::string item)
+{
+    std::istringstream iss(item);
+    std::vector<std::string> words;
+    std::string word;
+    while(std::getline(iss, word, '-'))
     {
         words.push_back(word);
     }
@@ -96,12 +144,25 @@ FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> pa
     return newFoodItem;
 }
 
+Date CalorieTrackerManager::createDate(const std::vector<std::string> parsedItem)
+{
+    int year = std::stoi(parsedItem[0]);
+    unsigned char month = static_cast<unsigned char>(std::stoi(parsedItem[1]));
+    unsigned char day = static_cast<unsigned char>(std::stoi(parsedItem[2]));
+
+    Date date(year, month, day);
+    return date;
+}
+
 void CalorieTrackerManager::shutDown()
 {
     libraryDB->connect();
     libraryDB->saveData();
-
     libraryDB->disconnect();
+
+    historyDB->connect();
+    historyDB->saveData();
+    historyDB->disconnect();
 
     delete libraryDB;
     delete historyDB;
@@ -139,6 +200,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
 {
     bool quit = false;
     FoodLibrary& fl = FoodLibrary::GetInstance();
+    CalorieHistory& ch = CalorieHistory::GetInstance();
 
     Option option = stringToOption(input);
     switch(option)
@@ -157,7 +219,8 @@ bool CalorieTrackerManager::handleInput(std::string input)
             //todaysData(today);
             break;
         case showHistory:
-            //ch.showHistory();
+            ch.showHistory();
+            historyDB->displayData();
             break;
         case addItemToLibrary:
             createItem();
