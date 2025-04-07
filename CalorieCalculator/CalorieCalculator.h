@@ -1,12 +1,12 @@
 #ifndef CALORIECALCULATOR_H
 #define CALORIECALCULATOR_H
 
-#include "FoodItem.h"
+#include <string>
 
 class CalorieCalculator {
     public:
         CalorieCalculator();
-        double calculateCalories(const FoodItem item, int amount);
+        double calculateCalories(std::string unit, int amount);
 };
 
 #endif

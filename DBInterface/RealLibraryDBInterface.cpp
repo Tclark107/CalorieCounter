@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "RealLibraryDBInterface.h"
+
+#include <iostream>
 
 RealLibraryDBInterface::RealLibraryDBInterface() {}
 
@@ -57,8 +57,10 @@ void RealLibraryDBInterface::saveData()
 
 void RealLibraryDBInterface::displayData()
 {
+    std::cout << "RealLibraryDBInterface::displayData()\n";
     for(int i = 0; i < libraryData.size(); i++)
     {
         std::cout << libraryData[i] << std::endl;
     }
+    std::cout << std::endl;
 }

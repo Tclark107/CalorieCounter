@@ -2,9 +2,9 @@
 
 CalorieCalculator::CalorieCalculator() {}
 
-double CalorieCalculator::calculateCalories(FoodItem food, int amount)
+double CalorieCalculator::calculateCalories(std::string unit, int amount)
 {
-    double protein = food.getProteins() * amount;
-    return protein;
+    int calories;
+    return calories;
 }
      

@@ -18,6 +18,13 @@ historyDB(nullptr),
 ui(nullptr)
 {}
 
+CalorieTrackerManager::~CalorieTrackerManager()
+{
+    delete libraryDB;
+    delete historyDB;
+    delete ui;
+}
+
 void CalorieTrackerManager::startUp()
 {
     try 
@@ -34,12 +41,59 @@ void CalorieTrackerManager::startUp()
     }
 
     std::vector<std::string> libraryData;
+    loadLibraryData(libraryData);
+    saveLibraryDataToFoodLibrary(libraryData);
+    run();
+}
+
+void CalorieTrackerManager::loadLibraryData(std::vector<std::string>& libraryData)
+{
     libraryDB->connect();
+
     libraryDB->loadData();
     libraryData = libraryDB->getData();
     libraryDB->disconnect();
+}
 
-    run();
+void CalorieTrackerManager::saveLibraryDataToFoodLibrary(const std::vector<std::string>& libraryData)
+{
+    std::cout << "Loading Data to FoodLibrary\n";
+    std::vector<std::vector<std::string>> parsedData;
+    std::vector<std::string> parsedItem;
+
+    FoodItem newFoodItem;
+    FoodLibrary& fl = FoodLibrary::GetInstance();
+
+    for(const auto& item : libraryData)
+    {
+        parsedItem = splitBySpaces(item);       
+        newFoodItem = createFoodItem(parsedItem);
+        fl.addItem(newFoodItem);
+    }
+}
+
+std::vector<std::string> CalorieTrackerManager::splitBySpaces(const std::string item)
+{
+    std::istringstream iss(item);
+    std::vector<std::string> words;
+    std::string word;
+    while(iss >> word)
+    {
+        words.push_back(word);
+    }
+    return words;
+}
+
+FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> parsedItem)
+{
+    std::string name = parsedItem[0]; 
+    int calories = std::stoi(parsedItem[1]);
+    double proteins = std::stod(parsedItem[2]);
+    double fats = std::stod(parsedItem[3]);
+    double carbs = std::stod(parsedItem[4]);
+
+    FoodItem newFoodItem(name, calories, proteins, fats, carbs);
+    return newFoodItem;
 }
 
 void CalorieTrackerManager::shutDown()
@@ -97,6 +151,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
             break;
         case showLibrary:
             fl.showFoodLibrary();
+            libraryDB->displayData();
             break;
         case showDateData:
             //todaysData(today);
