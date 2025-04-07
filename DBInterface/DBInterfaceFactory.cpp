@@ -1,12 +1,13 @@
 #include "DBInterfaceFactory.h"
-#include "DevDBInterface.h"
-#include "RealDBInterface.h"
+#include "RealLibraryDBInterface.h"
+#include "RealHistoryDBInterface.h"
 
-DBInterfaceFactory::createLibraryDBInterface(bool devMode)
+DBInterface* DBInterfaceFactory::createLibraryDBInterface(bool devMode)
 {
     if(devMode)
     {
-        return new DevLibraryDBInterface();
+        //return new DevLibraryDBInterface();
+        return nullptr;
     }
     else
     {
@@ -14,11 +15,12 @@ DBInterfaceFactory::createLibraryDBInterface(bool devMode)
     }
 }
 
-DBInterfaceFactory::createHistoryDBInterface(bool devMode)
+DBInterface* DBInterfaceFactory::createHistoryDBInterface(bool devMode)
 {
     if(devMode)
     {
-        return new DevHistoryDBInterface();
+        //return new DevHistoryDBInterface();
+        return nullptr;
     }
     else
     {

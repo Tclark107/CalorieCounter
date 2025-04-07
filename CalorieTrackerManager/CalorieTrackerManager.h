@@ -10,11 +10,13 @@ enum Option
     showLibrary,
     showDateData,
     showHistory,
+    addItemToLibrary,
     invalidOption
 };
 
 class DBInterface;
 class UserInterface;
+class FoodItem;
 
 class CalorieTrackerManager 
 {
@@ -26,10 +28,13 @@ class CalorieTrackerManager
         void run();
         bool handleInput(std::string input);
         bool isDevMode();
+        void createItem();
+        void addFoodToLibrary(FoodItem food);
 
     private:
         bool devMode;
-        DBInterface *dbi;
+        DBInterface *libraryDB;
+        DBInterface *historyDB;
         UserInterface *ui;
 };
 

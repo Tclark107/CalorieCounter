@@ -1,5 +1,8 @@
 #ifndef DBINTERFACEFACTORY_H
 #define DBINTERFACEFACTORY_H
+
+#include "DBInterface.h"
+
 class DBInterfaceFactory
 {
     public:

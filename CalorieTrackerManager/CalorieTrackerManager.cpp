@@ -7,11 +7,14 @@
 #include "FoodLibrary.h"
 #include "UserInterface.h"
 
+#include <limits>
+
 CalorieTrackerManager::CalorieTrackerManager() {}
 
 CalorieTrackerManager::CalorieTrackerManager(bool devMode) :
 devMode(devMode),
-dbi(nullptr),
+libraryDB(nullptr),
+historyDB(nullptr),
 ui(nullptr)
 {}
 
@@ -19,7 +22,8 @@ void CalorieTrackerManager::startUp()
 {
     try 
     {
-        dbi = DBInterfaceFactory::createDBInterface(devMode);
+        libraryDB = DBInterfaceFactory::createLibraryDBInterface(devMode);
+        historyDB = DBInterfaceFactory::createHistoryDBInterface(devMode);
         ui = new UserInterface();
     }
     catch (const std::bad_alloc& e)
@@ -29,19 +33,28 @@ void CalorieTrackerManager::startUp()
             << std::endl;
     }
 
-    dbi->updateCalorieHistory();
-    dbi->updateFoodLibrary();
+    std::vector<std::string> libraryData;
+    libraryDB->connect();
+    libraryDB->loadData();
+    libraryData = libraryDB->getData();
+    libraryDB->disconnect();
+
+    run();
 }
 
 void CalorieTrackerManager::shutDown()
 {
-    dbi->saveCalorieHistory();
-    dbi->saveFoodLibrary();
+    libraryDB->connect();
+    libraryDB->saveData();
 
-    delete dbi;
+    libraryDB->disconnect();
+
+    delete libraryDB;
+    delete historyDB;
     delete ui;
 
-    dbi = nullptr;
+    libraryDB = nullptr;
+    historyDB = nullptr;
     ui = nullptr;
 }
 
@@ -64,6 +77,7 @@ Option stringToOption(const std::string& input)
     if(input == "3") return showLibrary;
     if(input == "4") return showDateData;
     if(input == "5") return showHistory;
+    if(input == "6") return addItemToLibrary;
     return invalidOption;
 }
 
@@ -90,6 +104,9 @@ bool CalorieTrackerManager::handleInput(std::string input)
         case showHistory:
             //ch.showHistory();
             break;
+        case addItemToLibrary:
+            createItem();
+            break;
         default:
             std::cout << "Input not recognized, please try again" << std::endl;
             break;
@@ -97,11 +114,55 @@ bool CalorieTrackerManager::handleInput(std::string input)
     return quit;
 }
 
+void CalorieTrackerManager::createItem()
+{
+    std::string name;
+    std::string placeHolder;
+    int calories = 0;
+    double proteins = 0;
+    double fats = 0;
+    double carbs = 0;
+
+    std::string prompt = "What is the name of the item you would like to add";
+    ui->displayMessage(prompt);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, name);
+
+    prompt = "How many calories are in the item";
+    ui->displayMessage(prompt);
+    std::cin >> placeHolder;
+    calories = std::stoi(placeHolder);
+
+    prompt = "How many proteins are in the item";
+    ui->displayMessage(prompt);
+    std::cin >> placeHolder;
+    proteins = std::stod(placeHolder);
+
+    prompt = "How many fats are in the item";
+    ui->displayMessage(prompt);
+    std::cin >> placeHolder;
+    fats = std::stod(placeHolder);
+
+    prompt = "How many carbs are in the item";
+    ui->displayMessage(prompt);
+    std::cin >> placeHolder;
+    carbs = std::stod(placeHolder);
+
+    FoodLibrary& fl = FoodLibrary::GetInstance();
+    FoodItem food(name, calories, proteins, fats, carbs);
+    addFoodToLibrary(food);
+}
+
+void CalorieTrackerManager::addFoodToLibrary(FoodItem food)
+{
+    FoodLibrary& fl = FoodLibrary::GetInstance();
+    fl.addItem(food);
+}
+
 bool CalorieTrackerManager::isDevMode()
 {
     return devMode;
 }
-
 /*
 oid UserInterface::trackItem()
 

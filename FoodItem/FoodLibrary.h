@@ -31,6 +31,25 @@ class FoodLibrary
 			}
 			std::cout << std::endl;
 		}
+        
+        void addItem(FoodItem food)
+        {
+            foodLibrary[food.getName()] = food;
+        }
+
+        //FoodItem createItem(std::string name,
+        //                    int calories,
+        //                    double proteins,
+        //                    double fats,
+        //                    double carbs)
+        //{
+        //    FoodItem food;
+        //    food.setName(name);
+        //    food.setCalories(calories);
+        //    food.setProteins(proteins);
+        //    food.setFats(fats);
+        //    food.setCarbohydrates(carbs);
+        //}
 
     private:
         std::unordered_map<std::string, FoodItem> foodLibrary;

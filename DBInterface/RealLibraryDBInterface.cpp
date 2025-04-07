@@ -1,26 +1,13 @@
-#include "DBInterface.h"
+#include <iostream>
 
-DBInterface::DBInterface() {}
+#include "RealLibraryDBInterface.h"
 
-DBInterface::DBInterface(bool devMode) :
-devMode(devMode) {}
+RealLibraryDBInterface::RealLibraryDBInterface() {}
 
-bool connect(bool flag)
+bool RealLibraryDBInterface::connect()
 {
-    if(flag)
-y    {
-        return connectHistoryDB();
-    }
-    else
-    {
-        return connectLibraryDB();
-    }
-}
-
-bool connectHistoryDB()
-{
-    historyDB.open("../TristanDB/History.txt", std::ios::in | std::ios::out);
-    if(!historyDB)
+    libraryDB.open("../TristanDB/FoodLibrary.txt", std::ios::in | std::ios::out);
+    if(!libraryDB)
     {
         std::cerr << "Error opening HistroyDB.\n";
         return false;
@@ -28,193 +15,50 @@ bool connectHistoryDB()
     return true;
 }
 
-bool connectLibraryDB()
-{
-    historyDB.open("../TristanDB/FoodLibrary.txt", std::ios::in | std::ios::out);
-    if(!historyDB)
-    {
-        std::cerr << "Error opening HistroyDB.\n";
-        return false;
-    }
-    return true;
-}
-
-bool close(bool flag)
-{
-    if(flag)
-    {
-        return closeHistoryDB();
-    }
-    else
-    {
-        return closeLibraryDB();
-    }
-}
-
-bool closeHistoryDB()
-{
-    if(historyDB.is_open())
-    {
-        historyDB.close();
-    }
-}
-
-bool closeLibraryDB()
+bool RealLibraryDBInterface::disconnect()
 {
     if(libraryDB.is_open())
     {
         libraryDB.close();
+        return true;
     }
+    return false;
 }
 
-void RealDBInterface::loadData()
+void RealLibraryDBInterface::loadData()
 {
-}
-void DBInterface::saveCalorieHistory()
-{
-    //TODO: if file exists, otherwise create it"
-    //TODO: make this relative path
-
-    CalorieHistory& ch = CalorieHistory::getInstance();
-    std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
-
-    for(auto& entry : history)
-    {
-        historyDB << entry.first << " "
-                << ch.getTotalCalories(entry.first) << " ";
-
-        int numberOfEntries = entry.second.size();
-        historyDB << numberOfEntries << " ";
-        for(int i = 0; i < numberOfEntries; i++)
-        {
-            historyDB << entry.second[i].getName() << "-"
-                    << entry.second[i].getCalories() << "-"
-                    << entry.second[i].getProteins() << "-"
-                    << entry.second[i].getFats() << "-"
-                    << entry.second[i].getCarbohydrates() << " ";
-        }
-        historyDB << "\n";
-    }
-    //call closefileio
-    historyDB.close();
-}
-
-void DBInterface::updateCalorieHistory()
-{
-    openFileIO();
-    if(!historyDB)
-    {
-        std::cerr << "Error opening file for reading. \n";
-    }
-
-    CalorieHistory& ch = CalorieHistory::getInstance();
-    std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
-
-    std::vector<std::vector<std::string>> historyData;
-    
-    std::string line;
-    std::string word;
-    while(std::getline(historyDB, line))
-    {
-        std::istringstream iss(line);
-        std::vector<std::string> words;
-        while(iss >> word)
-        {
-            words.push_back(word);
-        }
-        historyData.push_back(words);
-    }
-    
-    
-    for(int i = 0; i < historyData.size(); i++)
-    {
-        //Note: If string contains non-numeric characters stoi or stoul will throw std:invalid_argument
-        // perhaps do some error checking
-        int year = std::stoi(historyData[i][0]);
-        unsigned char month = static_cast<unsigned char>(std::stoul(historyData[i][1]));
-        unsigned char day = static_cast<unsigned char>(std::stoul(historyData[i][2]));
-        Date date(year, month, day);    
-
-        int numberOfEntries = std::stoi(historyData[i][4]);
-        for(int j = 5; j < historyData[i].size(); j++)
-        {
-            std::vector<std::string> foodItem;
-            std::stringstream ss(historyData[i][j]);
-            std::string foodData;
-            while(std::getline(ss, foodData, '-'))
-            {
-                foodItem.push_back(foodData);
-            }
-            
-            FoodItem food(foodItem[0],
-                          std::stoi(foodItem[1]),
-                          std::stod(foodItem[2]),
-                          std::stod(foodItem[3]),
-                          std::stod(foodItem[4]));
-
-            ch.saveDate(date,food);
-
-        }
-    }
-    historyDB.close();
-}
-
-void DBInterface::updateFoodLibrary()
-{
-    openFileIO();
-    if(!libraryDB)
-    {
-        std::cerr << "Error opening file for reading. \n";
-    }
-
-	FoodLibrary& fl = FoodLibrary::getInstance();
-	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
-    
-    std::vector<std::vector<std::string>> FoodLibraryData;
     std::string line;
     std::string word;
     while(std::getline(libraryDB, line))
     {
-        std::istringstream iss(line);
-        std::vector<std::string> words;
-        while(iss >> word)
-        {
-            words.push_back(word);
-        }
-        FoodLibraryData.push_back(words);
-    }
-
-    std::string name;
-    int calories = 0;
-    double proteins = 0;
-    double fats = 0;
-    double carbs = 0;
-    for(int i = 0; i < FoodLibraryData.size(); i++)
-    {
-        name = FoodLibraryData[i][0];
-        calories = std::stoi(FoodLibraryData[i][1]);
-        proteins = std::stod(FoodLibraryData[i][2]);
-        fats = std::stod(FoodLibraryData[i][3]);
-        carbs = std::stod(FoodLibraryData[i][4]);
-
-        FoodItem newFoodItem(name, calories, proteins, fats, carbs);
-        foodLibrary[FoodLibraryData[i][0]] = newFoodItem;
+        libraryData.push_back(line);
     }
 }
 
-void DBInterface::saveFoodLibrary()
+std::vector<std::string> RealLibraryDBInterface::getData()
 {
-    openFileIO();
-    if(!libraryDB)
+    return libraryData;
+}
+
+void RealLibraryDBInterface::addItem(std::string newItem)
+{
+    libraryData.push_back(newItem);
+}
+
+void RealLibraryDBInterface::saveData()
+{
+    for(int i = 0; i < libraryData.size(); i++)
     {
-        std::cerr << "Error opening file for writing.\n";
+        std::cout << libraryData[i] << std::endl;
+        libraryDB << libraryData[i] << std::endl; 
     }
+}
 
-    FoodLibrary& fl = FoodLibrary::GetInstance();
-	std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
 
-    for(auto& pair : foodLibrary)
+void RealLibraryDBInterface::displayData()
+{
+    for(int i = 0; i < libraryData.size(); i++)
     {
-        libraryDB << pair.second << "\n";
+        std::cout << libraryData[i] << std::endl;
     }
 }

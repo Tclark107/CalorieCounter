@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "UserInterface.h"
 
 UserInterface::UserInterface()
@@ -11,8 +13,8 @@ void UserInterface::displayPrompt()
               << "[2] to track calories\n"
               << "[3] to see what foods I have stored\n"
               << "[4] to see what you have eaten today \n"
-              << "[5] to see what you have eaten all time\n";
-              // create a new item
+              << "[5] to see what you have eaten all time\n"
+              << "[6] to add an item to the food library\n";
 }
 
 std::string UserInterface::getUserInput()
@@ -22,7 +24,7 @@ std::string UserInterface::getUserInput()
     return input;
 }
 
-void displayMessage(std::string message)
+void UserInterface::displayMessage(std::string message)
 {
     std::cout << message << std::endl;
 }

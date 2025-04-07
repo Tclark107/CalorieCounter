@@ -1,31 +1,30 @@
-#ifndef DBINTERFACE_H 
-#define DBINTERFACE_H 
+#ifndef REALHISTORYDBINTERFACE_H 
+#define REALHISTORYDBINTERFACE_H 
 
 #include <fstream>
-#include <iostream>
-#include <sstream>
 #include <string>
+#include <vector>
 
-class RealHistoryDBInterface : public DBInterface{
+#include "DBInterface.h"
+
+class RealHistoryDBInterface : public DBInterface
+{
     public:
-        RealDBInterface();
+        RealHistoryDBInterface();
 
         bool connect() override;
         bool disconnect() override;
         void loadData() override;  // Load data from the database
         void saveData() override;  // Save data to the database
         void displayData() override;  // Display the data
+        std::vector<std::string> getData() override;
 
-        void saveCalorieHistory();
-        void updateCalorieHistory();
-        void saveFoodLibrary();
-        void updateFoodLibrary();
+        void addItem(std::string);
+
 
     private:
         std::fstream historyDB;
-        std::fstream libraryDB;
-
-        std::vector<std::vector<std::string>> historyData;
+        std::vector<std::string> historyData;
 };
 
 #endif
