@@ -1,11 +1,8 @@
 #include "RealHistoryDBInterface.h"
 
-DBInterface::DBInterface() {}
+RealHistoryDBInterface::RealHistoryDBInterface() {}
 
-DBInterface::DBInterface(bool devMode) :
-devMode(devMode) {}
-
-bool connect()
+bool RealHistoryDBInterface::connect()
 {
     historyDB.open("../TristanDB/History.txt", std::ios::in | std::ios::out);
     if(!historyDB)
@@ -16,7 +13,7 @@ bool connect()
     return true;
 }
 
-bool disconnect()
+bool RealHistoryDBInterfaceRealDBInterface::disconnect()
 {
     if(historyDB.is_open())
     {
@@ -24,15 +21,33 @@ bool disconnect()
     }
 }
 
-void RealDBInterface::loadData()
+void RealHistoryDBInterfaceRealDBInterface::loadData()
+{
+    std::string line;
+    std::string word;
+    while(std::getline(historyDB, line))
+    {
+        std::istringstream iss(line);
+        std::vector<std::string> words;
+        while(iss >> word)
+        {
+            words.push_back(word);
+        }
+        historyData.push_back(words);
+    }
+}
+
+std::vector<std::vector<std::string>> RealHistoryDBInterface::getData()
+{
+    return historyData;
+}
+
+void RealHistoryDBInterface::saveData()
 {
 }
 
 void DBInterface::saveCalorieHistory()
 {
-    //TODO: if file exists, otherwise create it"
-    //TODO: make this relative path
-
     CalorieHistory& ch = CalorieHistory::getInstance();
     std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
 
@@ -56,67 +71,6 @@ void DBInterface::saveCalorieHistory()
     //call closefileio
     historyDB.close();
 }
-
-void DBInterface::updateCalorieHistory()
-{
-    openFileIO();
-    if(!historyDB)
-    {
-        std::cerr << "Error opening file for reading. \n";
-    }
-
-    CalorieHistory& ch = CalorieHistory::getInstance();
-    std::vector<std::pair<Date,std::vector<FoodItem>>>& history = ch.getHistory();
-
-    std::vector<std::vector<std::string>> historyData;
-    
-    std::string line;
-    std::string word;
-    while(std::getline(historyDB, line))
-    {
-        std::istringstream iss(line);
-        std::vector<std::string> words;
-        while(iss >> word)
-        {
-            words.push_back(word);
-        }
-        historyData.push_back(words);
-    }
-    
-    
-    for(int i = 0; i < historyData.size(); i++)
-    {
-        //Note: If string contains non-numeric characters stoi or stoul will throw std:invalid_argument
-        // perhaps do some error checking
-        int year = std::stoi(historyData[i][0]);
-        unsigned char month = static_cast<unsigned char>(std::stoul(historyData[i][1]));
-        unsigned char day = static_cast<unsigned char>(std::stoul(historyData[i][2]));
-        Date date(year, month, day);    
-
-        int numberOfEntries = std::stoi(historyData[i][4]);
-        for(int j = 5; j < historyData[i].size(); j++)
-        {
-            std::vector<std::string> foodItem;
-            std::stringstream ss(historyData[i][j]);
-            std::string foodData;
-            while(std::getline(ss, foodData, '-'))
-            {
-                foodItem.push_back(foodData);
-            }
-            
-            FoodItem food(foodItem[0],
-                          std::stoi(foodItem[1]),
-                          std::stod(foodItem[2]),
-                          std::stod(foodItem[3]),
-                          std::stod(foodItem[4]));
-
-            ch.saveDate(date,food);
-
-        }
-    }
-    historyDB.close();
-}
-
 void DBInterface::updateFoodLibrary()
 {
     openFileIO();

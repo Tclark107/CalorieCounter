@@ -6,10 +6,7 @@
 #include <sstream>
 #include <string>
 
-#include "CalorieHistory.h"
-#include "FoodLibrary.h"
-
-class RealDBInterface : public DBInterface{
+class RealHistoryDBInterface : public DBInterface{
     public:
         RealDBInterface();
 
@@ -27,6 +24,8 @@ class RealDBInterface : public DBInterface{
     private:
         std::fstream historyDB;
         std::fstream libraryDB;
+
+        std::vector<std::vector<std::string>> historyData;
 };
 
 #endif

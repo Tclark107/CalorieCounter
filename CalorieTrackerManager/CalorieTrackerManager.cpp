@@ -102,64 +102,98 @@ bool CalorieTrackerManager::isDevMode()
     return devMode;
 }
 
-//oid UserInterface::trackItem()
-//
-//   std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
-//   std::cout << std::endl;
-//   std::cout << "What would you like to track today?\n";
-//   std::string foodItem;
-//   std::cin >> foodItem;
-//   
-//   int calories = 0;
-//   double proteins = 0;
-//   double fats = 0;
-//   double carbs = 0;
-//
-//   if(foodLibrary.find(foodItem) != foodLibrary.end())
-//   {
-//       //std::cout << "What amount in oz did you eat?\n"; 
-//       ch.saveDate(today, foodLibrary[foodItem]);
-//   }
-//   else
-//   {
-//       std::cout << "I don't have that in my library yet.\n";
-//           
-//       //std::cout << "What is the serving siz for " << foodItem;
-//       //std::string servingSize;
-//       //std::cin >> servingSize;
-//   
-//       std::cout << "How many calories are in " << foodItem << "\n";
-//       std::cin >> calories;
-//       std::cout << "How many proteins are in " << foodItem << "\n";
-//       std::cin >> proteins;
-//       std::cout << "How many fats are in " << foodItem << "\n";
-//       std::cin >> fats;
-//       std::cout << "How many carbohydrates are in " << foodItem << "\n";
-//       std::cin >> carbs;
-//   
-//   	FoodItem newFoodItem(foodItem, calories, proteins, fats, carbs);
-//   	std::cout << "Your food item is " << newFoodItem << std::endl;
-//       std::cout << std::endl;
-//   	ch.saveDate(today, newFoodItem);
-//   	foodLibrary[foodItem] = newFoodItem;
-//   }
-//
+/*
+oid UserInterface::trackItem()
 
-//oid UserInterface::todaysData(Date today)
-//
-//   int calories = ch.getTotalCalories(today);
-//   int proteins = ch.getTotalProteins(today);
-//   int fats = ch.getTotalFats(today);
-//   int carbs = ch.getTotalCarbohydrates(today);
-//
-//   std::cout << std::endl;
-//   std::cout << "Today you have had " << calories << " calories, "
-//       << proteins << " grams of protien, " 
-//       << fats << " grams of fat, and " 
-//       << carbs << " grams of carbohydrates.\n";
-//   std::cout << std::endl;
-//
+   std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
+   std::cout << std::endl;
+   std::cout << "What would you like to track today?\n";
+   std::string foodItem;
+   std::cin >> foodItem;
+   
+   int calories = 0;
+   double proteins = 0;
+   double fats = 0;
+   double carbs = 0;
 
+   if(foodLibrary.find(foodItem) != foodLibrary.end())
+   {
+       //std::cout << "What amount in oz did you eat?\n"; 
+       ch.saveDate(today, foodLibrary[foodItem]);
+   }
+   else
+   {
+       std::cout << "I don't have that in my library yet.\n";
+           
+       //std::cout << "What is the serving siz for " << foodItem;
+       //std::string servingSize;
+       //std::cin >> servingSize;
+   
+       std::cout << "How many calories are in " << foodItem << "\n";
+       std::cin >> calories;
+       std::cout << "How many proteins are in " << foodItem << "\n";
+       std::cin >> proteins;
+       std::cout << "How many fats are in " << foodItem << "\n";
+       std::cin >> fats;
+       std::cout << "How many carbohydrates are in " << foodItem << "\n";
+       std::cin >> carbs;
+   
+   	FoodItem newFoodItem(foodItem, calories, proteins, fats, carbs);
+   	std::cout << "Your food item is " << newFoodItem << std::endl;
+       std::cout << std::endl;
+   	ch.saveDate(today, newFoodItem);
+   	foodLibrary[foodItem] = newFoodItem;
+   }
+
+
+oid UserInterface::todaysData(Date today)
+
+   int calories = ch.getTotalCalories(today);
+   int proteins = ch.getTotalProteins(today);
+   int fats = ch.getTotalFats(today);
+   int carbs = ch.getTotalCarbohydrates(today);
+
+   std::cout << std::endl;
+   std::cout << "Today you have had " << calories << " calories, "
+       << proteins << " grams of protien, " 
+       << fats << " grams of fat, and " 
+       << carbs << " grams of carbohydrates.\n";
+   std::cout << std::endl;
+
+void updateHistory()    
+    for(int i = 0; i < historyData.size(); i++)
+    {
+        //Note: If string contains non-numeric characters stoi or stoul will throw std:invalid_argument
+        // perhaps do some error checking
+        int year = std::stoi(historyData[i][0]);
+        unsigned char month = static_cast<unsigned char>(std::stoul(historyData[i][1]));
+        unsigned char day = static_cast<unsigned char>(std::stoul(historyData[i][2]));
+        Date date(year, month, day);    
+
+        int numberOfEntries = std::stoi(historyData[i][4]);
+        for(int j = 5; j < historyData[i].size(); j++)
+        {
+            std::vector<std::string> foodItem;
+            std::stringstream ss(historyData[i][j]);
+            std::string foodData;
+            while(std::getline(ss, foodData, '-'))
+            {
+                foodItem.push_back(foodData);
+            }
+            
+            FoodItem food(foodItem[0],
+                          std::stoi(foodItem[1]),
+                          std::stod(foodItem[2]),
+                          std::stod(foodItem[3]),
+                          std::stod(foodItem[4]));
+
+            ch.saveDate(date,food);
+
+        }
+    }
+    historyDB.close();
+}
+*/
 
 
 
