@@ -57,6 +57,7 @@ void CalorieTrackerManager::loadLibraryData(std::vector<std::string>& libraryDat
 
     libraryDB->loadData();
     libraryData = libraryDB->getData();
+
     libraryDB->disconnect();
 }
 
@@ -82,6 +83,7 @@ void CalorieTrackerManager::loadHistoryData(std::vector<std::string>& historyDat
 
     historyDB->loadData();
     historyData = historyDB->getData();
+
     historyDB->disconnect();
 }
 
@@ -209,7 +211,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
             quit = true;
             break;
         case track:
-            //trackItem();
+            trackItem();
             break;
         case showLibrary:
             fl.showFoodLibrary();
@@ -223,8 +225,13 @@ bool CalorieTrackerManager::handleInput(std::string input)
             historyDB->displayData();
             break;
         case addItemToLibrary:
-            createItem();
+            {
+            FoodItem food;
+            std::string name = getUserItem();
+            food = createUserItem(name);
+            addFoodToLibrary(food);
             break;
+            }
         default:
             std::cout << "Input not recognized, please try again" << std::endl;
             break;
@@ -232,43 +239,50 @@ bool CalorieTrackerManager::handleInput(std::string input)
     return quit;
 }
 
-void CalorieTrackerManager::createItem()
+FoodItem CalorieTrackerManager::createUserItem(std::string name)
 {
-    std::string name;
-    std::string placeHolder;
+    std::string prompt = "";
+    std::string placeHolder = "";
+
     int calories = 0;
     double proteins = 0;
     double fats = 0;
     double carbs = 0;
 
-    std::string prompt = "What is the name of the item you would like to add";
-    ui->displayMessage(prompt);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::getline(std::cin, name);
-
-    prompt = "How many calories are in the item";
+    prompt = "How many calories are in " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     calories = std::stoi(placeHolder);
 
-    prompt = "How many proteins are in the item";
+    prompt = "How many proteins are in " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     proteins = std::stod(placeHolder);
 
-    prompt = "How many fats are in the item";
+    prompt = "How many fats are in " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     fats = std::stod(placeHolder);
 
-    prompt = "How many carbs are in the item";
+    prompt = "How many carbs are in " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     carbs = std::stod(placeHolder);
 
     FoodLibrary& fl = FoodLibrary::GetInstance();
     FoodItem food(name, calories, proteins, fats, carbs);
-    addFoodToLibrary(food);
+    return food;
+}
+
+std::string CalorieTrackerManager::getUserItem()
+{
+    std::string name;
+    std::string prompt = "What is the name of the item you would like to add";
+    ui->displayMessage(prompt);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, name);
+
+    return name;
 }
 
 void CalorieTrackerManager::addFoodToLibrary(FoodItem food)
@@ -281,50 +295,32 @@ bool CalorieTrackerManager::isDevMode()
 {
     return devMode;
 }
+
+void CalorieTrackerManager::trackItem()
+{
+    CalorieHistory& ch = CalorieHistory::GetInstance();
+    FoodLibrary& fl = FoodLibrary::GetInstance();
+
+    Date today = ch.getCurrentDate();
+    std::string foodItem = getUserItem();
+
+    if(fl.inLibrary(foodItem))
+    {
+        //std::cout << "What amount in oz did you eat?\n"; 
+        ch.saveDate(today, fl.getItem(foodItem));
+    }
+    else
+    {
+        FoodItem food;
+        food = createUserItem(foodItem);
+        ch.saveDate(today, food);
+
+        addFoodToLibrary(food);
+    }
+}
+
+
 /*
-oid UserInterface::trackItem()
-
-   std::unordered_map<std::string, FoodItem>& foodLibrary = fl.getFoodLibrary();
-   std::cout << std::endl;
-   std::cout << "What would you like to track today?\n";
-   std::string foodItem;
-   std::cin >> foodItem;
-   
-   int calories = 0;
-   double proteins = 0;
-   double fats = 0;
-   double carbs = 0;
-
-   if(foodLibrary.find(foodItem) != foodLibrary.end())
-   {
-       //std::cout << "What amount in oz did you eat?\n"; 
-       ch.saveDate(today, foodLibrary[foodItem]);
-   }
-   else
-   {
-       std::cout << "I don't have that in my library yet.\n";
-           
-       //std::cout << "What is the serving siz for " << foodItem;
-       //std::string servingSize;
-       //std::cin >> servingSize;
-   
-       std::cout << "How many calories are in " << foodItem << "\n";
-       std::cin >> calories;
-       std::cout << "How many proteins are in " << foodItem << "\n";
-       std::cin >> proteins;
-       std::cout << "How many fats are in " << foodItem << "\n";
-       std::cin >> fats;
-       std::cout << "How many carbohydrates are in " << foodItem << "\n";
-       std::cin >> carbs;
-   
-   	FoodItem newFoodItem(foodItem, calories, proteins, fats, carbs);
-   	std::cout << "Your food item is " << newFoodItem << std::endl;
-       std::cout << std::endl;
-   	ch.saveDate(today, newFoodItem);
-   	foodLibrary[foodItem] = newFoodItem;
-   }
-
-
 oid UserInterface::todaysData(Date today)
 
    int calories = ch.getTotalCalories(today);

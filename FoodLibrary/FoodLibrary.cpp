@@ -19,7 +19,12 @@ void FoodLibrary::addItem(FoodItem food)
     foodLibrary[food.getName()] = food;
 }
 
-FoodItem createItem(std::string name,
+FoodItem FoodLibrary::getItem(std::string food)
+{
+    return foodLibrary[food];
+}
+
+FoodItem FoodLibrary::createItem(std::string name,
                     int calories,
                     double proteins,
                     double fats,
@@ -34,3 +39,11 @@ FoodItem createItem(std::string name,
     return food;
 }
 
+bool FoodLibrary::inLibrary(std::string item)
+{
+    if(foodLibrary.find(item) != foodLibrary.end())
+    {
+        return true;
+    }
+    return false;
+}

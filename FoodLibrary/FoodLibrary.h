@@ -26,11 +26,13 @@ class FoodLibrary
 
 		void showFoodLibrary();
         void addItem(FoodItem food);
+        FoodItem getItem(std::string food);
         FoodItem createItem(std::string name,
                             int calories,
                             double proteins,
                             double fats,
                             double carbs);
+        bool inLibrary(std::string item);
     private:
         std::unordered_map<std::string, FoodItem> foodLibrary;
         FoodLibrary() {};

@@ -32,8 +32,10 @@ class CalorieTrackerManager
         void run();
         bool handleInput(std::string input);
         bool isDevMode();
-        void createItem();
+        std::string getUserItem();
+        FoodItem createUserItem(std::string name);
         void addFoodToLibrary(FoodItem food);
+        void trackItem();
 
     private:
         bool devMode;
