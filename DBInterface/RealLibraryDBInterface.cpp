@@ -40,13 +40,14 @@ std::vector<std::string> RealLibraryDBInterface::getData()
     return libraryData;
 }
 
-void RealLibraryDBInterface::addItem(std::string newItem)
+void RealLibraryDBInterface::addItem(const std::string& newItem)
 {
     libraryData.push_back(newItem);
 }
 
 void RealLibraryDBInterface::saveData()
 {
+    std::cout << "RealLibraryDBInterface::saveData()\n";
     for(int i = 0; i < libraryData.size(); i++)
     {
         std::cout << libraryData[i] << std::endl;

@@ -19,7 +19,7 @@ class RealLibraryDBInterface : public DBInterface
         void displayData() override;  // Display the data
         std::vector<std::string> getData() override;
 
-        void addItem(std::string);
+        void addItem(const std::string& item) override;
 
 
     private:

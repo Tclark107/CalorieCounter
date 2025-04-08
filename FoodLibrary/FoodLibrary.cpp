@@ -1,6 +1,8 @@
 #include "FoodLibrary.h"
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 void FoodLibrary::showFoodLibrary()
 {
@@ -46,4 +48,17 @@ bool FoodLibrary::inLibrary(std::string item)
         return true;
     }
     return false;
+}
+
+std::string FoodLibrary::toString(FoodItem item)
+{
+    std::stringstream ss;
+    ss << item.getName() << " "
+       << item.getCalories() << " "
+       << item.getProteins() << " "
+       << item.getFats() << " "
+       << item.getCarbohydrates();
+
+    std::string result = ss.str();
+    return result;
 }

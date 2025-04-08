@@ -231,6 +231,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
             std::string name = getUserItem();
             food = createUserItem(name);
             addFoodToLibrary(food);
+            addFoodToDataBase(food);
             break;
             }
         default:
@@ -292,6 +293,13 @@ void CalorieTrackerManager::addFoodToLibrary(FoodItem food)
     fl.addItem(food);
 }
 
+void CalorieTrackerManager::addFoodToDataBase(FoodItem food)
+{
+    FoodLibrary& fl = FoodLibrary::GetInstance();
+    std::string foodItem = fl.toString(food);
+    libraryDB->addItem(foodItem);
+}
+
 bool CalorieTrackerManager::isDevMode()
 {
     return devMode;
@@ -317,7 +325,7 @@ void CalorieTrackerManager::trackItem()
         ch.saveDate(today, food);
 
         addFoodToLibrary(food);
-
+        addFoodToDataBase(food);
     }
 }
 

@@ -24,6 +24,7 @@ class FoodLibrary
         //    return foodLibrary;
         //}
 
+        bool inLibrary(std::string item);
 		void showFoodLibrary();
         void addItem(FoodItem food);
         FoodItem getItem(std::string food);
@@ -32,7 +33,8 @@ class FoodLibrary
                             double proteins,
                             double fats,
                             double carbs);
-        bool inLibrary(std::string item);
+
+        std::string toString(FoodItem food);
     private:
         std::unordered_map<std::string, FoodItem> foodLibrary;
         FoodLibrary() {};

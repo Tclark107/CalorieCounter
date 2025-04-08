@@ -40,7 +40,7 @@ std::vector<std::string> RealHistoryDBInterface::getData()
     return historyData;
 }
 
-void RealHistoryDBInterface::addItem(std::string newItem)
+void RealHistoryDBInterface::addItem(const std::string& newItem)
 {
     historyData.push_back(newItem);
 }
