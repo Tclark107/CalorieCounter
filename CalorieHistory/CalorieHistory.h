@@ -68,6 +68,8 @@ class CalorieHistory
         {
             return history;
         }
+
+        std::string toString(const Date& date);
         
         
     private:

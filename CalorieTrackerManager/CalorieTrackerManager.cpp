@@ -87,7 +87,7 @@ void CalorieTrackerManager::loadHistoryData(std::vector<std::string>& historyDat
     historyDB->disconnect();
 }
 
-void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::string>& libraryData)
+void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::string>& historyData)
 {
     std::cout << "Loading Data to History\n";
     std::vector<std::string> parsedDateInfo;
@@ -96,16 +96,25 @@ void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::stri
     Date date;
     CalorieHistory& ch = CalorieHistory::GetInstance();
 
-    for(const auto& item : libraryData)
+    for(const auto& item : historyData)
     {
-        parsedDateInfo = splitBySpaces(item);       
+        std::cout << "item " << item << std::endl;
+        parsedDateInfo = splitBySpaces(item);
+        for(int i = 0; i < parsedDateInfo.size(); i++)
+        {
+            std::cout << parsedDateInfo[i] << " - ";
+        }
+        std::cout << std::endl;
+
         date = createDate(parsedDateInfo);
         for(int i = 5; i < parsedDateInfo.size(); i++)
         {
             parsedItem = splitByDashes(parsedDateInfo[i]);
             FoodItem newFoodItem = createFoodItem(parsedItem);
+            std::cout << "newFoodItem = " << newFoodItem << std::endl;
             ch.saveDate(date, newFoodItem);
         }
+        ch.showHistory();
         std::cout << std::endl;
     }
 }
@@ -136,11 +145,39 @@ std::vector<std::string> CalorieTrackerManager::splitByDashes(const std::string 
 
 FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> parsedItem)
 {
-    std::string name = parsedItem[0]; 
-    int calories = std::stoi(parsedItem[1]);
-    double proteins = std::stod(parsedItem[2]);
-    double fats = std::stod(parsedItem[3]);
-    double carbs = std::stod(parsedItem[4]);
+
+    std::string name = "";
+    int calories = 0;
+    double proteins = 0;
+    double fats = 0;
+    double carbs = 0;
+
+    if(parsedItem.size() < 3)
+    {
+        std::cerr << "Error: Not enough elements in parsedItem to construct a foodItem. "
+            << "Food item has " << parsedItem.size() << " elements.\n";
+    }
+
+    try
+    {
+        name = parsedItem[0]; 
+        calories = std::stoi(parsedItem[1]);
+        proteins = std::stod(parsedItem[2]);
+        fats = std::stod(parsedItem[3]);
+        carbs = std::stod(parsedItem[4]);
+    }
+    catch (const std::out_of_range& e)
+    {
+        std::cerr << "Error: Parsed item index out of range. " << e.what() << std::endl;
+    }
+    catch (const std::invalid_argument& e)
+    {
+        std::cerr << "Error: Invalid argument during string to number conversions. " << e.what() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "General error during parsing: " << e.what() << std::endl;
+    }
 
     FoodItem newFoodItem(name, calories, proteins, fats, carbs);
     return newFoodItem;
@@ -148,9 +185,34 @@ FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> pa
 
 Date CalorieTrackerManager::createDate(const std::vector<std::string> parsedItem)
 {
-    int year = std::stoi(parsedItem[0]);
-    unsigned char month = static_cast<unsigned char>(std::stoi(parsedItem[1]));
-    unsigned char day = static_cast<unsigned char>(std::stoi(parsedItem[2]));
+    int year = 0;
+    unsigned char month = 0;
+    unsigned char day = 0;
+
+    if(parsedItem.size() < 3)
+    {
+        std::cerr << "Error: Not enough elements in parsedItem to construct a Date. "
+            << "Date has " << parsedItem.size() << " elements.\n";
+    }
+
+    try
+    {
+        year = std::stoi(parsedItem[0]);
+        month = static_cast<unsigned char>(std::stoi(parsedItem[1]));
+        day = static_cast<unsigned char>(std::stoi(parsedItem[2]));
+    }
+    catch (const std::out_of_range& e)
+    {
+        std::cerr << "Error: Parsed item index out of range. " << e.what() << std::endl;
+    }
+    catch (const std::invalid_argument& e)
+    {
+        std::cerr << "Error: Invalid argument during string to number conversions. " << e.what() << std::endl;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "General error during parsing: " << e.what() << std::endl;
+    }
 
     Date date(year, month, day);
     return date;
@@ -163,6 +225,7 @@ void CalorieTrackerManager::shutDown()
     libraryDB->disconnect();
 
     historyDB->connect();
+    addDatatoHistoryDatabase();
     historyDB->saveData();
     historyDB->disconnect();
 
@@ -231,7 +294,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
             std::string name = getUserItem();
             food = createUserItem(name);
             addFoodToLibrary(food);
-            addFoodToDataBase(food);
+            addFoodToLibraryDataBase(food);
             break;
             }
         default:
@@ -293,7 +356,7 @@ void CalorieTrackerManager::addFoodToLibrary(FoodItem food)
     fl.addItem(food);
 }
 
-void CalorieTrackerManager::addFoodToDataBase(FoodItem food)
+void CalorieTrackerManager::addFoodToLibraryDataBase(FoodItem food)
 {
     FoodLibrary& fl = FoodLibrary::GetInstance();
     std::string foodItem = fl.toString(food);
@@ -325,10 +388,18 @@ void CalorieTrackerManager::trackItem()
         ch.saveDate(today, food);
 
         addFoodToLibrary(food);
-        addFoodToDataBase(food);
+        addFoodToLibraryDataBase(food);
     }
 }
 
+void CalorieTrackerManager::addDatatoHistoryDatabase(const Date& date)
+{
+    CalorieHistory& ch = CalorieHistory::GetInstance();
+    std::cout << "Date is " << date.getYear() << " " << static_cast<int>(date.getMonth()) << " " << static_cast<int>(date.getDay()) << std::endl;
+    std::string strDateData = ch.toString(date);
+    std::cout << strDateData << std::endl;
+    historyDB->addItem(strDateData);
+}
 
 /*
 oid UserInterface::todaysData(Date today)

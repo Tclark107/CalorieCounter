@@ -35,8 +35,9 @@ class CalorieTrackerManager
         std::string getUserItem();
         FoodItem createUserItem(std::string name);
         void addFoodToLibrary(FoodItem food);
-        void addFoodToDataBase(FoodItem food);
+        void addFoodToLibraryDataBase(FoodItem food);
         void trackItem();
+        void addDatatoHistoryDatabase(const Date& date);
 
     private:
         bool devMode;

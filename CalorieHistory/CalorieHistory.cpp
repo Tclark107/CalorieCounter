@@ -1,5 +1,8 @@
 #include "CalorieHistory.h"
 
+#include <sstream>
+#include <iomanip>
+
 Date::Date(int year, unsigned char month, unsigned char day) :
     year (year),
     month (month),
@@ -10,7 +13,9 @@ Date CalorieHistory::getCurrentDate()
 {
     std::time_t t = std::time(nullptr);
     std::tm *now = std::localtime(&t);
-
+    std::cout << "Date is " << static_cast<int>(now->tm_year + 1900)
+        << " " << static_cast<int>(now->tm_mon + 1)
+        << " " << static_cast<int>(now->tm_mday);
     Date todaysDate(static_cast<int>(now->tm_year + 1900),
                     static_cast<unsigned char>(now->tm_mon + 1),
                     static_cast<unsigned char>(now->tm_mday)
@@ -46,6 +51,7 @@ void CalorieHistory::saveDate(Date date, FoodItem item)
         {
             history[i].second.push_back(item);
             dateFound = true;
+            break;
         }
     }
     if(!dateFound)
@@ -138,9 +144,6 @@ double CalorieHistory::getTotalCarbohydrates(Date date)
     return result;
 }
 
-
-
-
 void CalorieHistory::showHistory()
 {
     std::cout << std::endl;
@@ -158,3 +161,24 @@ void CalorieHistory::showHistory()
     std::cout << std::endl;
 }
 
+std::string CalorieHistory::toString(const Date& date)
+{
+    std::stringstream ss;
+    showHistory();
+    int totalCalories = getTotalCalories(date);
+    for(int i = history.size() - 1; i >= 0; i--)
+    {
+        if(date == history[i].first)
+        {
+            ss << history[i].first << " "
+                << totalCalories << " "
+                << history[i].second.size() << " ";
+            for(int j = 0; j < history[i].second.size(); j++)
+            {
+                ss << history[i].second[j] << "-";
+            }
+        }
+    }
+    std::string result = ss.str();
+    return result;
+}
