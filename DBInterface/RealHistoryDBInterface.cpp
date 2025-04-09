@@ -1,6 +1,7 @@
-#include <iostream>
-
 #include "RealHistoryDBInterface.h"
+
+#include <iostream>
+#include <algorithm>
 
 RealHistoryDBInterface::RealHistoryDBInterface() {}
 
@@ -29,38 +30,66 @@ void RealHistoryDBInterface::loadData()
 {
     std::string line;
     std::string word;
+    std::string date;
     while(std::getline(historyDB, line))
     {
-        historyData.push_back(line);
+        if(line.empty() || std::all_of(line.begin(), line.end(), isspace))
+        {
+            continue;
+        }
+        date = getDate(line);
+        historyData[date] = line;
     }
 }
 
+bool RealHistoryDBInterface::inHistory(const std::string& date)
+{
+    if(historyData.find(date) != historyData.end()) return true;
+    return false;
+}
 std::vector<std::string> RealHistoryDBInterface::getData()
 {
-    return historyData;
+    std::vector<std::string> data;
+    int i = 0;
+    for(const auto& pair : historyData)
+    {
+        data[i] = pair.second;
+        i++;
+    }
+
+    return data;
 }
 
 void RealHistoryDBInterface::addItem(const std::string& newItem)
 {
-    historyData.push_back(newItem);
+    std::string date = getDate(newItem);
+    historyData[date] = newItem;
+}
+
+std::string RealHistoryDBInterface::getDate(const std::string& input)
+{
+    std::string date = input.substr(0,10);
+    std::cout << "This is my new function and date looks like " << date 
+        << " but input looks like "<< input << std::endl;
+    return date;
 }
 
 void RealHistoryDBInterface::saveData()
 {
-    std::cout << " In saveddata: logic needed" << std::endl;
-    for(int i = 0; i < historyData.size(); i++)
+    std::cout << "RealHistoryDBInterface::saveData()\n";
+    for(const auto& pair: historyData)
     {
-        std::cout << historyData[i] << std::endl;
-        historyDB << historyData[i] << std::endl;
+        std::cout << pair.second << std::endl;
+        historyDB << pair.second << std::endl;
     }
 }
 
 void RealHistoryDBInterface::displayData()
 {
     std::cout << "RealHistoryDBInterface::displayData()\n";
-    for(int i = 0; i < historyData.size(); i++)
+    for(const auto& pair: historyData)
     {
-        std::cout << historyData[i] << std::endl;
+        std::cout << pair.second << std::endl;
     }
     std::cout << std::endl;
 }

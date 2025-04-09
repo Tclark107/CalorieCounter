@@ -225,7 +225,6 @@ void CalorieTrackerManager::shutDown()
     libraryDB->disconnect();
 
     historyDB->connect();
-    addDatatoHistoryDatabase();
     historyDB->saveData();
     historyDB->disconnect();
 
