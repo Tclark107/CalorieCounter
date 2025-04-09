@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 Date::Date(int year, unsigned char month, unsigned char day) :
     year (year),
@@ -163,6 +164,7 @@ void CalorieHistory::showHistory()
 
 std::string CalorieHistory::toString(const Date& date)
 {
+    std::cout << "CalorieHistory::toString(const Date& date)\n";
     std::stringstream ss;
     showHistory();
     int totalCalories = getTotalCalories(date);
@@ -170,13 +172,16 @@ std::string CalorieHistory::toString(const Date& date)
     {
         if(date == history[i].first)
         {
+            std::cout << "histifirst " << history[i].first << std::endl;
             ss << history[i].first << " "
                 << totalCalories << " "
                 << history[i].second.size() << " ";
             for(int j = 0; j < history[i].second.size(); j++)
             {
-                ss << history[i].second[j] << "-";
+                std::cout << history[i].second[j] << " == ";
+                ss << history[i].second[j] << " ";
             }
+            std::cout << std::endl;
         }
     }
     std::string result = ss.str();

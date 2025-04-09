@@ -74,10 +74,10 @@ void FoodItem::setCarbohydrates( double carbohydrates)
 
 //std::ostream& operator<<(std::ostream& os, const FoodItem& food) {
 std::ostream& operator<<(std::ostream& os, FoodItem& food) {
-        os << food.getName() << " "
-           << food.getCalories() << " "
-           << food.getProteins() << " "
-           << food.getFats() << " "
+        os << food.getName() << "-"
+           << food.getCalories() << "-"
+           << food.getProteins() << "-"
+           << food.getFats() << "-"
            << food.getCarbohydrates();
         return os;
 }

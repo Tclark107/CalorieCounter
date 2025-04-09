@@ -100,13 +100,14 @@ void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::stri
     {
         std::cout << "item " << item << std::endl;
         parsedDateInfo = splitBySpaces(item);
+        date = createDate(parsedDateInfo);
         for(int i = 0; i < parsedDateInfo.size(); i++)
         {
             std::cout << parsedDateInfo[i] << " - ";
         }
         std::cout << std::endl;
 
-        date = createDate(parsedDateInfo);
+
         for(int i = 5; i < parsedDateInfo.size(); i++)
         {
             parsedItem = splitByDashes(parsedDateInfo[i]);
@@ -231,6 +232,7 @@ void CalorieTrackerManager::shutDown()
     libraryDB->disconnect();
 
     historyDB->connect();
+    addDatatoHistoryDatabase();
     historyDB->saveData();
     historyDB->disconnect();
 
@@ -397,9 +399,10 @@ void CalorieTrackerManager::trackItem()
     }
 }
 
-void CalorieTrackerManager::addDatatoHistoryDatabase(const Date& date)
+void CalorieTrackerManager::addDatatoHistoryDatabase()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();
+    Date date = ch.getCurrentDate();
     std::cout << "Date is " << date.getYear() << " " << static_cast<int>(date.getMonth()) << " " << static_cast<int>(date.getDay()) << std::endl;
     std::string strDateData = ch.toString(date);
     std::cout << strDateData << std::endl;

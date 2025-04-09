@@ -37,7 +37,7 @@ class CalorieTrackerManager
         void addFoodToLibrary(FoodItem food);
         void addFoodToLibraryDataBase(FoodItem food);
         void trackItem();
-        void addDatatoHistoryDatabase(const Date& date);
+        void addDatatoHistoryDatabase();
 
     private:
         bool devMode;
