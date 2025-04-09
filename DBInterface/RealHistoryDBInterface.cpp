@@ -47,14 +47,21 @@ bool RealHistoryDBInterface::inHistory(const std::string& date)
     if(historyData.find(date) != historyData.end()) return true;
     return false;
 }
+
 std::vector<std::string> RealHistoryDBInterface::getData()
 {
+    if(historyData.empty())
+    {
+        std::cout << "Food History is empty. No data found." << std::endl;
+        return {};
+    }
+
     std::vector<std::string> data;
     int i = 0;
     for(const auto& pair : historyData)
     {
-        data[i] = pair.second;
-        i++;
+        std::cout << pair.first << " " << pair.second << std::endl;
+        data.push_back(pair.second);
     }
 
     return data;

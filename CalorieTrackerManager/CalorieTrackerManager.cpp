@@ -152,10 +152,16 @@ FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> pa
     double fats = 0;
     double carbs = 0;
 
-    if(parsedItem.size() < 3)
+    if(parsedItem.size() < 5)
     {
         std::cerr << "Error: Not enough elements in parsedItem to construct a foodItem. "
             << "Food item has " << parsedItem.size() << " elements.\n";
+        std::cerr << "The parsed Item is " << std::endl;
+        for(int i = 0; i < parsedItem.size(); i++)
+        {
+            std::cerr << parsedItem[i] << " ";
+        }
+        std::cerr << std::endl;
     }
 
     try
