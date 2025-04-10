@@ -38,6 +38,7 @@ class CalorieTrackerManager
         void addFoodToLibraryDataBase(FoodItem food);
         void trackItem();
         void addDatatoHistoryDatabase();
+        void displayTodaysMacros();
 
     private:
         bool devMode;

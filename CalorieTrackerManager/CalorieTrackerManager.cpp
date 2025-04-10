@@ -289,7 +289,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
             libraryDB->displayData();
             break;
         case showDateData:
-            //todaysData(today);
+            displayTodaysMacros();
             break;
         case showHistory:
             ch.showHistory();
@@ -403,61 +403,25 @@ void CalorieTrackerManager::addDatatoHistoryDatabase()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();
     Date date = ch.getCurrentDate();
-    std::cout << "Date is " << date.getYear() << " " << static_cast<int>(date.getMonth()) << " " << static_cast<int>(date.getDay()) << std::endl;
     std::string strDateData = ch.toString(date);
     std::cout << strDateData << std::endl;
     historyDB->addItem(strDateData);
 }
 
-/*
-oid UserInterface::todaysData(Date today)
 
-   int calories = ch.getTotalCalories(today);
-   int proteins = ch.getTotalProteins(today);
-   int fats = ch.getTotalFats(today);
-   int carbs = ch.getTotalCarbohydrates(today);
+void CalorieTrackerManager::displayTodaysMacros()
+{
+    CalorieHistory& ch = CalorieHistory::GetInstance();
+    Date today = ch.getCurrentDate();
+    int calories = ch.getTotalCalories(today);
+    int proteins = ch.getTotalProteins(today);
+    int fats = ch.getTotalFats(today);
+    int carbs = ch.getTotalCarbohydrates(today);
 
-   std::cout << std::endl;
-   std::cout << "Today you have had " << calories << " calories, "
-       << proteins << " grams of protien, " 
-       << fats << " grams of fat, and " 
-       << carbs << " grams of carbohydrates.\n";
-   std::cout << std::endl;
-
-void updateHistory()    
-    for(int i = 0; i < historyData.size(); i++)
-    {
-        //Note: If string contains non-numeric characters stoi or stoul will throw std:invalid_argument
-        // perhaps do some error checking
-        int year = std::stoi(historyData[i][0]);
-        unsigned char month = static_cast<unsigned char>(std::stoul(historyData[i][1]));
-        unsigned char day = static_cast<unsigned char>(std::stoul(historyData[i][2]));
-        Date date(year, month, day);    
-
-        int numberOfEntries = std::stoi(historyData[i][4]);
-        for(int j = 5; j < historyData[i].size(); j++)
-        {
-            std::vector<std::string> foodItem;
-            std::stringstream ss(historyData[i][j]);
-            std::string foodData;
-            while(std::getline(ss, foodData, '-'))
-            {
-                foodItem.push_back(foodData);
-            }
-            
-            FoodItem food(foodItem[0],
-                          std::stoi(foodItem[1]),
-                          std::stod(foodItem[2]),
-                          std::stod(foodItem[3]),
-                          std::stod(foodItem[4]));
-
-            ch.saveDate(date,food);
-
-        }
-    }
-    historyDB.close();
+    std::cout << std::endl;
+    std::cout << "Today you have had " << calories << " calories, "
+        << proteins << " grams of protien, " 
+        << fats << " grams of fat, and " 
+        << carbs << " grams of carbohydrates.\n";
+    std::cout << std::endl;
 }
-*/
-
-
-
