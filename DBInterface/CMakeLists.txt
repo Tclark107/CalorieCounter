@@ -1,6 +1,8 @@
 add_library(DBInterface 
             RealHistoryDBInterface.cpp
             RealLibraryDBInterface.cpp
+            DevHistoryDBInterface.cpp
+            DevLibraryDBInterface.cpp
             DBInterfaceFactory.cpp
             )
 
