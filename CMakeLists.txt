@@ -10,4 +10,5 @@ add_subdirectory(FoodLibrary)
 add_subdirectory(AppDriver)
 add_subdirectory(DBInterface)
 add_subdirectory(UserInterface)
+add_subdirectory(WeightTracker)
 
