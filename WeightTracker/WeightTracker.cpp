@@ -1,19 +1,15 @@
 #include "WeightTracker.h"
 #include "CalorieHistory.h"
 
-WeightTracker::WeightTracker() {}
+WeightTracker::WeightTracker(bool devMode, UserInterface* ui) :
+devMode(devMode),
+ui(ui)
+{}
 
-void WeightTracker::trackWeight(const std::string& date, const int& weight)
+void WeightTracker::recordWeight()
 {
-    weightHistory[date] = weight;
 }
 
-int WeightTracker::getWeight(const std::string& date)
+void WeightTracker::displayProgress()
 {
-    return weightHistory[date];
-}
-
-std::map<std::string,int> WeightTracker::getWeightHistory()
-{
-    return weightHistory;
 }
