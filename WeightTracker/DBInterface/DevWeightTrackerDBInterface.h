@@ -6,11 +6,11 @@
 #include <vector>
 #include <string>
 
-class DevWeightTrackerDBInterface public WeightTrackerDBInterface
+class DevWeightTrackerDBInterface : public WeightTrackerDBInterface
 {
     public:
         std::vector<std::string> loadRawEntries() override;
-        void saveEntry() override;
+        void saveEntry(const std::string&) override;
 };
 
 #endif

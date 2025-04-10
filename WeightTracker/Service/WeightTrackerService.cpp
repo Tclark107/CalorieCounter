@@ -8,7 +8,7 @@ void WeightTrackerService::addEntry(const WeightEntry& entry)
 {
 }
 
-std::vector<WeightEntry> getAllEntries() const
+std::vector<WeightEntry> getAllEntries()
 {
     std::vector<WeightEntry> entries;
     return entries;

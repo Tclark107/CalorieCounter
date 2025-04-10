@@ -7,7 +7,9 @@ target_link_libraries(AppDriver
                       FoodLibrary
                       CalorieHistory
                       DBInterface
-                      UserInterface)
+                      UserInterface
+                      WeightTracker
+                      )
 
 # Include directories
 target_include_directories(AppDriver PUBLIC
@@ -17,5 +19,6 @@ target_include_directories(AppDriver PUBLIC
             ${PROJECT_SOURCE_DIR}/CalorieHistory
             ${PROJECT_SOURCE_DIR}/DBInterface
             ${PROJECT_SOURCE_DIR}/UserInterface
+            ${PROJECT_SOURCE_DIR}/WeightTracker
             )
 

@@ -6,6 +6,6 @@ std::vector<std::string> DevWeightTrackerDBInterface::loadRawEntries()
     return rawEntries;
 }
 
-void DevWeightTrackerDBInterface::saveEntry()
+void DevWeightTrackerDBInterface::saveEntry(const std::string& line)
 {
 }

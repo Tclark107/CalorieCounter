@@ -1,19 +1,16 @@
-#ifndef WEIGHT_ENTRY_H
-#define WEIGHT_ENTRY_H
+#include "WeightEntry.h"
 
-#include <string>
+WeightEntry::WeightEntry(const std::string& date, float weight) :
+    date(date),
+    weight(weight)
+{}
 
-class WeightEntry
+std::string WeightEntry::getDate() const
 {
-    public:
-        WeightEntry(const std::string& date, float weight);
+    return date;
+}
 
-        std::string getDate() const;
-        float getWeight() const;
-
-    private:
-        std::string date;
-        float weight;
-};
-
-#endif
+float WeightEntry::getWeight() const
+{
+    return weight;
+}

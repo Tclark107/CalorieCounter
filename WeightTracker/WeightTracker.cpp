@@ -1,5 +1,7 @@
 #include "WeightTracker.h"
-#include "CalorieHistory.h"
+#include "WeightTrackerDBInterface.h"
+#include "WeightTrackerService.h"
+#include "UserInterface.h"
 
 WeightTracker::WeightTracker(bool devMode, UserInterface* ui) :
 devMode(devMode),

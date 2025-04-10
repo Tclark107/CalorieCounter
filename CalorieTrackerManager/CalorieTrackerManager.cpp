@@ -35,7 +35,7 @@ void CalorieTrackerManager::startUp()
         libraryDB = DBInterfaceFactory::createLibraryDBInterface(devMode);
         historyDB = DBInterfaceFactory::createHistoryDBInterface(devMode);
         ui = new UserInterface();
-        wt = new WeightTracker();
+        wt = new WeightTracker(devMode, ui);
     }
     catch (const std::bad_alloc& e)
     {
@@ -317,15 +317,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
 
 void CalorieTrackerManager::addWeight()
 {
-    CalorieHistory& ch = CalorieHistory::GetInstance();
-    Date date = ch.getCurrentDate();
-    std::stringstream strDate;
-    std::cout << "CalorieTrackerManager::addWeight()\n"
-
-    strDate << date;
-    std::cout << "strDate " << strDate  << std::endl;
-    wt->trackWeight(date);
-
+    std::cout << "CalorieTrackerManager::addWeight()\n";
 }
 
 
@@ -398,12 +390,12 @@ void CalorieTrackerManager::trackItem()
     CalorieHistory& ch = CalorieHistory::GetInstance();
     FoodLibrary& fl = FoodLibrary::GetInstance();
 
-    <<Date today = ch.getCurrentDate();
+    Date today = ch.getCurrentDate();
     std::string foodItem = getUserItem();
 
     if(fl.inLibrary(foodItem))
     {
-        <//std::cout << "What amount in oz did you eat?\n"; 
+        //std::cout << "What amount in oz did you eat?\n"; 
         ch.saveDate(today, fl.getItem(foodItem));
     }
     else

@@ -1,20 +1,20 @@
 #ifndef WEIGHT_TRACKER_H
 #define WEIGHT_TRACKER_H
 
+class UserInterface;
+
 class WeightTracker 
 {
     public:
         WeightTracker(bool devMode, UserInterface* ui);
-        ~WeightTracker();
+        //~WeightTracker();
 
         void recordWeight();
         void displayProgress();
 
     private:
-        WeightTrackerService* service;
+        bool devMode;
         UserInterface* ui;
-
-
 };
 
 #endif

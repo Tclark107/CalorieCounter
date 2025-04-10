@@ -20,6 +20,7 @@ class DBInterface;
 class UserInterface;
 class FoodItem;
 class Date;
+class WeightTracker;
 
 class CalorieTrackerManager 
 {

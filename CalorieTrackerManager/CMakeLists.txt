@@ -7,6 +7,7 @@ target_include_directories(CalorieTrackerManager PUBLIC
     ${PROJECT_SOURCE_DIR}/CalorieCalculator
     ${PROJECT_SOURCE_DIR}/DBInterface
     ${PROJECT_SOURCE_DIR}/UserInterface
+    ${PROJECT_SOURCE_DIR}/WeightTracker
     )
 
 target_link_libraries(CalorieTrackerManager PUBLIC
@@ -15,4 +16,5 @@ target_link_libraries(CalorieTrackerManager PUBLIC
         CalorieHistory
         CalorieCalculator
         UserInterface
+        WeightTracker
         )
