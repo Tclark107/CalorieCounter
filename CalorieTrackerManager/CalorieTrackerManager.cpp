@@ -6,6 +6,7 @@
 #include "FoodItem.h"
 #include "FoodLibrary.h"
 #include "UserInterface.h"
+#include "WeightTrackerFacade.h"
 
 #include <limits>
 
@@ -15,7 +16,8 @@ CalorieTrackerManager::CalorieTrackerManager(bool devMode) :
 devMode(devMode),
 libraryDB(nullptr),
 historyDB(nullptr),
-ui(nullptr)
+ui(nullptr),
+wt(nullptr)
 {}
 
 CalorieTrackerManager::~CalorieTrackerManager()
@@ -23,6 +25,7 @@ CalorieTrackerManager::~CalorieTrackerManager()
     delete libraryDB;
     delete historyDB;
     delete ui;
+    delete wt;
 }
 
 void CalorieTrackerManager::startUp()
@@ -32,6 +35,7 @@ void CalorieTrackerManager::startUp()
         libraryDB = DBInterfaceFactory::createLibraryDBInterface(devMode);
         historyDB = DBInterfaceFactory::createHistoryDBInterface(devMode);
         ui = new UserInterface();
+        wt = new WeightTrackerFacade(devMode, ui);
     }
     catch (const std::bad_alloc& e)
     {
@@ -266,6 +270,7 @@ Option stringToOption(const std::string& input)
     if(input == "4") return showDateData;
     if(input == "5") return showHistory;
     if(input == "6") return addItemToLibrary;
+    if(input == "7") return recWeight;
     return invalidOption;
 }
 
@@ -304,12 +309,22 @@ bool CalorieTrackerManager::handleInput(std::string input)
             addFoodToLibraryDataBase(food);
             break;
             }
+        case recWeight:
+            recordWeight();
+            break;
         default:
             std::cout << "Input not recognized, please try again" << std::endl;
             break;
     }
     return quit;
 }
+
+void CalorieTrackerManager::recordWeight()
+{
+    std::cout << "CalorieTrackerManager::recordWeight()\n";
+    wt->recordWeight();
+}
+
 
 FoodItem CalorieTrackerManager::createUserItem(std::string name)
 {

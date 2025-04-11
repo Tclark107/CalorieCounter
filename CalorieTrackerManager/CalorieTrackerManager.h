@@ -12,6 +12,7 @@ enum Option
     showDateData,
     showHistory,
     addItemToLibrary,
+    recWeight,
     invalidOption
 };
 
@@ -19,6 +20,7 @@ class DBInterface;
 class UserInterface;
 class FoodItem;
 class Date;
+class WeightTrackerFacade;
 
 class CalorieTrackerManager 
 {
@@ -39,12 +41,14 @@ class CalorieTrackerManager
         void trackItem();
         void addDatatoHistoryDatabase();
         void displayTodaysMacros();
+        void recordWeight();
 
     private:
         bool devMode;
         DBInterface *libraryDB;
         DBInterface *historyDB;
         UserInterface *ui;
+        WeightTrackerFacade *wt;
 
         void loadLibraryData(std::vector<std::string>& libraryData);
         void saveLibraryDataToFoodLibrary(const std::vector<std::string>& libraryData);
