@@ -18,8 +18,12 @@ void WeightTrackerFacade::recordWeight()
     ui->displayMessage(prompt);
     std::string input = ui->getUserInput();
     weightTrackerService->addEntry(input);
+    displayProgress();
 }
 
 void WeightTrackerFacade::displayProgress()
 {
+    std::string weightHistory = "";
+    weightHistory = weightTrackerService->getHistory();
+    ui->displayMessage(weightHistory);
 }

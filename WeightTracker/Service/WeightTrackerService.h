@@ -4,6 +4,7 @@
 #include "WeightEntry.h"
 
 #include <vector>
+#include <string>
 
 class WeightTrackerService
 {
@@ -13,6 +14,7 @@ class WeightTrackerService
         void addEntry(const std::string& entry);
         std::vector<WeightEntry> getAllEntries() const;
         float calculateWeeklyAverage() const;
+        std::string getHistory();
 
     private:
         std::vector<WeightEntry> entries;

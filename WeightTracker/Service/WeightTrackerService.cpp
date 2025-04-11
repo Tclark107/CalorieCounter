@@ -2,6 +2,7 @@
 #include "Utility.h"
 
 #include <iostream>
+#include <sstream>
 
 WeightTrackerService::WeightTrackerService() : 
 entries()
@@ -21,10 +22,25 @@ void WeightTrackerService::addEntry(const std::string& userInput)
     entries.push_back(entry);
 }
 
-std::vector<WeightEntry> getAllEntries()
+std::vector<WeightEntry> WeightTrackerService::getAllEntries() const
 {
     std::vector<WeightEntry> entries;
     return entries;
+}
+
+std::string WeightTrackerService::getHistory()
+{
+    std::stringstream ss;
+    ss << std::endl;
+
+    for(int i = entries.size() - 1; i >= 0; i--)
+    {
+        ss << entries[i].getWeight() << " ";
+    }
+    ss << std::endl;
+    
+    std::string result = ss.str();
+    return result;
 }
 
 float WeightTrackerService::calculateWeeklyAverage() const
