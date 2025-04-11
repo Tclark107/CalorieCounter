@@ -3,15 +3,15 @@ add_subdirectory(Parser)
 add_subdirectory(Service)
 add_subdirectory(DBInterface)
 
-add_library(WeightTracker WeightTracker.cpp)
+add_library(WeightTrackerFacade WeightTrackerFacade.cpp)
 
-target_link_libraries(WeightTracker
+target_link_libraries(WeightTrackerFacade
     WeightTrackerService
     WeightEntry
     WeightTrackerDBInterface
     )
 
-target_include_directories(WeightTracker PUBLIC 
+target_include_directories(WeightTrackerFacade PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/DBInterface
     ${CMAKE_CURRENT_SOURCE_DIR}/Model

@@ -3,11 +3,11 @@
 
 class UserInterface;
 
-class WeightTracker 
+class WeightTrackerFacade
 {
     public:
-        WeightTracker(bool devMode, UserInterface* ui);
-        //~WeightTracker();
+        WeightTrackerFacade(bool devMode, UserInterface* ui);
+        //~WeightTrackerFacade();
 
         void recordWeight();
         void displayProgress();

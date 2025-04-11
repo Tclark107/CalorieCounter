@@ -6,7 +6,7 @@
 #include "FoodItem.h"
 #include "FoodLibrary.h"
 #include "UserInterface.h"
-#include "WeightTracker.h"
+#include "WeightTrackerFacade.h"
 
 #include <limits>
 
@@ -308,6 +308,9 @@ bool CalorieTrackerManager::handleInput(std::string input)
             addFoodToLibraryDataBase(food);
             break;
             }
+        case recordWeight:
+            recordWeight();
+            break;
         default:
             std::cout << "Input not recognized, please try again" << std::endl;
             break;
@@ -315,9 +318,10 @@ bool CalorieTrackerManager::handleInput(std::string input)
     return quit;
 }
 
-void CalorieTrackerManager::addWeight()
+void CalorieTrackerManager::recordWeight()
 {
-    std::cout << "CalorieTrackerManager::addWeight()\n";
+    std::cout << "CalorieTrackerManager::recordWeight()\n";
+    wt->
 }
 
 
@@ -468,6 +472,3 @@ void updateHistory()
     historyDB.close();
 }
 */
-
-
-
