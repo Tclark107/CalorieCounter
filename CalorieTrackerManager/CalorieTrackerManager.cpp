@@ -408,7 +408,6 @@ void CalorieTrackerManager::addDatatoHistoryDatabase()
     historyDB->addItem(strDateData);
 }
 
-
 void CalorieTrackerManager::displayTodaysMacros()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();
