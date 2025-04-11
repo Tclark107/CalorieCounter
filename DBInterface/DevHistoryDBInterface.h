@@ -1,12 +1,12 @@
 #ifndef DEVHISTORYDBINTERFACE_H 
 #define DEVHISTORYDBINTERFACE_H 
 
+#include "DBInterface.h"
+
 #include <fstream>
 #include <string>
 #include <vector>
 #include <map>
-
-#include "DBInterface.h"
 
 class DevHistoryDBInterface : public DBInterface
 {

@@ -76,8 +76,6 @@ void DevHistoryDBInterface::addItem(const std::string& newItem)
 std::string DevHistoryDBInterface::getDate(const std::string& input)
 {
     std::string date = input.substr(0,10);
-    std::cout << "This is my new function and date looks like " << date 
-        << " but input looks like "<< input << std::endl;
     return date;
 }
 

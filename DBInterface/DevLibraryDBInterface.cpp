@@ -1,6 +1,7 @@
 #include "DevLibraryDBInterface.h"
 
 #include <iostream>
+#include <algorithm>
 
 DevLibraryDBInterface::DevLibraryDBInterface() {}
 
@@ -31,6 +32,10 @@ void DevLibraryDBInterface::loadData()
     std::string word;
     while(std::getline(libraryDB, line))
     {
+        if(line.empty() || std::all_of(line.begin(), line.end(), isspace))
+        {
+            continue;
+        }
         libraryData.push_back(line);
     }
 }
@@ -54,7 +59,6 @@ void DevLibraryDBInterface::saveData()
         libraryDB << libraryData[i] << std::endl; 
     }
 }
-
 
 void DevLibraryDBInterface::displayData()
 {
