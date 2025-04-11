@@ -1,33 +1,24 @@
 #include "WeightTrackerService.h"
 #include "Utility.h"
 
-WeightTrackerService::WeightTrackerService(WeightTrackerDBInterface* db) :
-    db(db)
+#include <iostream>
+
+WeightTrackerService::WeightTrackerService() : 
+entries()
 {}
 
 void WeightTrackerService::addEntry(const std::string& userInput)
 {
     float weight = 0;
-
-    try
-    {
-        weight = std::stof(userInput);
-    }
-    catch(const std::invalid_argument& e)
-    {
-        std::cerr << "Invalid Input: not a number.\n";
-    }
-    catch(const std::out_of_range& e)
-    {
-        std::cerr << "Input is out of float range.\n";
-    }
-    //weight = Utility::convertStringToFloat(userInput);
+    weight = Utility::convertStringToFloat(userInput);
 
     std::string date = "";
     date = Utility::getDate();
+    std::cout << "date = " << date << std::endl;
+    std::cout << "weight = " << weight << std::endl;
 
     WeightEntry entry(date, weight);
-    entires.push_back(entry);
+    entries.push_back(entry);
 }
 
 std::vector<WeightEntry> getAllEntries()
@@ -44,7 +35,7 @@ float WeightTrackerService::calculateWeeklyAverage() const
     for(int i = vecSize - 1; i >= 0; i--)
     {
         if(count > 6) break;
-        weeklyAverage += entries[i];
+        weeklyAverage += entries[i].getWeight();
         count++;
     }
     weeklyAverage = weeklyAverage/count;

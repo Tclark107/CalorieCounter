@@ -9,6 +9,7 @@ target_link_libraries(AppDriver
                       DBInterface
                       UserInterface
                       WeightTracker
+                      Utility
                       )
 
 # Include directories
@@ -20,5 +21,6 @@ target_include_directories(AppDriver PUBLIC
             ${PROJECT_SOURCE_DIR}/DBInterface
             ${PROJECT_SOURCE_DIR}/UserInterface
             ${PROJECT_SOURCE_DIR}/WeightTracker
+            ${PROJECT_SOURCE_DIR}/Utility
             )
 

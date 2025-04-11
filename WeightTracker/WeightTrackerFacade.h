@@ -2,6 +2,7 @@
 #define WEIGHT_TRACKER_H
 
 class UserInterface;
+class WeightTrackerService;
 
 class WeightTrackerFacade
 {
@@ -15,6 +16,8 @@ class WeightTrackerFacade
     private:
         bool devMode;
         UserInterface* ui;
+        WeightTrackerService* weightTrackerService;
+
 };
 
 #endif

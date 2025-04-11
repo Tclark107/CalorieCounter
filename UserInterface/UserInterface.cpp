@@ -14,7 +14,8 @@ void UserInterface::displayPrompt()
               << "[3] to see what foods I have stored\n"
               << "[4] to see what you have eaten today \n"
               << "[5] to see what you have eaten all time\n"
-              << "[6] to add an item to the food library\n";
+              << "[6] to add an item to the food library\n"
+              << "[7] to record your weight\n";
 }
 
 std::string UserInterface::getUserInput()

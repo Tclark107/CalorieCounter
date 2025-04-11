@@ -35,7 +35,7 @@ void CalorieTrackerManager::startUp()
         libraryDB = DBInterfaceFactory::createLibraryDBInterface(devMode);
         historyDB = DBInterfaceFactory::createHistoryDBInterface(devMode);
         ui = new UserInterface();
-        wt = new WeightTracker(devMode, ui);
+        wt = new WeightTrackerFacade(devMode, ui);
     }
     catch (const std::bad_alloc& e)
     {
@@ -270,6 +270,7 @@ Option stringToOption(const std::string& input)
     if(input == "4") return showDateData;
     if(input == "5") return showHistory;
     if(input == "6") return addItemToLibrary;
+    if(input == "7") return recWeight;
     return invalidOption;
 }
 
@@ -308,7 +309,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
             addFoodToLibraryDataBase(food);
             break;
             }
-        case recordWeight:
+        case recWeight:
             recordWeight();
             break;
         default:
@@ -321,7 +322,7 @@ bool CalorieTrackerManager::handleInput(std::string input)
 void CalorieTrackerManager::recordWeight()
 {
     std::cout << "CalorieTrackerManager::recordWeight()\n";
-    wt->
+    wt->recordWeight();
 }
 
 
