@@ -1,5 +1,4 @@
 #include "WeightTrackerFacade.h"
-#include "WeightTrackerDBInterface.h"
 #include "WeightTrackerService.h"
 #include "UserInterface.h"
 
@@ -9,7 +8,7 @@ WeightTrackerFacade::WeightTrackerFacade(bool devMode, UserInterface* ui) :
 devMode(devMode),
 ui(ui)
 {
-    weightTrackerService = new WeightTrackerService;
+    weightTrackerService = new WeightTrackerService(devMode);
 }
 
 void WeightTrackerFacade::recordWeight()

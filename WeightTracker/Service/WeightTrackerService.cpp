@@ -1,12 +1,22 @@
 #include "WeightTrackerService.h"
 #include "Utility.h"
+#include "DevWeightTrackerDBInterface.h"
+#include "WeightTrackerDBInterfaceFactory.h"
 
 #include <iostream>
 #include <sstream>
 
-WeightTrackerService::WeightTrackerService() : 
+WeightTrackerService::WeightTrackerService(bool devMode) : 
+db(nullptr),
+devMode(devMode),
 entries()
-{}
+{
+    db = WeightTrackerDBInterfaceFactory::createDBInterface(devMode);
+    db->connect();
+    db->loadData();
+    db->displayData();
+    db->disconnect();
+}
 
 void WeightTrackerService::addEntry(const std::string& userInput)
 {
@@ -17,6 +27,13 @@ void WeightTrackerService::addEntry(const std::string& userInput)
     date = Utility::getDate();
     std::cout << "date = " << date << std::endl;
     std::cout << "weight = " << weight << std::endl;
+
+    std::string weightData = date + " " + userInput;
+    db->connect();
+    db->addItem(weightData);
+    db->displayData();
+    db->saveData();
+    db->disconnect();
 
     WeightEntry entry(date, weight);
     entries.push_back(entry);

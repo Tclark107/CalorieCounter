@@ -6,10 +6,12 @@
 #include <vector>
 #include <string>
 
+class DBInterface;
+
 class WeightTrackerService
 {
     public:
-        WeightTrackerService();
+        WeightTrackerService(bool);
 
         void addEntry(const std::string& entry);
         std::vector<WeightEntry> getAllEntries() const;
@@ -17,6 +19,8 @@ class WeightTrackerService
         std::string getHistory();
 
     private:
+        DBInterface* db;
+        bool devMode;
         std::vector<WeightEntry> entries;
 };
 #endif 

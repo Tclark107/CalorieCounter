@@ -9,7 +9,6 @@ DBInterface* DBInterfaceFactory::createLibraryDBInterface(bool devMode)
     if(devMode)
     {
         return new DevLibraryDBInterface();
-        return nullptr;
     }
     else
     {
@@ -22,7 +21,6 @@ DBInterface* DBInterfaceFactory::createHistoryDBInterface(bool devMode)
     if(devMode)
     {
         return new DevHistoryDBInterface();
-        return nullptr;
     }
     else
     {

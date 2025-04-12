@@ -1,4 +1,5 @@
 add_library(WeightTrackerDBInterface 
+    WeightTrackerDBInterfaceFactory.cpp
     DevWeightTrackerDBInterface.cpp)
 
 target_include_directories(WeightTrackerDBInterface PUBLIC
