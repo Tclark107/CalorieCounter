@@ -1,6 +1,6 @@
 #include "WeightTrackerDBInterfaceFactory.h"
 #include "DevWeightTrackerDBInterface.h"
-//#include "RealWeightTrackerDBInterface.h"
+#include "RealWeightTrackerDBInterface.h"
 
 DBInterface* WeightTrackerDBInterfaceFactory::createDBInterface(bool devMode)
 {
@@ -10,7 +10,6 @@ DBInterface* WeightTrackerDBInterfaceFactory::createDBInterface(bool devMode)
     }
     else
     {
-        //return new RealWeightTrackerDBInterface();
-        return nullptr;
+        return new RealWeightTrackerDBInterface();
     }
 }
