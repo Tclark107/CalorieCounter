@@ -17,6 +17,8 @@ class DevWeightTrackerDBInterface : public  DBInterface
         void saveData() override;  // Save data to the database
         void displayData() override;  // Display the data
         std::vector<std::string> getData() override;
+        int getSize();
+        std::string getItem(const int index);
 
         void addItem(const std::string&);
     

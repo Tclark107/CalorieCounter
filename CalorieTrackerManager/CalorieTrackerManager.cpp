@@ -271,6 +271,7 @@ Option stringToOption(const std::string& input)
     if(input == "5") return showHistory;
     if(input == "6") return addItemToLibrary;
     if(input == "7") return recWeight;
+    if(input == "8") return AVERAGE_WEIGHT;
     return invalidOption;
 }
 
@@ -312,11 +313,20 @@ bool CalorieTrackerManager::handleInput(std::string input)
         case recWeight:
             recordWeight();
             break;
+        case AVERAGE_WEIGHT:
+            getAverageWeight();
+            break;
         default:
             std::cout << "Input not recognized, please try again" << std::endl;
             break;
     }
     return quit;
+}
+
+void CalorieTrackerManager::getAverageWeight()
+{
+    std::cout << "CalorieTrackerManager::getAverageWeight()\n";
+    wt->getAverageWeight();
 }
 
 void CalorieTrackerManager::recordWeight()

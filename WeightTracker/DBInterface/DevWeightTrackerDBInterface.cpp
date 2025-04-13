@@ -49,6 +49,16 @@ void DevWeightTrackerDBInterface::addItem(const std::string& newItem)
     weightData.push_back(newItem);
 }
 
+std::string DevWeightTrackerDBInterface::getItem(const int index)
+{
+    return weightData[index];
+}
+
+int DevWeightTrackerDBInterface::getSize()
+{
+    return weightData.size();
+}
+
 void DevWeightTrackerDBInterface::saveData()
 {
     std::cout << "DevWeightTrackerDBInterface::saveData()\n";

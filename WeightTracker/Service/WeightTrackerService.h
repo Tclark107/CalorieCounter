@@ -13,10 +13,13 @@ class WeightTrackerService
     public:
         WeightTrackerService(bool);
 
-        void addEntry(const std::string& entry);
+        void addEntry(const std::string&);
         std::vector<WeightEntry> getAllEntries() const;
         float calculateWeeklyAverage() const;
         std::string getHistory();
+        void saveEntryToDataBase(const std::string&);
+        void saveEntryInternal(const std::string, const float);
+        void saveDataFromDatabase();
 
     private:
         DBInterface* db;

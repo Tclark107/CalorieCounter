@@ -12,6 +12,7 @@ class WeightTrackerFacade
 
         void recordWeight();
         void displayProgress();
+        void getAverageWeight();
 
     private:
         bool devMode;

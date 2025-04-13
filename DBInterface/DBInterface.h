@@ -14,6 +14,8 @@ public:
     virtual void displayData() = 0;  // Display the data
     virtual void addItem(const std::string& item) = 0;
     virtual std::vector<std::string> getData() = 0;
+    //virtual int getSize() override;
+    //virtual std::string getItem(const int index) override;
 };
 
 #endif

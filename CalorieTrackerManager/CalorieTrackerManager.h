@@ -13,6 +13,7 @@ enum Option
     showHistory,
     addItemToLibrary,
     recWeight,
+    AVERAGE_WEIGHT,
     invalidOption
 };
 
@@ -42,6 +43,7 @@ class CalorieTrackerManager
         void addDatatoHistoryDatabase();
         void displayTodaysMacros();
         void recordWeight();
+        void getAverageWeight();
 
     private:
         bool devMode;
