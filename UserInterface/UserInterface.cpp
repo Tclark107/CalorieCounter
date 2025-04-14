@@ -16,7 +16,7 @@ void UserInterface::displayPrompt()
               << "[5] to see what you have eaten all time\n"
               << "[6] to add an item to the food library\n"
               << "[7] to record your weight\n"
-              << "[7] to show your weight in a weekly average\n";
+              << "[8] to show your weight in a weekly average\n";
 }
 
 std::string UserInterface::getUserInput()

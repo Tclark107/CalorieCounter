@@ -75,7 +75,7 @@ void CalorieTrackerManager::saveLibraryDataToFoodLibrary(const std::vector<std::
 
     for(const auto& item : libraryData)
     {
-        parsedItem = splitBySpaces(item);       
+        parsedItem = splitBySpaces(item);
         newFoodItem = createFoodItem(parsedItem);
         fl.addItem(newFoodItem);
     }
@@ -102,25 +102,15 @@ void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::stri
 
     for(const auto& item : historyData)
     {
-        std::cout << "item " << item << std::endl;
         parsedDateInfo = splitBySpaces(item);
         date = createDate(parsedDateInfo);
-        for(int i = 0; i < parsedDateInfo.size(); i++)
-        {
-            std::cout << parsedDateInfo[i] << " - ";
-        }
-        std::cout << std::endl;
-
 
         for(int i = 5; i < parsedDateInfo.size(); i++)
         {
             parsedItem = splitByDashes(parsedDateInfo[i]);
             FoodItem newFoodItem = createFoodItem(parsedItem);
-            std::cout << "newFoodItem = " << newFoodItem << std::endl;
             ch.saveDate(date, newFoodItem);
         }
-        ch.showHistory();
-        std::cout << std::endl;
     }
 }
 
@@ -429,7 +419,6 @@ void CalorieTrackerManager::addDatatoHistoryDatabase()
     CalorieHistory& ch = CalorieHistory::GetInstance();
     Date date = ch.getCurrentDate();
     std::string strDateData = ch.toString(date);
-    std::cout << strDateData << std::endl;
     historyDB->addItem(strDateData);
 }
 

@@ -60,7 +60,6 @@ std::vector<std::string> DevHistoryDBInterface::getData()
     int i = 0;
     for(const auto& pair : historyData)
     {
-        std::cout << pair.first << " " << pair.second << std::endl;
         data.push_back(pair.second);
     }
 

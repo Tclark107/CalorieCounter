@@ -14,9 +14,6 @@ Date CalorieHistory::getCurrentDate()
 {
     std::time_t t = std::time(nullptr);
     std::tm *now = std::localtime(&t);
-    std::cout << "Date is " << static_cast<int>(now->tm_year + 1900)
-        << " " << static_cast<int>(now->tm_mon + 1)
-        << " " << static_cast<int>(now->tm_mday);
     Date todaysDate(static_cast<int>(now->tm_year + 1900),
                     static_cast<unsigned char>(now->tm_mon + 1),
                     static_cast<unsigned char>(now->tm_mday)
@@ -172,13 +169,11 @@ std::string CalorieHistory::toString(const Date& date)
     {
         if(date == history[i].first)
         {
-            std::cout << "histifirst " << history[i].first << std::endl;
             ss << history[i].first << " "
                 << totalCalories << " "
                 << history[i].second.size() << " ";
             for(int j = 0; j < history[i].second.size(); j++)
             {
-                std::cout << history[i].second[j] << " == ";
                 ss << history[i].second[j] << " ";
             }
             std::cout << std::endl;
