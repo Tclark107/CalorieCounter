@@ -3,14 +3,13 @@
 #include <iostream>
 #include <algorithm>
 
-DevWeightTrackerDBInterface::DevWeightTrackerDBInterface() {}
-
-bool DevWeightTrackerDBInterface::connect()
+DevWeightTrackerDBInterface::DevWeightTrackerDBInterface() 
 {
-    weightDB.open("../TristanDB/WeightTest.txt", std::ios::in | std::ios::out);
-    if(!weightDB)
-    {
-        return false;
-    }
-    return true;
+    setFileName("../TristanDB/WeightTest.txt");
+}
+
+std::vector<std::string> DevWeightTrackerDBInterface::getData()
+{
+    std::vector<std::string> result;
+    return result;
 }

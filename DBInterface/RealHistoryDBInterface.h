@@ -18,7 +18,6 @@ class RealHistoryDBInterface : public DBInterface
         void loadData() override;  // Load data from the database
         void saveData() override;  // Save data to the database
         void displayData() override;  // Display the data
-
         std::vector<std::string> getData() override;
 
         void addItem(const std::string& item);

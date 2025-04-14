@@ -22,15 +22,15 @@ entries()
 
 void WeightTrackerService::saveDataFromDatabase()
 {
-    DevWeightTrackerDBInterface* devDb = dynamic_cast<DevWeightTrackerDBInterface*>(db);
+    FileIODBInterface* fileIODB = dynamic_cast<FileIODBInterface*>(db);
 
-    int dbSize = devDb->getSize();
+    int dbSize = fileIODB->getSize();
     std::string weightEntry = "";
     std::vector<std::string> parsedWeightEntry;
     
     for(int i = 0; i < dbSize; i++)
     {
-        weightEntry = devDb->getItem(i);
+        weightEntry = fileIODB->getItem(i);
         parsedWeightEntry = Utility::splitByColons(weightEntry);
         std::string date = parsedWeightEntry[0];
         float weight = Utility::convertStringToFloat(parsedWeightEntry[1]);

@@ -5,9 +5,17 @@
 
 FileIODBInterface::FileIODBInterface() {}
 
+FileIODBInterface::~FileIODBInterface() {}
+
+void FileIODBInterface::setFileName(const std::string newFileName)
+{
+    filename = newFileName;
+}
+
 bool FileIODBInterface::connect()
 {
-    fileIODB.open("../TristanDB/MockDB.txt", std::ios::in | std::ios::out);
+    std::cout << "FileIODBInterface::connect()\n";
+    fileIODB.open(filename, std::ios::in | std::ios::out);
     if(!fileIODB)
     {
         std::cerr << "Error opening HistroyDB.\n";
@@ -40,9 +48,14 @@ void FileIODBInterface::loadData()
     }
 }
 
-std::vector<std::string> FileIODBInterface::getData()
+std::string FileIODBInterface::getItem(const int index)
 {
-    return fileIOData;
+    return fileIOData[index];
+}
+
+int FileIODBInterface::getSize()
+{
+    return fileIOData.size();
 }
 
 void FileIODBInterface::addItem(const std::string& newItem)
