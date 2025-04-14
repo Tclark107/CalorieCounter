@@ -1,4 +1,5 @@
 add_library(DBInterface 
+            FileIODBInterface.cpp
             RealHistoryDBInterface.cpp
             RealLibraryDBInterface.cpp
             DevHistoryDBInterface.cpp
