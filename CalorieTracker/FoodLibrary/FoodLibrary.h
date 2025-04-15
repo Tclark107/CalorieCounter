@@ -21,6 +21,7 @@ class FoodLibrary
         bool inLibrary(std::string item);
 		void showFoodLibrary();
         void addItem(FoodItem food);
+        //void editItem(std::string item);
         FoodItem getItem(std::string food);
         FoodItem createItem(std::string name,
                             int calories,

@@ -1,15 +1,15 @@
 #include "FoodLibraryDBInterfaceFactory.h"
-#include "DevFoodLibraryDBInterface.h"
-#include "RealFoodLibraryDBInterface.h"
+#include "DevLibraryDBInterface.h"
+#include "RealLibraryDBInterface.h"
 
 DBInterface* FoodLibraryDBInterfaceFactory::createDBInterface(bool devMode)
 {
     if(devMode)
     {
-        return new DevFoodLibraryDBInterface();
+        return new DevLibraryDBInterface();
     }
     else
     {
-        return new RealFoodLibraryDBInterface();
+        return new RealLibraryDBInterface();
     }
 }

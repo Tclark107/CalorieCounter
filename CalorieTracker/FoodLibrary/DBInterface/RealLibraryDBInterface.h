@@ -5,13 +5,13 @@
 #include <string>
 #include <vector>
 
-#include "DBInterface.h"
+#include "FileIODBInterface.h"
 
 class RealLibraryDBInterface : public FileIODBInterface
 {
     public:
         RealLibraryDBInterface();
-        bool connect() override;
+        std::vector<std::string> getData();
 };
 
 #endif

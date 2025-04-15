@@ -5,14 +5,13 @@
 #include <string>
 #include <vector>
 
-#include "DBInterface.h"
+#include "FileIODBInterface.h"
 
 class DevLibraryDBInterface : public FileIODBInterface
 {
     public:
         DevLibraryDBInterface();
-        bool connect()
-
+        std::vector<std::string> getData();
 };
 
 #endif

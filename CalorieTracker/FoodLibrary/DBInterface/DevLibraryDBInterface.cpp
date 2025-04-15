@@ -5,16 +5,11 @@
 
 DevLibraryDBInterface::DevLibraryDBInterface() 
 {
-    filename = "../TristanDB/FoodLibraryTest.txt";
+    setFileName("../TristanDB/FoodLibraryTest.txt");
 }
 
-bool DevLibraryDBInterface::connect()
+std::vector<std::string> DevLibraryDBInterface::getData()
 {
-    libraryDB.open(filename, std::ios::in | std::ios::out);
-    if(!libraryDB)
-    {
-        std::cerr << "Error opening HistroyDB.\n";
-        return false;
-    }
-    return true;
+    std::vector<std::string> result;
+    return result;
 }

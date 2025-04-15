@@ -1,5 +1,11 @@
-add_library(FoodLibrary FoodLibrary.cpp FoodItem.cpp)
+add_subdirectory(DBInterface)
+add_subdirectory(Model)
 
-target_link_libraries()
+add_library(FoodLibrary FoodLibrary.cpp)
+
+target_link_libraries(FoodLibrary
+    FoodItem
+    FoodLibraryDBInterface
+    )
 
 target_include_directories(FoodLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

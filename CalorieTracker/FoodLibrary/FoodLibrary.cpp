@@ -50,6 +50,17 @@ bool FoodLibrary::inLibrary(std::string item)
     return false;
 }
 
+//bool FoodLibrary::editItem(std::string item)
+//
+//   if(!inLibrary(item))
+//   {
+//       std::cout << "Item not in Library so we will add the Item instead.\n";
+//       return false;
+//   }
+//
+//   return true;
+//}
+
 std::string FoodLibrary::toString(FoodItem item)
 {
     std::stringstream ss;

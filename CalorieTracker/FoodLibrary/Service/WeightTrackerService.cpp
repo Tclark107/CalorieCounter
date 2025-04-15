@@ -1,6 +1,5 @@
 #include "WeightTrackerService.h"
 #include "Utility.h"
-#include "DevWeightTrackerDBInterface.h"
 #include "WeightTrackerDBInterfaceFactory.h"
 
 #include <iostream>

@@ -1,4 +1,5 @@
-add_library(WeightTrackerService WeightTrackerService.cpp)
+add_library(WeightTrackerService WeightTrackerService.cpp
+    )
 
 target_link_libraries(WeightTrackerService
     Utility
