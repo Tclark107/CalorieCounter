@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "CalorieTrackerManager.h"
+#include "AppManager.h"
 
 int main(int argc, char* argv[])
 {
@@ -14,6 +14,6 @@ int main(int argc, char* argv[])
         }
     }
 
-    CalorieTrackerManager calorieTrackerManager(devMode);
-    calorieTrackerManager.startUp();
+    AppManager appManager(devMode);
+    appManager.startUp();
 }
