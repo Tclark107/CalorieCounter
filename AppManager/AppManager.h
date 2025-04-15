@@ -1,5 +1,5 @@
-#ifndef CALORIETRACKERMANAGER_H
-#define CALORIETRACKERMANAGER_H
+#ifndef AppManager_H
+#define AppManager_H
 
 #include <string>
 #include <vector>
@@ -23,13 +23,13 @@ class FoodItem;
 class Date;
 class WeightTrackerFacade;
 
-class CalorieTrackerManager 
+class AppManager 
 {
     public:
-        CalorieTrackerManager();
-        ~CalorieTrackerManager();
+        AppManager();
+        ~AppManager();
 
-        CalorieTrackerManager(bool devMode);
+        AppManager(bool devMode);
         void startUp();
         void shutDown();
         void run();

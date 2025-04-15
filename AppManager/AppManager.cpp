@@ -1,4 +1,4 @@
-#include "CalorieTrackerManager.h"
+#include "AppManager.h"
 #include "DBInterface.h"
 #include "DBInterfaceFactory.h"
 #include "CalorieCalculator.h"
@@ -10,9 +10,9 @@
 
 #include <limits>
 
-CalorieTrackerManager::CalorieTrackerManager() {}
+AppManager::AppManager() {}
 
-CalorieTrackerManager::CalorieTrackerManager(bool devMode) :
+AppManager::AppManager(bool devMode) :
 devMode(devMode),
 libraryDB(nullptr),
 historyDB(nullptr),
@@ -20,7 +20,7 @@ ui(nullptr),
 wt(nullptr)
 {}
 
-CalorieTrackerManager::~CalorieTrackerManager()
+AppManager::~AppManager()
 {
     delete libraryDB;
     delete historyDB;
@@ -28,7 +28,7 @@ CalorieTrackerManager::~CalorieTrackerManager()
     delete wt;
 }
 
-void CalorieTrackerManager::startUp()
+void AppManager::startUp()
 {
     try 
     {
@@ -55,7 +55,7 @@ void CalorieTrackerManager::startUp()
     run();
 }
 
-void CalorieTrackerManager::loadLibraryData(std::vector<std::string>& libraryData)
+void AppManager::loadLibraryData(std::vector<std::string>& libraryData)
 {
     libraryDB->connect();
 
@@ -65,7 +65,7 @@ void CalorieTrackerManager::loadLibraryData(std::vector<std::string>& libraryDat
     libraryDB->disconnect();
 }
 
-void CalorieTrackerManager::saveLibraryDataToFoodLibrary(const std::vector<std::string>& libraryData)
+void AppManager::saveLibraryDataToFoodLibrary(const std::vector<std::string>& libraryData)
 {
     std::cout << "Loading Data to FoodLibrary\n";
     std::vector<std::string> parsedItem;
@@ -81,7 +81,7 @@ void CalorieTrackerManager::saveLibraryDataToFoodLibrary(const std::vector<std::
     }
 }
 
-void CalorieTrackerManager::loadHistoryData(std::vector<std::string>& historyData)
+void AppManager::loadHistoryData(std::vector<std::string>& historyData)
 {
     historyDB->connect();
 
@@ -91,7 +91,7 @@ void CalorieTrackerManager::loadHistoryData(std::vector<std::string>& historyDat
     historyDB->disconnect();
 }
 
-void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::string>& historyData)
+void AppManager::saveHistoryDataToHistory(const std::vector<std::string>& historyData)
 {
     std::cout << "Loading Data to History\n";
     std::vector<std::string> parsedDateInfo;
@@ -114,7 +114,7 @@ void CalorieTrackerManager::saveHistoryDataToHistory(const std::vector<std::stri
     }
 }
 
-std::vector<std::string> CalorieTrackerManager::splitBySpaces(const std::string item)
+std::vector<std::string> AppManager::splitBySpaces(const std::string item)
 {
     std::istringstream iss(item);
     std::vector<std::string> words;
@@ -126,7 +126,7 @@ std::vector<std::string> CalorieTrackerManager::splitBySpaces(const std::string 
     return words;
 }
 
-std::vector<std::string> CalorieTrackerManager::splitByDashes(const std::string item)
+std::vector<std::string> AppManager::splitByDashes(const std::string item)
 {
     std::istringstream iss(item);
     std::vector<std::string> words;
@@ -138,7 +138,7 @@ std::vector<std::string> CalorieTrackerManager::splitByDashes(const std::string 
     return words;
 }
 
-FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> parsedItem)
+FoodItem AppManager::createFoodItem(const std::vector<std::string> parsedItem)
 {
 
     std::string name = "";
@@ -184,7 +184,7 @@ FoodItem CalorieTrackerManager::createFoodItem(const std::vector<std::string> pa
     return newFoodItem;
 }
 
-Date CalorieTrackerManager::createDate(const std::vector<std::string> parsedItem)
+Date AppManager::createDate(const std::vector<std::string> parsedItem)
 {
     int year = 0;
     unsigned char month = 0;
@@ -219,7 +219,7 @@ Date CalorieTrackerManager::createDate(const std::vector<std::string> parsedItem
     return date;
 }
 
-void CalorieTrackerManager::shutDown()
+void AppManager::shutDown()
 {
     libraryDB->connect();
     libraryDB->saveData();
@@ -239,7 +239,7 @@ void CalorieTrackerManager::shutDown()
     ui = nullptr;
 }
 
-void CalorieTrackerManager::run()
+void AppManager::run()
 {
     bool quit = false;
     std::string input;
@@ -265,7 +265,7 @@ Option stringToOption(const std::string& input)
     return invalidOption;
 }
 
-bool CalorieTrackerManager::handleInput(std::string input)
+bool AppManager::handleInput(std::string input)
 {
     bool quit = false;
     FoodLibrary& fl = FoodLibrary::GetInstance();
@@ -313,20 +313,20 @@ bool CalorieTrackerManager::handleInput(std::string input)
     return quit;
 }
 
-void CalorieTrackerManager::getAverageWeight()
+void AppManager::getAverageWeight()
 {
-    std::cout << "CalorieTrackerManager::getAverageWeight()\n";
+    std::cout << "AppManager::getAverageWeight()\n";
     wt->getAverageWeight();
 }
 
-void CalorieTrackerManager::recordWeight()
+void AppManager::recordWeight()
 {
-    std::cout << "CalorieTrackerManager::recordWeight()\n";
+    std::cout << "AppManager::recordWeight()\n";
     wt->recordWeight();
 }
 
 
-FoodItem CalorieTrackerManager::createUserItem(std::string name)
+FoodItem AppManager::createUserItem(std::string name)
 {
     std::string prompt = "";
     std::string placeHolder = "";
@@ -361,7 +361,7 @@ FoodItem CalorieTrackerManager::createUserItem(std::string name)
     return food;
 }
 
-std::string CalorieTrackerManager::getUserItem()
+std::string AppManager::getUserItem()
 {
     std::string name;
     std::string prompt = "What is the name of the item you would like to add";
@@ -372,25 +372,25 @@ std::string CalorieTrackerManager::getUserItem()
     return name;
 }
 
-void CalorieTrackerManager::addFoodToLibrary(FoodItem food)
+void AppManager::addFoodToLibrary(FoodItem food)
 {
     FoodLibrary& fl = FoodLibrary::GetInstance();
     fl.addItem(food);
 }
 
-void CalorieTrackerManager::addFoodToLibraryDataBase(FoodItem food)
+void AppManager::addFoodToLibraryDataBase(FoodItem food)
 {
     FoodLibrary& fl = FoodLibrary::GetInstance();
     std::string foodItem = fl.toString(food);
     libraryDB->addItem(foodItem);
 }
 
-bool CalorieTrackerManager::isDevMode()
+bool AppManager::isDevMode()
 {
     return devMode;
 }
 
-void CalorieTrackerManager::trackItem()
+void AppManager::trackItem()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();
     FoodLibrary& fl = FoodLibrary::GetInstance();
@@ -414,7 +414,7 @@ void CalorieTrackerManager::trackItem()
     }
 }
 
-void CalorieTrackerManager::addDatatoHistoryDatabase()
+void AppManager::addDatatoHistoryDatabase()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();
     Date date = ch.getCurrentDate();
@@ -422,7 +422,7 @@ void CalorieTrackerManager::addDatatoHistoryDatabase()
     historyDB->addItem(strDateData);
 }
 
-void CalorieTrackerManager::displayTodaysMacros()
+void AppManager::displayTodaysMacros()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();
     Date today = ch.getCurrentDate();

@@ -1,6 +1,6 @@
-add_library(CalorieTrackerManager CalorieTrackerManager.cpp)
+add_library(AppManager AppManager.cpp)
 
-target_include_directories(CalorieTrackerManager PUBLIC
+target_include_directories(AppManager PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${PROJECT_SOURCE_DIR}/FoodLibrary
     ${PROJECT_SOURCE_DIR}/CalorieHistory
@@ -10,7 +10,7 @@ target_include_directories(CalorieTrackerManager PUBLIC
     ${PROJECT_SOURCE_DIR}/WeightTracker
     )
 
-target_link_libraries(CalorieTrackerManager PUBLIC
+target_link_libraries(AppManager PUBLIC
         DBInterface
         FoodLibrary
         CalorieHistory
