@@ -18,12 +18,6 @@ class FoodLibrary
         FoodLibrary(const FoodLibrary&) = delete;
         void operator=(const FoodLibrary&) = delete;
         
-        //std::unordered_map<std::string, FoodItem>& getFoodLibrary();
-        //std::unordered_map<std::string, FoodItem>& getFoodLibrary()
-        //{
-        //    return foodLibrary;
-        //}
-
         bool inLibrary(std::string item);
 		void showFoodLibrary();
         void addItem(FoodItem food);
