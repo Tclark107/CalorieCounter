@@ -23,6 +23,38 @@ namespace Utility
         }
     }
 
+    int convertStringToInt(const std::string& input)
+    {
+        try
+        {
+            return std::stoi(input);
+        }
+        catch(const std::invalid_argument& e)
+        {
+            throw std::runtime_error("Invalid int format: " + input);
+        }
+        catch(const std::out_of_range& e)
+        {
+            throw std::runtime_error("Float out of range: " + input);
+        }
+    }
+
+    double convertStringToDouble(const std::string& input)
+    {
+        try
+        {
+            return std::stod(input);
+        }
+        catch(const std::invalid_argument& e)
+        {
+            throw std::runtime_error("Invalid double format: " + input);
+        }
+        catch(const std::out_of_range& e)
+        {
+            throw std::runtime_error("Float out of range: " + input);
+        }
+    }
+
     std::string getDate()
     {
         time_t now = time(0);

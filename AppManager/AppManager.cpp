@@ -1,12 +1,10 @@
 #include "AppManager.h"
 #include "DBInterface.h"
 #include "DBInterfaceFactory.h"
-#include "CalorieCalculator.h"
 #include "CalorieHistory.h"
-#include "FoodItem.h"
-#include "FoodLibrary.h"
 #include "UserInterface.h"
 #include "WeightTrackerFacade.h"
+#include "CalorieTrackerManager.h"
 
 #include <limits>
 
@@ -32,10 +30,10 @@ void AppManager::startUp()
 {
     try 
     {
-        libraryDB = DBInterfaceFactory::createLibraryDBInterface(devMode);
         historyDB = DBInterfaceFactory::createHistoryDBInterface(devMode);
         ui = new UserInterface();
         wt = new WeightTrackerFacade(devMode, ui);
+        ct = new CalorieTrackerManager(devMode, ui);
     }
     catch (const std::bad_alloc& e)
     {
@@ -43,10 +41,6 @@ void AppManager::startUp()
             << e.what() 
             << std::endl;
     }
-
-    std::vector<std::string> libraryData;
-    loadLibraryData(libraryData);
-    saveLibraryDataToFoodLibrary(libraryData);
 
     std::vector<std::string> historyData;
     loadHistoryData(historyData);

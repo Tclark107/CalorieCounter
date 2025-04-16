@@ -1,3 +1,6 @@
+#ifndef USER_INTERFACE_H
+#define USER_INTERFACE_H
+
 #include <string>
 
 class UserInterface {
@@ -8,3 +11,6 @@ class UserInterface {
         std::string getUserInput();
         void displayMessage(std::string message);
 };
+
+#endif
+

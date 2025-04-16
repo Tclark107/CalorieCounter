@@ -7,5 +7,5 @@ add_library(FoodLibraryDBInterface
 
 target_include_directories(FoodLibraryDBInterface PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../DBInterface
+    ${CMAKE_SOURCE_DIR}/DBInterface
     )

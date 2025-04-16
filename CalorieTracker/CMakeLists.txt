@@ -2,7 +2,7 @@ add_subdirectory(CalorieHistory)
 add_subdirectory(FoodLibrary)
 add_subdirectory(CalorieCalculator)
 
-add_library(CalorieTracker CalorieTrackerFacade.cpp)
+add_library(CalorieTracker CalorieTrackerManager.cpp)
 
 target_link_libraries(CalorieTracker
     CalorieHistory
@@ -12,5 +12,6 @@ target_link_libraries(CalorieTracker
 
 target_include_directories(CalorieTracker PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/UserInterface
     )
 

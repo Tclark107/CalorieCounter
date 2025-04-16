@@ -23,6 +23,7 @@ class FileIODBInterface : public DBInterface
         void addItem(const std::string& item) override;
         std::string getItem(const int index);
         int getSize();
+        void saveItem(const std::string item);
 
     private:
         std::fstream fileIODB;
