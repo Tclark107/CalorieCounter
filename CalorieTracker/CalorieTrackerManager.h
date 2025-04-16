@@ -8,7 +8,7 @@ class CalorieTrackerManager
 {
     public:
         CalorieTrackerManager ();
-        CalorieTrackerManager(bool devMode, UserInterface ui);
+        CalorieTrackerManager(bool devMode, UserInterface* ui);
         ~CalorieTrackerManager ();
 
     private:

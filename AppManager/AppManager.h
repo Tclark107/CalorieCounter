@@ -19,9 +19,9 @@ enum Option
 
 class DBInterface;
 class UserInterface;
-class FoodItem;
 class Date;
 class WeightTrackerFacade;
+class CalorieTrackerManager;
 
 class AppManager 
 {
@@ -34,34 +34,15 @@ class AppManager
         void shutDown();
         void run();
         bool handleInput(std::string input);
-        bool isDevMode();
-        std::string getUserItem();
-        FoodItem createUserItem(std::string name);
-        void addFoodToLibrary(FoodItem food);
-        void addFoodToLibraryDataBase(FoodItem food);
-        void trackItem();
-        void addDatatoHistoryDatabase();
-        void displayTodaysMacros();
         void recordWeight();
         void getAverageWeight();
 
     private:
         bool devMode;
-        DBInterface *libraryDB;
-        DBInterface *historyDB;
         UserInterface *ui;
         WeightTrackerFacade *wt;
+        CalorieTrackerManager *ctm;
 
-        void loadLibraryData(std::vector<std::string>& libraryData);
-        void saveLibraryDataToFoodLibrary(const std::vector<std::string>& libraryData);
-        FoodItem createFoodItem(const std::vector<std::string> parsedItem);
-
-        void loadHistoryData(std::vector<std::string>& historyData);
-        void saveHistoryDataToHistory(const std::vector<std::string>& libraryData);
-        Date createDate(const std::vector<std::string> parsedItem);
-
-        std::vector<std::string> splitBySpaces(const std::string item);
-        std::vector<std::string> splitByDashes(const std::string item);
 };
 
 #endif

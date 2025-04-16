@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-FoodLibraryFacade::FoodLibraryFacade (bool devMode, UserInterface ui) 
+FoodLibraryFacade::FoodLibraryFacade(bool devMode, UserInterface* ui) 
 {
     foodLibraryService = new FoodLibraryService(devMode);
 }

@@ -7,7 +7,7 @@ class FoodLibraryService;
 class FoodLibraryFacade
 {
     public:
-        FoodLibraryFacade(bool devMode, UserInterface ui);
+        FoodLibraryFacade(bool devMode, UserInterface* ui);
 
     private:
         FoodLibraryService* foodLibraryService;
