@@ -11,6 +11,9 @@ class CalorieTrackerManager
         CalorieTrackerManager(bool devMode, UserInterface* ui);
         ~CalorieTrackerManager ();
 
+        void showLibrary();
+        void addItemToLibrary();
+
     private:
         FoodLibraryFacade* fl;
         //CalorieHistoryFacade* ch;

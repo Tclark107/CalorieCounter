@@ -28,6 +28,16 @@ CalorieTrackerManager::~CalorieTrackerManager ()
     //delete ch;
 }
 
+void CalorieTrackerManager::showLibrary()
+{
+    fl->displayLibrary();
+}
+
+void CalorieTrackerManager::addItemToLibrary()
+{
+    fl->addItemToLibrary();
+}
+
 /*
 //
 //td::string AppManager::getUserItem()
@@ -44,8 +54,6 @@ CalorieTrackerManager::~CalorieTrackerManager ()
 
 FoodItem AppManager::createUserItem(std::string name)
 {
-    std::string prompt = "";
-    std::string placeHolder = "";
 
     int calories = 0;
     double proteins = 0;

@@ -26,6 +26,7 @@ class FoodLibraryService
                                const double,
                                const double);
         void saveDataFromDatabase();
+        void displayLibrary();
 
     private:
         DBInterface* db;

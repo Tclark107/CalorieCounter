@@ -41,16 +41,6 @@ void AppManager::startUp()
 
     run();
 }
-void AppManager::shutDown()
-{
-    delete wt;
-    delete ui;
-    delete ctm;
-
-    ui = nullptr;
-    wt = nullptr;
-    ctm = nullptr;
-}
 
 void AppManager::run()
 {
@@ -65,14 +55,25 @@ void AppManager::run()
     shutDown();
 }
 
+void AppManager::shutDown()
+{
+    delete wt;
+    delete ui;
+    delete ctm;
+
+    ui = nullptr;
+    wt = nullptr;
+    ctm = nullptr;
+}
+
 Option stringToOption(const std::string& input)
 {
     if(input == "1") return exitloop;
     if(input == "2") return track;
-    if(input == "3") return showLibrary;
+    if(input == "3") return SHOW_LIBRARY;
     if(input == "4") return showDateData;
     if(input == "5") return showHistory;
-    if(input == "6") return addItemToLibrary;
+    if(input == "6") return ADD_ITEM_TO_LIBRARY;
     if(input == "7") return recWeight;
     if(input == "8") return AVERAGE_WEIGHT;
     return invalidOption;
@@ -90,16 +91,17 @@ bool AppManager::handleInput(std::string input)
         case track:
             std::cout << "Track: Under Construction" << std::endl;
             break;
-        case showLibrary:
-            std::cout << "ShowLibrary: Under Construction" << std::endl;
+        case SHOW_LIBRARY:
+            ctm->showLibrary();
             break;
         case showDateData:
             std::cout << "ShowTodaysDate: Under Construction" << std::endl;
             break;
         case showHistory:
             break;
-        case addItemToLibrary:
+        case ADD_ITEM_TO_LIBRARY:
             std::cout << "editLibrary: Under Construction" << std::endl;
+            ctm->addItemToLibrary();
             break;
         case recWeight:
             recordWeight();

@@ -8,10 +8,10 @@ enum Option
 {
     exitloop = 1,
     track,
-    showLibrary,
+    SHOW_LIBRARY,
     showDateData,
     showHistory,
-    addItemToLibrary,
+    ADD_ITEM_TO_LIBRARY,
     recWeight,
     AVERAGE_WEIGHT,
     invalidOption

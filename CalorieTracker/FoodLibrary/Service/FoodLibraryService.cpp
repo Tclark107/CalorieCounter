@@ -65,10 +65,14 @@ void FoodLibraryService::saveEntryToDataBase(const std::string& name)
                      + std::to_string(items[name].getProteins()) + "-"
                      + std::to_string(items[name].getFats()) + "-"
                      + std::to_string(items[name].getCarbohydrates());
+    //set precision
+
+    std::cout << foodData << std::endl;
 
     FileIODBInterface* fileIODB = dynamic_cast<FileIODBInterface*>(db);
     fileIODB->connect();
-    fileIODB->saveItem(foodData);
+    //fileIODB->saveItem(foodData);
+    fileIODB->saveData();
     fileIODB->displayData();
     fileIODB->disconnect();
 }
@@ -81,4 +85,16 @@ void FoodLibraryService::saveEntryInternal(const std::string name,
 {
     FoodItem item(name, calories, proteins, fats, carbs);
     items[name] = item;
+}
+
+void FoodLibraryService::displayLibrary()
+{
+    std::cout << std::endl;
+    std::cout << "FoodLibraryService::displayLibrary()\n";
+    for(auto& pair : items)
+    {
+    	std::cout << pair.first << " "; 
+    	std::cout << pair.second << std::endl;
+    }
+    std::cout << std::endl;
 }
