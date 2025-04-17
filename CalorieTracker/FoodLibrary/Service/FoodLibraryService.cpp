@@ -4,6 +4,7 @@
 #include "FileIODBInterface.h"
 
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 
 FoodLibraryService::FoodLibraryService(bool devMode) : 
@@ -44,47 +45,92 @@ void FoodLibraryService::saveDataFromDatabase()
         fats = Utility::convertStringToDouble(parsedFoodItem[3]);
         carbs = Utility::convertStringToDouble(parsedFoodItem[4]);
         
-        saveEntryInternal(name, calories, proteins, fats, carbs);
+        FoodItem item = createItem(name, calories, proteins, fats, carbs);
+        saveEntryInternal(item);
     }
 }
 
-void FoodLibraryService::addEntry(const std::string name,
+void FoodLibraryService::addItem(const std::string name,
                                   const int calories,
                                   const double proteins,
                                   const double fats,
                                   const double carbs)
 {
-    saveEntryInternal(name, calories, proteins, fats, carbs);
+    FoodItem item = createItem(name, calories, proteins, fats, carbs);
+    saveEntryInternal(item);
+}
+
+std::string FoodLibraryService::toString(FoodItem item)
+{
+    std::stringstream ss;
+    ss << item.getName() << "-"
+       << item.getCalories() << "-"
+       << item.getProteins() << "-"
+       << item.getFats() << "-"
+       << item.getCarbohydrates();
+
+    std::string result = ss.str();
+    return result;
+}
+
+bool FoodLibraryService::inLibrary(const std::string name)
+{
+    if(items.find(name) != items.end())
+    {
+        return true;
+    }
+    return false;
+}
+
+FoodItem FoodLibraryService::getItem(const std::string name)
+{
+    return items[name];
 }
 
 void FoodLibraryService::saveEntryToDataBase(const std::string& name)
 {
-
-    std::string foodData = name + "-"
-                     + std::to_string(items[name].getCalories()) + "-"
-                     + std::to_string(items[name].getProteins()) + "-"
-                     + std::to_string(items[name].getFats()) + "-"
-                     + std::to_string(items[name].getCarbohydrates());
-    //set precision
-
+    if(!inLibrary(name))
+    {
+        std::cerr << "FoodLibraryService::saveEntryToDataBase() "
+            << "item: " << name << " is not in internal library.\n";
+        return;
+    }
+    FoodItem item = getItem(name);
+    std::string foodData = toString(item);
     std::cout << foodData << std::endl;
 
+    writeItemToDB(foodData);
+}
+
+void FoodLibraryService::writeItemToDB(const std::string data)
+{
     FileIODBInterface* fileIODB = dynamic_cast<FileIODBInterface*>(db);
     fileIODB->connect();
-    //fileIODB->saveItem(foodData);
+    fileIODB->addItem(data);
     fileIODB->saveData();
     fileIODB->displayData();
     fileIODB->disconnect();
 }
 
-void FoodLibraryService::saveEntryInternal(const std::string name,
-                                           const int calories,
-                                           const double proteins,
-                                           const double fats,
-                                           const double carbs)
+FoodItem FoodLibraryService::createItem(std::string name,
+                    int calories,
+                    double proteins,
+                    double fats,
+                    double carbs)
 {
-    FoodItem item(name, calories, proteins, fats, carbs);
-    items[name] = item;
+    FoodItem food;
+    food.setName(name);
+    food.setCalories(calories);
+    food.setProteins(proteins);
+    food.setFats(fats);
+    food.setCarbohydrates(carbs);
+    return food;
+}
+
+
+void FoodLibraryService::saveEntryInternal(FoodItem item)
+{
+    items[item.getName()] = item;
 }
 
 void FoodLibraryService::displayLibrary()

@@ -13,20 +13,27 @@ class FoodLibraryService
     public:
         FoodLibraryService(bool);
 
-        void addEntry(const std::string, 
+        void saveDataFromDatabase();
+
+        void addItem(const std::string, 
                       const int,
                       const double,
                       const double,
                       const double);
+        FoodItem createItem(const std::string, 
+                            const int,
+                            const double,
+                            const double,
+                            const double);
+        FoodItem getItem(const std::string);
+        bool inLibrary(const std::string);
+        std::string toString(FoodItem item);
 
         void saveEntryToDataBase(const std::string&);
-        void saveEntryInternal(const std::string, 
-                               const int,
-                               const double,
-                               const double,
-                               const double);
-        void saveDataFromDatabase();
+        void saveEntryInternal(FoodItem);
+        void writeItemToDB(const std::string);
         void displayLibrary();
+
 
     private:
         DBInterface* db;

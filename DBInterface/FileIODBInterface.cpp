@@ -75,6 +75,8 @@ void FileIODBInterface::saveData()
 
 void FileIODBInterface::saveItem(const std::string item)
 {
+    std::cout << "FileIODBInterface::saveItem()\n";
+    std::cout << item << std::endl;
     fileIODB << item << std::endl;
 }
 

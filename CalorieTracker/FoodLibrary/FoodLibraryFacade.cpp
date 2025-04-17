@@ -26,7 +26,7 @@ void FoodLibraryFacade::addItemToLibrary()
     double fats = getUserItemFats(name);
     double carbs = getUserItemCarbs(name);
 
-    foodLibraryService->addEntry(name, calories, proteins, fats, carbs);
+    foodLibraryService->addItem(name, calories, proteins, fats, carbs);
 
     //have to add entry before saveing to database
     foodLibraryService->saveEntryToDataBase(name);
