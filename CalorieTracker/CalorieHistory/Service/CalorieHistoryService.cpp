@@ -1,4 +1,4 @@
-#include "CalorieHistory.h"
+#include "CalorieHistoryService.h"
 
 #include <sstream>
 #include <iomanip>
@@ -10,7 +10,7 @@ Date::Date(int year, unsigned char month, unsigned char day) :
     day (day)
 {}
 
-Date CalorieHistory::getCurrentDate()
+Date CalorieHistoryService::getCurrentDate()
 {
     std::time_t t = std::time(nullptr);
     std::tm *now = std::localtime(&t);
@@ -22,7 +22,7 @@ Date CalorieHistory::getCurrentDate()
     return todaysDate;
 }
 
-void CalorieHistory::saveDate(Date date)
+void CalorieHistoryService::saveDate(Date date)
 {
     //TODO: put error checking if it exists
     //TODO: write a date output overwritten function"
@@ -38,7 +38,7 @@ void CalorieHistory::saveDate(Date date)
     history.push_back(std::make_pair(date,std::vector<FoodItem>()));
 }
 
-void CalorieHistory::saveDate(Date date, FoodItem item)
+void CalorieHistoryService::saveDate(Date date, FoodItem item)
 {
     // TODO:findDate Function that returns an Index of where the date is
     // If date found then do this
@@ -60,7 +60,7 @@ void CalorieHistory::saveDate(Date date, FoodItem item)
     }
 }
 
-bool CalorieHistory::checkDate(Date date)
+bool CalorieHistoryService::checkDate(Date date)
 {
     //TODO: put error checking if it exists
     //TODO: write a date output overwritten function"
@@ -74,7 +74,7 @@ bool CalorieHistory::checkDate(Date date)
 }
 
 
-int CalorieHistory::getTotalCalories(Date date)
+int CalorieHistoryService::getTotalCalories(Date date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
@@ -91,7 +91,7 @@ int CalorieHistory::getTotalCalories(Date date)
     return result;
 }
 
-double CalorieHistory::getTotalProteins(Date date)
+double CalorieHistoryService::getTotalProteins(Date date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
@@ -108,7 +108,7 @@ double CalorieHistory::getTotalProteins(Date date)
     return result;
 }
 
-double CalorieHistory::getTotalFats(Date date)
+double CalorieHistoryService::getTotalFats(Date date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
@@ -125,7 +125,7 @@ double CalorieHistory::getTotalFats(Date date)
     return result;
 }
 
-double CalorieHistory::getTotalCarbohydrates(Date date)
+double CalorieHistoryService::getTotalCarbohydrates(Date date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
@@ -142,10 +142,10 @@ double CalorieHistory::getTotalCarbohydrates(Date date)
     return result;
 }
 
-void CalorieHistory::showHistory()
+void CalorieHistoryService::showHistory()
 {
     std::cout << std::endl;
-    std::cout << "CalorieHistory::showHistory()\n";
+    std::cout << "CalorieHistoryService::showHistory()\n";
     for(int i = history.size() - 1; i >= 0; i--)
     {
         std::cout << history[i].first << ": ";
@@ -159,9 +159,9 @@ void CalorieHistory::showHistory()
     std::cout << std::endl;
 }
 
-std::string CalorieHistory::toString(const Date& date)
+std::string CalorieHistoryService::toString(const Date& date)
 {
-    std::cout << "CalorieHistory::toString(const Date& date)\n";
+    std::cout << "CalorieHistoryService::toString(const Date& date)\n";
     std::stringstream ss;
     showHistory();
     int totalCalories = getTotalCalories(date);
