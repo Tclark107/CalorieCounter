@@ -1,7 +1,12 @@
-add_library(CalorieHistory CalorieHistory.cpp)
+add_subdirectory(Model)
 
-target_link_libraries(CalorieHistory PUBLIC FoodLibrary)
+add_library(CalorieHistory CalorieHistoryFacade.cpp)
+
+target_link_libraries(CalorieHistory PUBLIC FoodLibrary
+    History
+    )
 
 target_include_directories(CalorieHistory PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Model
     )

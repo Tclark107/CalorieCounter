@@ -8,7 +8,7 @@
 class CalorieHistoryService
 {
     public:
-        CalorieHistoryService(const CalorieHistoryService&) = delete;
+        CalorieHistoryService();
 
         int getTotalCalories(std::string date);
         double getTotalProteins(std::string date);
