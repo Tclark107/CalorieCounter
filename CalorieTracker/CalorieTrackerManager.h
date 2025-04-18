@@ -3,6 +3,7 @@
 
 class UserInterface;
 class FoodLibraryFacade;
+class CalorieHistoryFacade;
 
 class CalorieTrackerManager
 {
@@ -14,9 +15,11 @@ class CalorieTrackerManager
         void showLibrary();
         void addItemToLibrary();
 
+        void showHistory();
+
     private:
         FoodLibraryFacade* fl;
-        //CalorieHistoryFacade* ch;
+        CalorieHistoryFacade* ch;
 };
 
 #endif

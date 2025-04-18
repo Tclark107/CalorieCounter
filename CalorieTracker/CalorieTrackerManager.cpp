@@ -1,5 +1,6 @@
 #include "CalorieTrackerManager.h"
 #include "FoodLibraryFacade.h"
+#include "CalorieHistoryFacade.h"
 #include "UserInterface.h"
 
 #include <iostream>
@@ -11,7 +12,7 @@ CalorieTrackerManager::CalorieTrackerManager(bool devMode, UserInterface* ui)
     try
     {
         fl = new FoodLibraryFacade(devMode, ui);
-        //ch = new CalorieHistoryFacade(devMode, ui);
+        ch = new CalorieHistoryFacade(devMode, ui);
     }
     catch (const std::bad_alloc& e)
     {
@@ -25,7 +26,7 @@ CalorieTrackerManager::CalorieTrackerManager(bool devMode, UserInterface* ui)
 CalorieTrackerManager::~CalorieTrackerManager () 
 {
     delete fl;
-    //delete ch;
+    delete ch;
 }
 
 void CalorieTrackerManager::showLibrary()
@@ -36,6 +37,11 @@ void CalorieTrackerManager::showLibrary()
 void CalorieTrackerManager::addItemToLibrary()
 {
     fl->addItemToLibrary();
+}
+
+void CalorieTrackerManager::showHistory()
+{
+    ch->displayHistory();
 }
 
 /*
