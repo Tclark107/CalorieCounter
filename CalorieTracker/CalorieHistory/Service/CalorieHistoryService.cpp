@@ -2,7 +2,7 @@
 
 #include "HistoryDBInterfaceFactory.h"
 
-CalorieHistoryService::CalorieHistoryService() :
+CalorieHistoryService::CalorieHistoryService(bool devMode) :
 db(nullptr),
 devMode(devMode)
 {
@@ -19,13 +19,15 @@ devMode(devMode)
 //{
 //
 //}
-int CalorieHistoryService::getTotalCalories(Date date)
+
+/*
+int CalorieHistoryService::getTotalCalories(std::string date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
     {
-        // make a find date function
-        if(date == history[i].first)
+        // make a find const std::string function
+        if(const std::string == history[i].first)
         {
             for(auto entry : history[i].second)
             {
@@ -36,13 +38,13 @@ int CalorieHistoryService::getTotalCalories(Date date)
     return result;
 }
 
-double CalorieHistoryService::getTotalProteins(Date date)
+double CalorieHistoryService::getTotalProteins(std::string date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
     {
-        // make a find date function
-        if(date == history[i].first)
+        // make a find const std::string function
+        if(const std::string == history[i].first)
         {
             for(auto entry : history[i].second)
             {
@@ -53,13 +55,13 @@ double CalorieHistoryService::getTotalProteins(Date date)
     return result;
 }
 
-double CalorieHistoryService::getTotalFats(Date date)
+double CalorieHistoryService::getTotalFats(std::string date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
     {
-        // make a find date function
-        if(date == history[i].first)
+        // make a find const std::string function
+        if(const std::string == history[i].first)
         {
             for(auto entry : history[i].second)
             {
@@ -70,13 +72,13 @@ double CalorieHistoryService::getTotalFats(Date date)
     return result;
 }
 
-double CalorieHistoryService::getTotalCarbohydrates(Date date)
+double CalorieHistoryService::getTotalCarbohydrates(std::string date)
 {
     int result = 0;
     for(int i = history.size() - 1; i >= 0; i--)
     {
-        // make a find date function
-        if(date == history[i].first)
+        // make a find const std::string function
+        if(const std::string == history[i].first)
         {
             for(auto entry : history[i].second)
             {
@@ -86,7 +88,8 @@ double CalorieHistoryService::getTotalCarbohydrates(Date date)
     }
     return result;
 }
+*/
 
-void CalorieHistoryService::showHistory()
+void CalorieHistoryService::displayHistory()
 {
 }

@@ -1,20 +1,21 @@
 #include "CalorieHistoryFacade.h"
 #include "UserInterface.h"
 #include "Utility.h"
+#include "CalorieHistoryService.h"
 
 #include <iostream>
 #include <limits>
 
 CalorieHistoryFacade::CalorieHistoryFacade(bool devMode, UserInterface* ui) :
-CalorieHistoryService(nullptr),
+cHS(nullptr),
 ui(ui)
 {
-    CalorieHistoryService = new CalorieHistoryService(devMode);
+    cHS = new CalorieHistoryService(devMode);
 }
 
 void CalorieHistoryFacade::displayHistory()
 {
-    CalorieHistoryService->displayHistory();
+    cHS->displayHistory();
 }
 
 void CalorieHistoryFacade::addItemToHistory()

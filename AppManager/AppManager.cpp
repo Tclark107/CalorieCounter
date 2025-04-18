@@ -1,12 +1,12 @@
 #include "AppManager.h"
 #include "DBInterface.h"
 #include "DBInterfaceFactory.h"
-#include "CalorieHistory.h"
 #include "UserInterface.h"
 #include "WeightTrackerFacade.h"
 #include "CalorieTrackerManager.h"
 
 #include <limits>
+#include <iostream>
 
 AppManager::AppManager() {}
 

@@ -19,7 +19,7 @@ class CalorieHistoryService
         //double getTotalFats(std::string date);
         //double getTotalCarbohydrates(std::string date);
         
-        void showHistory();
+        void displayHistory();
 
         //std::string toString();
         

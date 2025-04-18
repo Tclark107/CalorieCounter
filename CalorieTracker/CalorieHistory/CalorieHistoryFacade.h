@@ -17,7 +17,7 @@ class CalorieHistoryFacade
 
     private:
         UserInterface* ui;
-        CalorieHistoryService* CalorieHistoryService;
+        CalorieHistoryService* cHS;
 };
 
 #endif
