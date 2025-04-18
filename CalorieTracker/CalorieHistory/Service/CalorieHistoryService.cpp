@@ -12,13 +12,17 @@ devMode(devMode)
     db->loadData();
     db->displayData();
     db->disconnect();
-    //saveFromDatabase()
+    saveFromDatabase()
 }
 
-//void CalorieHistoryService::saveFromDatabase()
-//{
-//
-//}
+void CalorieHistoryService::saveFromDatabase()
+{
+    FileIODBInterface* fileIODB = dynamic_cast<FileIODBInterface*>(db);
+    //read item from db line by line
+    //parse it line by line
+    //call history, store it in history structure
+
+}
 
 /*
 int CalorieHistoryService::getTotalCalories(std::string date)
