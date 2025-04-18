@@ -5,21 +5,27 @@
 #include <string>
 #include <utility>
 
+class DBInterface;
+
 class CalorieHistoryService
 {
     public:
-        CalorieHistoryService();
+        CalorieHistoryService(bool);
 
-        int getTotalCalories(std::string date);
-        double getTotalProteins(std::string date);
-        double getTotalFats(std::string date);
-        double getTotalCarbohydrates(std::string date);
+        //void saveFromDatabase();
+
+        //int getTotalCalories(std::string date);
+        //double getTotalProteins(std::string date);
+        //double getTotalFats(std::string date);
+        //double getTotalCarbohydrates(std::string date);
         
         void showHistory();
 
         //std::string toString();
         
     private:
+        DBInterface* db;
+        bool devMode;
 
 };
 

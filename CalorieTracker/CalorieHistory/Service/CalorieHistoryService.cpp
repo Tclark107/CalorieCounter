@@ -1,11 +1,24 @@
 #include "CalorieHistoryService.h"
 
-#include <sstream>
-#include <iomanip>
-#include <algorithm>
+#include "HistoryDBInterfaceFactory.h"
 
-CalorieHistoryService::CalorieHistoryService() {}
+CalorieHistoryService::CalorieHistoryService() :
+db(nullptr),
+devMode(devMode)
+{
+    db = HistoryDBInterfaceFactory::createDBInterface(devMode);
 
+    db->connect();
+    db->loadData();
+    db->displayData();
+    db->disconnect();
+    //saveFromDatabase()
+}
+
+//void CalorieHistoryService::saveFromDatabase()
+//{
+//
+//}
 int CalorieHistoryService::getTotalCalories(Date date)
 {
     int result = 0;
