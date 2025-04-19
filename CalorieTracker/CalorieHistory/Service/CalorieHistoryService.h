@@ -6,13 +6,14 @@
 #include <utility>
 
 class DBInterface;
+class History;
 
 class CalorieHistoryService
 {
     public:
         CalorieHistoryService(bool);
 
-        //void saveFromDatabase();
+        void saveFromDatabase();
 
         //int getTotalCalories(std::string date);
         //double getTotalProteins(std::string date);
@@ -26,6 +27,7 @@ class CalorieHistoryService
     private:
         DBInterface* db;
         bool devMode;
+        History* history;
 
 };
 

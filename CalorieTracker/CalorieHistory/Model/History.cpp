@@ -11,6 +11,11 @@ bool History::inHistory(const std::string date)
     return false;
 }
 
+int History::getSize()
+{
+    return history.size();
+}
+
 std::string History::getHistory(const std::string date)
 {
     if(!inHistory(date))

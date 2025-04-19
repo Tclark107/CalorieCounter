@@ -1,26 +1,48 @@
 #include "CalorieHistoryService.h"
-
+#include "Utility.h"
+#include "History.h"
 #include "HistoryDBInterfaceFactory.h"
+#include "FileIODBInterface.h"
+
+#include <iostream>
 
 CalorieHistoryService::CalorieHistoryService(bool devMode) :
 db(nullptr),
+history(nullptr),
 devMode(devMode)
 {
     db = HistoryDBInterfaceFactory::createDBInterface(devMode);
+    history = new History();
 
     db->connect();
     db->loadData();
     db->displayData();
+    saveFromDatabase();
     db->disconnect();
-    saveFromDatabase()
 }
 
 void CalorieHistoryService::saveFromDatabase()
 {
     FileIODBInterface* fileIODB = dynamic_cast<FileIODBInterface*>(db);
-    //read item from db line by line
-    //parse it line by line
-    //call history, store it in history structure
+
+    std::string date = "";
+    std::vector<std::string> parsedDate;
+
+    int dbSize = fileIODB->getSize();
+    for(int i = 0; i < dbSize; i++)
+    {
+        date = fileIODB->getItem(i);
+        parsedDate = Utility::splitByColons(date);
+        date = parsedDate[0];
+        std::cout << "Date: " << date;
+        for(int j = 3; j < parsedDate.size(); j++)
+        {
+            history->addItemToDate(date, parsedDate[i]);
+        }
+        std::string output = history->getHistory(parsedDate[0]);
+        std::cout << "Printing date saved in Model\n";
+        std::cout << output << std::endl;
+    }
 
 }
 
