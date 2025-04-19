@@ -37,7 +37,7 @@ void CalorieHistoryService::saveFromDatabase()
         std::cout << "Date: " << date;
         for(int j = 3; j < parsedDate.size(); j++)
         {
-            history->addItemToDate(date, parsedDate[i]);
+            history->addItemToDate(date, parsedDate[j]);
         }
         std::string output = history->getHistory(parsedDate[0]);
         std::cout << "Printing date saved in Model\n";

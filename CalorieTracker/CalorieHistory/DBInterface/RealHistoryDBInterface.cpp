@@ -2,7 +2,7 @@
 
 RealHistoryDBInterface::RealHistoryDBInterface() 
 {
-    setFileName("../TristanDB/History.txt");
+    setFileName("/home/t_jclark/PROJECTS/CalorieCounterData/History.txt");
 }
 
 std::vector<std::string> RealHistoryDBInterface::getData()

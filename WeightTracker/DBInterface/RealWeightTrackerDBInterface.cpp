@@ -5,7 +5,7 @@
 
 RealWeightTrackerDBInterface::RealWeightTrackerDBInterface() 
 {
-    setFileName("../TristanDB/Weight.txt");
+    setFileName("/home/t_jclark/PROJECTS/CalorieCounterData/Weight.txt");
 }
 
 std::vector<std::string> RealWeightTrackerDBInterface::getData()

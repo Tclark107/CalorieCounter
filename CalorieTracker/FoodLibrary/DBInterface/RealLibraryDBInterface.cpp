@@ -4,7 +4,7 @@
 
 RealLibraryDBInterface::RealLibraryDBInterface() 
 {
-    setFileName("../TristanDB/FoodLibrary.txt");
+    setFileName("/home/t_jclark/PROJECTS/CalorieCounterData/FoodLibrary.txt");
 }
 
 std::vector<std::string> RealLibraryDBInterface::getData()
