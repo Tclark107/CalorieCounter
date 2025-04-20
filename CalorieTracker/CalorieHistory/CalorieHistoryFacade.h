@@ -13,7 +13,7 @@ class CalorieHistoryFacade
 
         void displayHistory();
         void addItemToHistory();
-
+        void trackItem();
 
     private:
         UserInterface* ui;

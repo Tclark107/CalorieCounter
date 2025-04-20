@@ -18,6 +18,11 @@ void CalorieHistoryFacade::displayHistory()
     cHS->displayHistory();
 }
 
+void CalorieHistoryFacade::trackItem()
+{
+
+}
+
 void CalorieHistoryFacade::addItemToHistory()
 {
 }

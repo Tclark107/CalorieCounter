@@ -6,7 +6,7 @@
 
 enum Option 
 {
-    exitloop = 1,
+    EXIT_LOOP = 1,
     track,
     SHOW_LIBRARY,
     showDateData,
@@ -34,6 +34,7 @@ class AppManager
         void shutDown();
         void run();
         bool handleInput(std::string input);
+        void trackItem();
         void showHistory();
         void recordWeight();
         void getAverageWeight();

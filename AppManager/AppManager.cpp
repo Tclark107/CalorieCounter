@@ -85,11 +85,12 @@ bool AppManager::handleInput(std::string input)
     Option option = stringToOption(input);
     switch(option)
     {
-        case exitloop:
+        case EXIT_LOOP:
             quit = true;
             break;
         case track:
             std::cout << "Track: Under Construction" << std::endl;
+            trackItem();
             break;
         case SHOW_LIBRARY:
             ctm->showLibrary();
@@ -101,7 +102,6 @@ bool AppManager::handleInput(std::string input)
             showHistory();
             break;
         case ADD_ITEM_TO_LIBRARY:
-            std::cout << "editLibrary: Under Construction" << std::endl;
             ctm->addItemToLibrary();
             break;
         case recWeight:
@@ -115,6 +115,11 @@ bool AppManager::handleInput(std::string input)
             break;
     }
     return quit;
+}
+
+void AppManager::trackItem()
+{
+    ctm->trackItem();
 }
 
 void AppManager::showHistory()

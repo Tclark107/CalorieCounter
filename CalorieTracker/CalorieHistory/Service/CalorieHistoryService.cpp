@@ -46,6 +46,8 @@ void CalorieHistoryService::saveFromDatabase()
 
 }
 
+
+
 /*
 int CalorieHistoryService::getTotalCalories(std::string date)
 {

@@ -44,6 +44,11 @@ void CalorieTrackerManager::showHistory()
     ch->displayHistory();
 }
 
+void CalorieTrackerManager::trackItem()
+{
+    ch->trackItem();
+}
+
 /*
 //
 //td::string AppManager::getUserItem()
