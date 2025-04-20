@@ -72,7 +72,7 @@ Option stringToOption(const std::string& input)
     if(input == "2") return track;
     if(input == "3") return SHOW_LIBRARY;
     if(input == "4") return showDateData;
-    if(input == "5") return showHistory;
+    if(input == "5") return SHOW_HISTORY;
     if(input == "6") return ADD_ITEM_TO_LIBRARY;
     if(input == "7") return recWeight;
     if(input == "8") return AVERAGE_WEIGHT;
@@ -97,7 +97,8 @@ bool AppManager::handleInput(std::string input)
         case showDateData:
             std::cout << "ShowTodaysDate: Under Construction" << std::endl;
             break;
-        case showHistory:
+        case SHOW_HISTORY:
+            showHistory();
             break;
         case ADD_ITEM_TO_LIBRARY:
             std::cout << "editLibrary: Under Construction" << std::endl;
@@ -114,6 +115,11 @@ bool AppManager::handleInput(std::string input)
             break;
     }
     return quit;
+}
+
+void AppManager::showHistory()
+{
+    ctm->showHistory();
 }
 
 void AppManager::getAverageWeight()

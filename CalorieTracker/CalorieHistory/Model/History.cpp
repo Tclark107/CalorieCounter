@@ -16,6 +16,18 @@ int History::getSize()
     return history.size();
 }
 
+std::vector<std::string> History::getAllDates()
+{
+    std::vector<std::string> result;
+    for(const auto& [date, _] : history)
+    {
+        result.push_back(date);
+
+    }
+    return result;
+        
+}
+
 std::string History::getHistory(const std::string date)
 {
     if(!inHistory(date))

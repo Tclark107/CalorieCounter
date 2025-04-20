@@ -15,10 +15,11 @@ class History
 
         bool inHistory(const std::string);
         int getSize();
+        std::vector<std::string> getAllDates();
         std::string getHistory(const std::string);
         std::string toString(const std::string);
         void addItemToDate(const std::string, const std::string);
-        //void displayHistory();
+        void displayHistory();
 
     private:
         std::map<std::string, std::vector<std::string>> history;

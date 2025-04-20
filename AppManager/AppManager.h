@@ -10,7 +10,7 @@ enum Option
     track,
     SHOW_LIBRARY,
     showDateData,
-    showHistory,
+    SHOW_HISTORY,
     ADD_ITEM_TO_LIBRARY,
     recWeight,
     AVERAGE_WEIGHT,
@@ -34,6 +34,7 @@ class AppManager
         void shutDown();
         void run();
         bool handleInput(std::string input);
+        void showHistory();
         void recordWeight();
         void getAverageWeight();
 

@@ -118,4 +118,11 @@ double CalorieHistoryService::getTotalCarbohydrates(std::string date)
 
 void CalorieHistoryService::displayHistory()
 {
+    std::vector<std::string> dates = history->getAllDates();
+    std::string output = "";
+    for(auto& date : dates)
+    {
+        output = history->getHistory(date);
+        std::cout << output << std::endl;
+    }
 }
