@@ -57,6 +57,8 @@ void AppManager::run()
 
 void AppManager::shutDown()
 {
+    ctm->saveHistory();
+
     delete wt;
     delete ui;
     delete ctm;
@@ -68,8 +70,8 @@ void AppManager::shutDown()
 
 Option stringToOption(const std::string& input)
 {
-    if(input == "1") return exitloop;
-    if(input == "2") return track;
+    if(input == "1") return EXIT_LOOP;
+    if(input == "2") return TRACK_ITEM;
     if(input == "3") return SHOW_LIBRARY;
     if(input == "4") return showDateData;
     if(input == "5") return SHOW_HISTORY;
@@ -88,7 +90,7 @@ bool AppManager::handleInput(std::string input)
         case EXIT_LOOP:
             quit = true;
             break;
-        case track:
+        case TRACK_ITEM:
             std::cout << "Track: Under Construction" << std::endl;
             trackItem();
             break;

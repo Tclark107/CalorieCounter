@@ -18,7 +18,7 @@ bool FileIODBInterface::connect()
     fileIODB.open(filename, std::ios::in | std::ios::out);
     if(!fileIODB)
     {
-        std::cerr << "Error opening HistroyDB.\n";
+        std::cerr << "Error opening DB FIleIO.\n";
         return false;
     }
     return true;

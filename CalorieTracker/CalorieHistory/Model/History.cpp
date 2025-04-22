@@ -25,7 +25,6 @@ std::vector<std::string> History::getAllDates()
 
     }
     return result;
-        
 }
 
 std::string History::getHistory(const std::string date)

@@ -15,6 +15,7 @@ class CalorieTrackerManager
         void showLibrary();
         void addItemToLibrary();
         void trackItem();
+        void saveHistory();
 
         void showHistory();
 

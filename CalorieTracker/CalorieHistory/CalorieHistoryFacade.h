@@ -14,10 +14,14 @@ class CalorieHistoryFacade
         void displayHistory();
         void addItemToHistory();
         void trackItem();
+        void saveHistory();
+
+        std::string getUserItem();
 
     private:
         UserInterface* ui;
         CalorieHistoryService* cHS;
+        //foodLibraryfacade
 };
 
 #endif

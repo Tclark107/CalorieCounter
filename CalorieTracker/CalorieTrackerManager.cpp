@@ -49,77 +49,12 @@ void CalorieTrackerManager::trackItem()
     ch->trackItem();
 }
 
+void CalorieTrackerManager::saveHistory()
+{
+    ch->saveHistory();
+}
+
 /*
-//
-//td::string AppManager::getUserItem()
-//
-//   std::string name;
-//   std::string prompt = "What is the name of the item you would like to add";
-//   ui->displayMessage(prompt);
-//   std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//   std::getline(std::cin, name);
-//
-//   return name;
-
-
-
-FoodItem AppManager::createUserItem(std::string name)
-{
-
-    int calories = 0;
-    double proteins = 0;
-    double fats = 0;
-    double carbs = 0;
-
-    prompt = "How many calories are in " + name + "?";
-    ui->displayMessage(prompt);
-    std::cin >> placeHolder;
-    calories = std::stoi(placeHolder);
-
-    prompt = "How many proteins are in " + name + "?";
-    ui->displayMessage(prompt);
-    std::cin >> placeHolder;
-    proteins = std::stod(placeHolder);
-
-    prompt = "How many fats are in " + name + "?";
-    ui->displayMessage(prompt);
-    std::cin >> placeHolder;
-    fats = std::stod(placeHolder);
-
-    prompt = "How many carbs are in " + name + "?";
-    ui->displayMessage(prompt);
-    std::cin >> placeHolder;
-    carbs = std::stod(placeHolder);
-
-    FoodLibrary& fl = FoodLibrary::GetInstance();
-    FoodItem food(name, calories, proteins, fats, carbs);
-    return food;
-}
-
-void AppManager::trackItem()
-{
-    CalorieHistory& ch = CalorieHistory::GetInstance();
-    FoodLibrary& fl = FoodLibrary::GetInstance();
-
-    Date today = ch.getCurrentDate();
-    std::string foodItem = getUserItem();
-
-    if(fl.inLibrary(foodItem))
-    {
-        //std::cout << "What amount in oz did you eat?\n"; 
-        ch.saveDate(today, fl.getItem(foodItem));
-    }
-    else
-    {
-        FoodItem food;
-        food = createUserItem(foodItem);
-        ch.saveDate(today, food);
-
-        addFoodToLibrary(food);
-        addFoodToLibraryDataBase(food);
-    }
-}
-
 void AppManager::loadHistoryData(std::vector<std::string>& historyData)
 {
     historyDB->connect();

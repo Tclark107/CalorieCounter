@@ -43,10 +43,23 @@ void CalorieHistoryService::saveFromDatabase()
         std::cout << "Printing date saved in Model\n";
         std::cout << output << std::endl;
     }
-
 }
 
+void CalorieHistoryService::writeToDatabase()
+{
+    std::cout << "CalorieHistoryService::writeToDatabase()\n";
+    std::vector<std::string> dates = history->getAllDates();
+    for(auto& date : dates)
+    {
+        std::cout << history->getHistory(date) << std::endl;
+    }
+    //save it to database
+}
 
+void CalorieHistoryService::trackItem()
+{
+    
+}
 
 /*
 int CalorieHistoryService::getTotalCalories(std::string date)

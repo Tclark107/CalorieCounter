@@ -7,7 +7,7 @@
 enum Option 
 {
     EXIT_LOOP = 1,
-    track,
+    TRACK_ITEM,
     SHOW_LIBRARY,
     showDateData,
     SHOW_HISTORY,
@@ -31,8 +31,9 @@ class AppManager
 
         AppManager(bool devMode);
         void startUp();
-        void shutDown();
         void run();
+        void shutDown();
+
         bool handleInput(std::string input);
         void trackItem();
         void showHistory();

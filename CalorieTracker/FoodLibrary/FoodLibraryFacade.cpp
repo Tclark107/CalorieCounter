@@ -32,6 +32,11 @@ void FoodLibraryFacade::addItemToLibrary()
     foodLibraryService->saveEntryToDataBase(name);
 }
 
+bool FoodLibraryFacade::inLibrary(std::string item)
+{
+    return foodLibraryService->inLibrary(item);
+}
+
 std::string FoodLibraryFacade::getUserItemName()
 {
     std::string name;
