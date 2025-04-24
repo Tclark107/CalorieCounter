@@ -15,6 +15,7 @@ class FoodLibraryService
 
         void saveDataFromDatabase();
 
+        bool inLibrary(const std::string);
         void addItem(const std::string, 
                       const int,
                       const double,
@@ -25,15 +26,21 @@ class FoodLibraryService
                             const double,
                             const double,
                             const double);
-        FoodItem getItem(const std::string);
-        bool inLibrary(const std::string);
+
         std::string toString(FoodItem item);
+        std::string getStringItem(const std::string);
+        FoodItem getItem(const std::string);
+
+        int getItemCalories(const std::string);
+        double getItemProteins(const std::string);
+        double getItemFats(const std::string);
+        double getItemCarbs(const std::string);
 
         void saveEntryToDataBase(const std::string&);
         void saveEntryInternal(FoodItem);
         void writeItemToDB(const std::string);
-        void displayLibrary();
 
+        void displayLibrary();
 
     private:
         DBInterface* db;

@@ -71,7 +71,6 @@ void FoodItem::setCarbohydrates( double carbohydrates)
 	this->carbohydrates = carbohydrates;
 }
 
-
 //std::ostream& operator<<(std::ostream& os, const FoodItem& food) {
 std::ostream& operator<<(std::ostream& os, FoodItem& food) {
         os << food.getName() << "-"

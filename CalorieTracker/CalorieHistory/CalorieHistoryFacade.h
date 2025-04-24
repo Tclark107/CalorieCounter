@@ -13,10 +13,8 @@ class CalorieHistoryFacade
 
         void displayHistory();
         void addItemToHistory();
-        void trackItem();
+        void trackItem(const std::string, const std::string);
         void saveHistory();
-
-        std::string getUserItem();
 
     private:
         UserInterface* ui;

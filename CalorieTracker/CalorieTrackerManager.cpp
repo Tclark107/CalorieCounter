@@ -2,6 +2,7 @@
 #include "FoodLibraryFacade.h"
 #include "CalorieHistoryFacade.h"
 #include "UserInterface.h"
+#include "Utility.h"
 
 #include <iostream>
 
@@ -44,9 +45,18 @@ void CalorieTrackerManager::showHistory()
     ch->displayHistory();
 }
 
-void CalorieTrackerManager::trackItem()
+void CalorieTrackerManager::trackItemToday()
 {
-    ch->trackItem();
+    std::string date = Utility::getDate();
+
+    std::string userItem = fl->getUserItemName();
+    if(!fl->inLibrary(userItem))
+    {
+        fl->addItemToLibrary(userItem);
+    }
+
+    std::string newItemToTrack = fl->getItemFromLibrary(userItem);
+    ch->trackItem(date, newItemToTrack);
 }
 
 void CalorieTrackerManager::saveHistory()
@@ -55,111 +65,6 @@ void CalorieTrackerManager::saveHistory()
 }
 
 /*
-void AppManager::loadHistoryData(std::vector<std::string>& historyData)
-{
-    historyDB->connect();
-
-    historyDB->loadData();
-    historyData = historyDB->getData();
-
-    historyDB->disconnect();
-}
-
-
-void AppManager::saveHistoryDataToHistory(const std::vector<std::string>& historyData)
-{
-    std::cout << "Loading Data to History\n";
-    std::vector<std::string> parsedDateInfo;
-    std::vector<std::string> parsedItem;
-
-    Date date;
-    CalorieHistory& ch = CalorieHistory::GetInstance();
-
-    for(const auto& item : historyData)
-    {
-        parsedDateInfo = splitBySpaces(item);
-        date = createDate(parsedDateInfo);
-
-        for(int i = 5; i < parsedDateInfo.size(); i++)
-        {
-            parsedItem = splitByDashes(parsedDateInfo[i]);
-            FoodItem newFoodItem = createFoodItem(parsedItem);
-            ch.saveDate(date, newFoodItem);
-        }
-    }
-}
-
-std::vector<std::string> AppManager::splitBySpaces(const std::string item)
-{
-    std::istringstream iss(item);
-    std::vector<std::string> words;
-    std::string word;
-    while(iss >> word)
-    {
-        words.push_back(word);
-    }
-    return words;
-}
-
-std::vector<std::string> AppManager::splitByDashes(const std::string item)
-{
-    std::istringstream iss(item);
-    std::vector<std::string> words;
-    std::string word;
-    while(std::getline(iss, word, '-'))
-    {
-        words.push_back(word);
-    }
-    return words;
-}
-
-Date AppManager::createDate(const std::vector<std::string> parsedItem)
-{
-    int year = 0;
-    unsigned char month = 0;
-    unsigned char day = 0;
-
-    if(parsedItem.size() < 3)
-    {
-        std::cerr << "Error: Not enough elements in parsedItem to construct a Date. "
-            << "Date has " << parsedItem.size() << " elements.\n";
-    }
-
-    try
-    {
-        year = std::stoi(parsedItem[0]);
-        month = static_cast<unsigned char>(std::stoi(parsedItem[1]));
-        day = static_cast<unsigned char>(std::stoi(parsedItem[2]));
-    }
-    catch (const std::out_of_range& e)
-    {
-        std::cerr << "Error: Parsed item index out of range. " << e.what() << std::endl;
-    }
-    catch (const std::invalid_argument& e)
-    {
-        std::cerr << "Error: Invalid argument during string to number conversions. " << e.what() << std::endl;
-    }
-    catch (const std::exception& e)
-    {
-        std::cerr << "General error during parsing: " << e.what() << std::endl;
-    }
-
-    Date date(year, month, day);
-    return date;
-}
-bool AppManager::isDevMode()
-{
-    return devMode;
-}
-
-void AppManager::addDatatoHistoryDatabase()
-{
-    CalorieHistory& ch = CalorieHistory::GetInstance();
-    Date date = ch.getCurrentDate();
-    std::string strDateData = ch.toString(date);
-    historyDB->addItem(strDateData);
-}
-
 void AppManager::displayTodaysMacros()
 {
     CalorieHistory& ch = CalorieHistory::GetInstance();

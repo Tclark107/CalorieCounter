@@ -73,6 +73,11 @@ std::string FoodLibraryService::toString(FoodItem item)
     return result;
 }
 
+std::string FoodLibraryService::getStringItem(const std::string name)
+{
+    FoodItem item = getItem(name);
+    return toString(item);
+}
 bool FoodLibraryService::inLibrary(const std::string name)
 {
     if(items.find(name) != items.end())
@@ -80,6 +85,50 @@ bool FoodLibraryService::inLibrary(const std::string name)
         return true;
     }
     return false;
+}
+
+int FoodLibraryService::getItemCalories(const std::string name)
+{
+    if(!inLibrary(name))
+    {
+        std::cerr << "Trying to get Calories of Item that is not in Library";
+        std::cerr << "returning 0\n";
+        return 0;
+    }
+    return items[name].getCalories();
+}
+
+double FoodLibraryService::getItemProteins(const std::string name)
+{
+    if(!inLibrary(name))
+    {
+        std::cerr << "Trying to get Proteins of Item that is not in Library";
+        std::cerr << "returning 0\n";
+        return 0;
+    }
+    return items[name].getProteins();
+}
+
+double FoodLibraryService::getItemFats(const std::string name)
+{
+    if(!inLibrary(name))
+    {
+        std::cerr << "Trying to get Fats of Item that is not in Library";
+        std::cerr << "returning 0\n";
+        return 0;
+    }
+    return items[name].getFats();
+}
+
+double FoodLibraryService::getItemCarbs(const std::string name)
+{
+    if(!inLibrary(name))
+    {
+        std::cerr << "Trying to get Carbs of Item that is not in Library";
+        std::cerr << "returning 0\n";
+        return 0;
+    }
+    return items[name].getCarbohydrates();
 }
 
 FoodItem FoodLibraryService::getItem(const std::string name)

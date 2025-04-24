@@ -121,7 +121,7 @@ bool AppManager::handleInput(std::string input)
 
 void AppManager::trackItem()
 {
-    ctm->trackItem();
+    ctm->trackItemToday();
 }
 
 void AppManager::showHistory()

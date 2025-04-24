@@ -16,13 +16,8 @@ class CalorieHistoryService
         void saveFromDatabase();
         void writeToDatabase();
 
-        //int getTotalCalories(std::string date);
-        //double getTotalProteins(std::string date);
-        //double getTotalFats(std::string date);
-        //double getTotalCarbohydrates(std::string date);
-        
         void displayHistory();
-        void trackItem();
+        void trackItem(const std::string, const std::string);
 
         //std::string toString();
         

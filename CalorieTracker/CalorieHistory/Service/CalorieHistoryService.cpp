@@ -56,80 +56,11 @@ void CalorieHistoryService::writeToDatabase()
     //save it to database
 }
 
-void CalorieHistoryService::trackItem()
+void CalorieHistoryService::trackItem(const std::string date, const std::string item)
 {
-    
+    std::cout << "CalorieHistoryService::trackItem(date, item)\n" << std::endl;
+    history->addItemToDate(date, item);
 }
-
-/*
-int CalorieHistoryService::getTotalCalories(std::string date)
-{
-    int result = 0;
-    for(int i = history.size() - 1; i >= 0; i--)
-    {
-        // make a find const std::string function
-        if(const std::string == history[i].first)
-        {
-            for(auto entry : history[i].second)
-            {
-                result += entry.getCalories();
-            }
-        }
-    }
-    return result;
-}
-
-double CalorieHistoryService::getTotalProteins(std::string date)
-{
-    int result = 0;
-    for(int i = history.size() - 1; i >= 0; i--)
-    {
-        // make a find const std::string function
-        if(const std::string == history[i].first)
-        {
-            for(auto entry : history[i].second)
-            {
-                result += entry.getProteins();
-            }
-        }
-    }
-    return result;
-}
-
-double CalorieHistoryService::getTotalFats(std::string date)
-{
-    int result = 0;
-    for(int i = history.size() - 1; i >= 0; i--)
-    {
-        // make a find const std::string function
-        if(const std::string == history[i].first)
-        {
-            for(auto entry : history[i].second)
-            {
-                result += entry.getFats();
-            }
-        }
-    }
-    return result;
-}
-
-double CalorieHistoryService::getTotalCarbohydrates(std::string date)
-{
-    int result = 0;
-    for(int i = history.size() - 1; i >= 0; i--)
-    {
-        // make a find const std::string function
-        if(const std::string == history[i].first)
-        {
-            for(auto entry : history[i].second)
-            {
-                result += entry.getCarbohydrates();
-            }
-        }
-    }
-    return result;
-}
-*/
 
 void CalorieHistoryService::displayHistory()
 {

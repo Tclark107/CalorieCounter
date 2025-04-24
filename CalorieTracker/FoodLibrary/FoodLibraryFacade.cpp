@@ -21,18 +21,28 @@ void FoodLibraryFacade::displayLibrary()
 void FoodLibraryFacade::addItemToLibrary()
 {
     std::string name = getUserItemName();
+    addItemToLibrary(name);
+}
+
+void FoodLibraryFacade::addItemToLibrary(const std::string name)
+{
     int calories = getUserItemCalories(name);
     double proteins = getUserItemProteins(name);
     double fats = getUserItemFats(name);
     double carbs = getUserItemCarbs(name);
 
+    //have to add entry before saveing to database
     foodLibraryService->addItem(name, calories, proteins, fats, carbs);
 
-    //have to add entry before saveing to database
     foodLibraryService->saveEntryToDataBase(name);
 }
 
-bool FoodLibraryFacade::inLibrary(std::string item)
+std::string FoodLibraryFacade::getItemFromLibrary(const std::string item)
+{
+    return foodLibraryService->getStringItem(item);
+}
+
+bool FoodLibraryFacade::inLibrary(const std::string item)
 {
     return foodLibraryService->inLibrary(item);
 }
@@ -102,4 +112,24 @@ double FoodLibraryFacade::getUserItemCarbs(const std::string name)
     carbs = Utility::convertStringToDouble(placeHolder);
     
     return carbs;
+}
+
+int FoodLibraryFacade::getItemCalories(const std::string name)
+{
+    return foodLibraryService->getItemCalories(name);
+}
+
+double FoodLibraryFacade::getItemProteins(const std::string name)
+{
+    return foodLibraryService->getItemCalories(name);
+}
+
+double FoodLibraryFacade::getItemFats(const std::string name)
+{
+    return foodLibraryService->getItemCalories(name);
+}
+
+double FoodLibraryFacade::getItemCarbs(const std::string name)
+{
+    return foodLibraryService->getItemCalories(name);
 }
