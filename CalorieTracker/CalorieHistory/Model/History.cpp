@@ -31,7 +31,7 @@ std::string History::getHistory(const std::string date)
 {
     if(!inHistory(date))
     {
-        std::cout << date << " is not in History.";
+        std::cout << date << " is not in History.\n";
         return "uh oh";
     }
     
@@ -57,3 +57,13 @@ void History::addItemToDate(const std::string date, const std::string item)
 {
     history[date].push_back(item);
 }
+
+/*
+void History::displayHistory()
+{
+    for(int i = 0; i < history.size(); i++)
+    {
+        std::cout << history[i] << std::endl;
+    }
+}
+*/
