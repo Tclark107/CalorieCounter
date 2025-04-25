@@ -63,6 +63,13 @@ void FileIODBInterface::addItem(const std::string& newItem)
     fileIOData.push_back(newItem);
 }
 
+void FileIODBInterface::replaceItem(const std::string newItem, const int index)
+{
+    std::cout << "index - " << index << std::endl;
+    std::cout << "newItem - " << newItem<< std::endl;
+    fileIOData[index] = newItem;
+}
+
 void FileIODBInterface::saveData()
 {
     std::cout << "FileIODBInterface::saveData()\n";

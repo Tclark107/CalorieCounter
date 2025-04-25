@@ -20,10 +20,11 @@ class FileIODBInterface : public DBInterface
         void displayData() override;  // Display the data
 
         void setFileName(const std::string);
-        void addItem(const std::string& item) override;
-        std::string getItem(const int index);
+        void addItem(const std::string&) override;
+        std::string getItem(const int);
         int getSize();
-        void saveItem(const std::string item);
+        void saveItem(const std::string);
+        void replaceItem(const std::string, const int); 
 
     private:
         std::fstream fileIODB;
