@@ -59,6 +59,18 @@ void CalorieTrackerManager::trackItemToday()
         fl->addItemToLibrary(userItem);
     }
 
+    std::string prompt = "How many ounces of " << userItem << " did you have?\n";
+    std::string result = ""; 
+    result << std::cin;
+    result = Utility::convertStringToDouble(result);
+
+    //getItemFromFoodLibrary(userItem)
+    //calculateCalories(amount, fl->getItemCalories(userItem));
+    //calculateProteins(amount, fl->getItemProteins(userItem));
+    //calculateFats(amount, fl->getItemFats(userItem));
+    //calculateCarbs(amount, fl->getItemCarbs(userItem));
+    //calorieHistor->buildItem();
+
     std::string newItemToTrack = fl->getItemFromLibrary(userItem);
     ch->trackItem(date, newItemToTrack);
 }
