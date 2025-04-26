@@ -102,3 +102,22 @@ void CalorieHistoryService::displayHistory()
         std::cout << output << std::endl;
     }
 }
+
+std::vector<std::string> CalorieHistoryService::getTodaysFoodItems()
+{
+    std::string todaysDate = Utility::getDate();
+    std::string items = history->getHistory(todaysDate);
+    std::vector<std::string> parsedHistory = Utility::splitByColons(items);
+
+    std::vector<std::string> parsedItem;
+    std::vector<std::string> todaysItems;
+
+    int firstItem = 1;
+    int itemName = 0;
+    for(int i = firstItem; i < parsedHistory.size(); i++)
+    {
+        parsedItem = Utility::splitByDashes(parsedHistory[i]);
+        todaysItems.push_back(parsedItem[itemName]);
+    }
+    return todaysItems;
+}

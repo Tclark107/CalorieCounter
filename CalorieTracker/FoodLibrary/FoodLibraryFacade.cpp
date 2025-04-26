@@ -121,15 +121,15 @@ int FoodLibraryFacade::getItemCalories(const std::string name)
 
 double FoodLibraryFacade::getItemProteins(const std::string name)
 {
-    return foodLibraryService->getItemCalories(name);
+    return foodLibraryService->getItemProteins(name);
 }
 
 double FoodLibraryFacade::getItemFats(const std::string name)
 {
-    return foodLibraryService->getItemCalories(name);
+    return foodLibraryService->getItemFats(name);
 }
 
 double FoodLibraryFacade::getItemCarbs(const std::string name)
 {
-    return foodLibraryService->getItemCalories(name);
+    return foodLibraryService->getItemCarbs(name);
 }

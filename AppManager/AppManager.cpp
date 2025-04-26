@@ -73,12 +73,12 @@ Option stringToOption(const std::string& input)
     if(input == "1") return EXIT_LOOP;
     if(input == "2") return TRACK_ITEM;
     if(input == "3") return SHOW_LIBRARY;
-    if(input == "4") return showDateData;
+    if(input == "4") return SHOW_TODAYS_MACROS;
     if(input == "5") return SHOW_HISTORY;
     if(input == "6") return ADD_ITEM_TO_LIBRARY;
-    if(input == "7") return recWeight;
+    if(input == "7") return RECORD_WEIGHT;
     if(input == "8") return AVERAGE_WEIGHT;
-    return invalidOption;
+    return INVALID_OPTION;
 }
 
 bool AppManager::handleInput(std::string input)
@@ -97,8 +97,9 @@ bool AppManager::handleInput(std::string input)
         case SHOW_LIBRARY:
             ctm->showLibrary();
             break;
-        case showDateData:
+        case SHOW_TODAYS_MACROS:
             std::cout << "ShowTodaysDate: Under Construction" << std::endl;
+            showTodaysMacros();
             break;
         case SHOW_HISTORY:
             showHistory();
@@ -106,7 +107,7 @@ bool AppManager::handleInput(std::string input)
         case ADD_ITEM_TO_LIBRARY:
             ctm->addItemToLibrary();
             break;
-        case recWeight:
+        case RECORD_WEIGHT:
             recordWeight();
             break;
         case AVERAGE_WEIGHT:
@@ -117,6 +118,11 @@ bool AppManager::handleInput(std::string input)
             break;
     }
     return quit;
+}
+
+void AppManager::showTodaysMacros()
+{
+    ctm->displayTodaysMacros();
 }
 
 void AppManager::trackItem()

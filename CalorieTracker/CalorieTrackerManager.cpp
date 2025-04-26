@@ -5,10 +5,14 @@
 #include "Utility.h"
 
 #include <iostream>
+#include <sstream>
 
 CalorieTrackerManager::CalorieTrackerManager () {}
 
-CalorieTrackerManager::CalorieTrackerManager(bool devMode, UserInterface* ui)
+CalorieTrackerManager::CalorieTrackerManager(bool devMode, UserInterface* ui) :
+fl(nullptr),
+ch(nullptr),
+ui(ui)
 {
     try
     {
@@ -64,22 +68,29 @@ void CalorieTrackerManager::saveHistory()
     ch->saveHistory();
 }
 
-/*
-void AppManager::displayTodaysMacros()
+void CalorieTrackerManager::displayTodaysMacros()
 {
-    CalorieHistory& ch = CalorieHistory::GetInstance();
-    Date today = ch.getCurrentDate();
-    int calories = ch.getTotalCalories(today);
-    int proteins = ch.getTotalProteins(today);
-    int fats = ch.getTotalFats(today);
-    int carbs = ch.getTotalCarbohydrates(today);
+    std::vector<std::string> todaysFood = ch->getTodaysFoodItems();
+    int calories = 0; 
+    double proteins = 0; 
+    double fats = 0; 
+    double carbs = 0; 
+    for(int i = 0; i < todaysFood.size(); i++)
+    {
+        calories += fl->getItemCalories(todaysFood[i]);
+        proteins += fl->getItemProteins(todaysFood[i]);
+        fats += fl->getItemFats(todaysFood[i]);
+        carbs += fl->getItemCarbs(todaysFood[i]);
+    }
+    
+    std::stringstream ss;
+    ss << "Today you have had " << calories << " calories: ";
+    ss << proteins << " proteins, "
+       << fats << " fats and "  
+       << carbs << " carbs.\n";
+    std::string prompt = ss.str();
+    ui->displayMessage(prompt);
 
-    std::cout << std::endl;
-    std::cout << "Today you have had " << calories << " calories, "
-        << proteins << " grams of protien, " 
-        << fats << " grams of fat, and " 
-        << carbs << " grams of carbohydrates.\n";
-    std::cout << std::endl;
 }
 
-*/
+

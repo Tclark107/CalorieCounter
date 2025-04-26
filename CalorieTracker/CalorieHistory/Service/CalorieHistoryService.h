@@ -19,7 +19,7 @@ class CalorieHistoryService
         void displayHistory();
         void trackItem(const std::string, const std::string);
 
-        //std::string toString();
+        std::vector<std::string> getTodaysFoodItems();
         
     private:
         DBInterface* db;

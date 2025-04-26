@@ -9,12 +9,12 @@ enum Option
     EXIT_LOOP = 1,
     TRACK_ITEM,
     SHOW_LIBRARY,
-    showDateData,
+    SHOW_TODAYS_MACROS,
     SHOW_HISTORY,
     ADD_ITEM_TO_LIBRARY,
-    recWeight,
+    RECORD_WEIGHT,
     AVERAGE_WEIGHT,
-    invalidOption
+    INVALID_OPTION
 };
 
 class DBInterface;
@@ -35,6 +35,7 @@ class AppManager
         void shutDown();
 
         bool handleInput(std::string input);
+        void showTodaysMacros();
         void trackItem();
         void showHistory();
         void recordWeight();

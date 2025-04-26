@@ -18,10 +18,12 @@ class CalorieTrackerManager
         void saveHistory();
 
         void showHistory();
+        void displayTodaysMacros();
 
     private:
         FoodLibraryFacade* fl;
         CalorieHistoryFacade* ch;
+        UserInterface* ui;
 };
 
 #endif

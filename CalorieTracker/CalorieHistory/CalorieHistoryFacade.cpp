@@ -28,6 +28,8 @@ void CalorieHistoryFacade::saveHistory()
     cHS->writeToDatabase();
 }
 
-void CalorieHistoryFacade::addItemToHistory()
+std::vector<std::string> CalorieHistoryFacade::getTodaysFoodItems()
 {
+    std::vector<std::string> result = cHS->getTodaysFoodItems();
+    return result;
 }
