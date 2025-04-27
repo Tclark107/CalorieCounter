@@ -1,10 +1,12 @@
 #include "CalorieCalculator.h"
 
-CalorieCalculator::CalorieCalculator() {}
-
-double CalorieCalculator::calculateCalories(std::string unit, int amount)
+namespace CalorieCalculator
 {
-    int calories;
-    return calories;
-}
+    double calculateCalories(double amount, int calories)
+    {
+        double result;
+        result  = amount * calories;
+        return result;
+    }
      
+}

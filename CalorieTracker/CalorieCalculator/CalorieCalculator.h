@@ -3,10 +3,16 @@
 
 #include <string>
 
-class CalorieCalculator {
-    public:
-        CalorieCalculator();
-        double calculateCalories(std::string unit, int amount);
+enum MACRONUTRIENT
+{
+    PROTEIN = 4,
+    CARB = 4,
+    FAT = 9
+};
+
+namespace CalorieCalculator 
+{
+    double calculateCalories(double amount, int calories);
 };
 
 #endif

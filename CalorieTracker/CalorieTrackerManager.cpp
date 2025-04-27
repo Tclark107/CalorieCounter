@@ -3,6 +3,7 @@
 #include "CalorieHistoryFacade.h"
 #include "UserInterface.h"
 #include "Utility.h"
+#include "CalorieCalculator.h"
 
 #include <iostream>
 #include <sstream>
@@ -59,13 +60,19 @@ void CalorieTrackerManager::trackItemToday()
         fl->addItemToLibrary(userItem);
     }
 
-    std::string prompt = "How many ounces of " << userItem << " did you have?\n";
-    std::string result = ""; 
-    result << std::cin;
-    result = Utility::convertStringToDouble(result);
+    std::string prompt = "How many ounces of " + userItem + " did you have?\n";
+    std::cout << prompt;
+    std::string amount = ""; 
+    std::cin >> amount;
 
-    //getItemFromFoodLibrary(userItem)
-    //calculateCalories(amount, fl->getItemCalories(userItem));
+    double dbAmount = 0;
+    dbAmount = Utility::convertStringToDouble(amount);
+
+    std::string item = fl->getItemFromLibrary(userItem);
+    std::cout << "item = " << item << std::endl;
+
+    double calories = CalorieCalculator::calculateCalories(dbAmount, fl->getItemCalories(userItem));
+    std::cout << "calories after calc is " << calories << std::endl;
     //calculateProteins(amount, fl->getItemProteins(userItem));
     //calculateFats(amount, fl->getItemFats(userItem));
     //calculateCarbs(amount, fl->getItemCarbs(userItem));
