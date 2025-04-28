@@ -24,7 +24,7 @@ class FoodLibrary
         //void editItem(std::string item);
         FoodItem getItem(std::string food);
         FoodItem createItem(std::string name,
-                            int calories,
+                            double calories,
                             double proteins,
                             double fats,
                             double carbs);

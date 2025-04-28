@@ -2,23 +2,23 @@
 
 FoodItem::FoodItem() :
     name (),
-    calories (0),
-    proteins (0),
-    fats (0),
-    carbohydrates(0)
+    caloriesPerGram (0),
+    proteinsPerGram (0),
+    fatsPerGram (0),
+    carbsPerGram(0)
 {}
 
 
 FoodItem::FoodItem(std::string name,
-                   int calories, 
-                   double proteins, 
-                   double fats, 
-                   double carbohydrates) :
+                   double caloriesPerGram, 
+                   double proteinsPerGram, 
+                   double fatsPerGram, 
+                   double carbsPerGram) :
     name (name),
-    calories (calories),
-    proteins (proteins),
-    fats (fats),
-    carbohydrates (carbohydrates)
+    caloriesPerGram (caloriesPerGram),
+    proteinsPerGram (proteinsPerGram),
+    fatsPerGram (fatsPerGram),
+    carbsPerGram (carbsPerGram)
 {}
 
 std::string FoodItem::getName()
@@ -26,24 +26,24 @@ std::string FoodItem::getName()
     return name;
 }
 
-int FoodItem::getCalories()
+double FoodItem::getCaloriesPerGram()
 { 
-    return calories;
+    return caloriesPerGram;
 }
 
-double FoodItem::getProteins()
+double FoodItem::getProteinsPerGram()
 {
-    return proteins;
+    return proteinsPerGram;
 }
 
-double FoodItem::getFats()
+double FoodItem::getFatsPerGram()
 {
-    return fats;
+    return fatsPerGram;
 }
 
-double FoodItem::getCarbohydrates()
+double FoodItem::getCarbsPerGram()
 {
-    return carbohydrates;
+    return carbsPerGram;
 } 
 
 void FoodItem::setName(std::string name)
@@ -51,32 +51,32 @@ void FoodItem::setName(std::string name)
 	this->name = name;
 }
 
-void FoodItem::setCalories(int calories)
+void FoodItem::setCaloriesPerGram(double caloriesPerGram)
 {
-	this->calories = calories;
+	this->caloriesPerGram = caloriesPerGram;
 }
 
-void FoodItem::setProteins(double proteins)
+void FoodItem::setProteinsPerGram(double proteinsPerGram)
 {
-	this->proteins = proteins;
+	this->proteinsPerGram = proteinsPerGram;
 }
 
-void FoodItem::setFats(double fats)
+void FoodItem::setFatsPerGram(double fatsPerGram)
 {
-	this->fats = fats;
+	this->fatsPerGram = fatsPerGram;
 }
 
-void FoodItem::setCarbohydrates( double carbohydrates)
+void FoodItem::setCarbsPerGram( double carbsPerGram)
 {
-	this->carbohydrates = carbohydrates;
+	this->carbsPerGram = carbsPerGram;
 }
 
 //std::ostream& operator<<(std::ostream& os, const FoodItem& food) {
 std::ostream& operator<<(std::ostream& os, FoodItem& food) {
         os << food.getName() << "-"
-           << food.getCalories() << "-"
-           << food.getProteins() << "-"
-           << food.getFats() << "-"
-           << food.getCarbohydrates();
+           << food.getCaloriesPerGram() << "-"
+           << food.getProteinsPerGram() << "-"
+           << food.getFatsPerGram() << "-"
+           << food.getCarbsPerGram();
         return os;
 }

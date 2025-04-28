@@ -30,7 +30,7 @@ void FoodLibraryService::saveDataFromDatabase()
     std::vector<std::string> parsedFoodItem;
 
     std::string name = "";
-    int calories = 0;
+    double calories = 0;
     double proteins = 0;
     double fats = 0;
     double carbs = 0;
@@ -51,7 +51,7 @@ void FoodLibraryService::saveDataFromDatabase()
 }
 
 void FoodLibraryService::addItem(const std::string name,
-                                  const int calories,
+                                  const double calories,
                                   const double proteins,
                                   const double fats,
                                   const double carbs)
@@ -64,10 +64,10 @@ std::string FoodLibraryService::toString(FoodItem item)
 {
     std::stringstream ss;
     ss << item.getName() << "-"
-       << item.getCalories() << "-"
-       << item.getProteins() << "-"
-       << item.getFats() << "-"
-       << item.getCarbohydrates();
+       << item.getCaloriesPerGram() << "-"
+       << item.getProteinsPerGram() << "-"
+       << item.getFatsPerGram() << "-"
+       << item.getCarbsPerGram();
 
     std::string result = ss.str();
     return result;
@@ -87,7 +87,7 @@ bool FoodLibraryService::inLibrary(const std::string name)
     return false;
 }
 
-int FoodLibraryService::getItemCalories(const std::string name)
+double FoodLibraryService::getItemCaloriesPerGram(const std::string name)
 {
     if(!inLibrary(name))
     {
@@ -95,10 +95,10 @@ int FoodLibraryService::getItemCalories(const std::string name)
         std::cerr << "returning 0\n";
         return 0;
     }
-    return items[name].getCalories();
+    return items[name].getCaloriesPerGram();
 }
 
-double FoodLibraryService::getItemProteins(const std::string name)
+double FoodLibraryService::getItemProteinsPerGram(const std::string name)
 {
     if(!inLibrary(name))
     {
@@ -106,10 +106,10 @@ double FoodLibraryService::getItemProteins(const std::string name)
         std::cerr << "returning 0\n";
         return 0;
     }
-    return items[name].getProteins();
+    return items[name].getProteinsPerGram();
 }
 
-double FoodLibraryService::getItemFats(const std::string name)
+double FoodLibraryService::getItemFatsPerGram(const std::string name)
 {
     if(!inLibrary(name))
     {
@@ -117,10 +117,10 @@ double FoodLibraryService::getItemFats(const std::string name)
         std::cerr << "returning 0\n";
         return 0;
     }
-    return items[name].getFats();
+    return items[name].getFatsPerGram();
 }
 
-double FoodLibraryService::getItemCarbs(const std::string name)
+double FoodLibraryService::getItemCarbsPerGram(const std::string name)
 {
     if(!inLibrary(name))
     {
@@ -128,7 +128,7 @@ double FoodLibraryService::getItemCarbs(const std::string name)
         std::cerr << "returning 0\n";
         return 0;
     }
-    return items[name].getCarbohydrates();
+    return items[name].getCarbsPerGram();
 }
 
 FoodItem FoodLibraryService::getItem(const std::string name)
@@ -162,17 +162,17 @@ void FoodLibraryService::writeItemToDB(const std::string data)
 }
 
 FoodItem FoodLibraryService::createItem(std::string name,
-                    int calories,
+                    double calories,
                     double proteins,
                     double fats,
                     double carbs)
 {
     FoodItem food;
     food.setName(name);
-    food.setCalories(calories);
-    food.setProteins(proteins);
-    food.setFats(fats);
-    food.setCarbohydrates(carbs);
+    food.setCaloriesPerGram(calories);
+    food.setProteinsPerGram(proteins);
+    food.setFatsPerGram(fats);
+    food.setCarbsPerGram(carbs);
     return food;
 }
 

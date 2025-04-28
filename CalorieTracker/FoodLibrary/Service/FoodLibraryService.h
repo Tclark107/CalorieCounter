@@ -17,12 +17,12 @@ class FoodLibraryService
 
         bool inLibrary(const std::string);
         void addItem(const std::string, 
-                      const int,
+                      const double,
                       const double,
                       const double,
                       const double);
         FoodItem createItem(const std::string, 
-                            const int,
+                            const double,
                             const double,
                             const double,
                             const double);
@@ -31,10 +31,10 @@ class FoodLibraryService
         std::string getStringItem(const std::string);
         FoodItem getItem(const std::string);
 
-        int getItemCalories(const std::string);
-        double getItemProteins(const std::string);
-        double getItemFats(const std::string);
-        double getItemCarbs(const std::string);
+        double getItemCaloriesPerGram(const std::string);
+        double getItemProteinsPerGram(const std::string);
+        double getItemFatsPerGram(const std::string);
+        double getItemCarbsPerGram(const std::string);
 
         void saveEntryToDataBase(const std::string&);
         void saveEntryInternal(FoodItem);

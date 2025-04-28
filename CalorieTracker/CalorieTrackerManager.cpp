@@ -71,14 +71,25 @@ void CalorieTrackerManager::trackItemToday()
     std::string item = fl->getItemFromLibrary(userItem);
     std::cout << "item = " << item << std::endl;
 
-    double calories = CalorieCalculator::calculateCalories(dbAmount, fl->getItemCalories(userItem));
+    double calories = CalorieCalculator::calculateCalories(dbAmount, fl->getItemCaloriesPerGram(userItem));
     std::cout << "calories after calc is " << calories << std::endl;
-    //calculateProteins(amount, fl->getItemProteins(userItem));
-    //calculateFats(amount, fl->getItemFats(userItem));
-    //calculateCarbs(amount, fl->getItemCarbs(userItem));
+    double proteins = CalorieCalculator::calculateProteins(dbAmount, fl->getItemProteinsPerGram(userItem));
+    std::cout << "proteins after calc is " << proteins << std::endl;
+    double fats = CalorieCalculator::calculateFats(dbAmount, fl->getItemFatsPerGram(userItem));
+    std::cout << "fats after calc is " << fats << std::endl;
+    double carbs = CalorieCalculator::calculateCarbs(dbAmount, fl->getItemCarbsPerGram(userItem));
+    std::cout << "carbs after calc is " << carbs << std::endl;
     //calorieHistor->buildItem();
+    std::stringstream ss;
+    ss << userItem << "-"
+       << calories << "-"
+       << proteins << "-"
+       << fats << "-"
+       << carbs;
 
-    std::string newItemToTrack = fl->getItemFromLibrary(userItem);
+    //std::string newItemToTrack = fl->getItemFromLibrary(userItem);
+    std::string newItemToTrack = ss.str(); 
+    std::cout << "newitem = " << newItemToTrack << std::endl;
     ch->trackItem(date, newItemToTrack);
 }
 
@@ -90,16 +101,16 @@ void CalorieTrackerManager::saveHistory()
 void CalorieTrackerManager::displayTodaysMacros()
 {
     std::vector<std::string> todaysFood = ch->getTodaysFoodItems();
-    int calories = 0; 
+    double calories = 0; 
     double proteins = 0; 
     double fats = 0; 
     double carbs = 0; 
     for(int i = 0; i < todaysFood.size(); i++)
     {
-        calories += fl->getItemCalories(todaysFood[i]);
-        proteins += fl->getItemProteins(todaysFood[i]);
-        fats += fl->getItemFats(todaysFood[i]);
-        carbs += fl->getItemCarbs(todaysFood[i]);
+        calories += fl->getItemCaloriesPerGram(todaysFood[i]);
+        proteins += fl->getItemProteinsPerGram(todaysFood[i]);
+        fats += fl->getItemFatsPerGram(todaysFood[i]);
+        carbs += fl->getItemCarbsPerGram(todaysFood[i]);
     }
     
     std::stringstream ss;

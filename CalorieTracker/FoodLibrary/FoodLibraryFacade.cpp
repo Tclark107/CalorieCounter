@@ -26,7 +26,7 @@ void FoodLibraryFacade::addItemToLibrary()
 
 void FoodLibraryFacade::addItemToLibrary(const std::string name)
 {
-    int calories = getUserItemCalories(name);
+    double calories = getUserItemCalories(name);
     double proteins = getUserItemProteins(name);
     double fats = getUserItemFats(name);
     double carbs = getUserItemCarbs(name);
@@ -58,16 +58,16 @@ std::string FoodLibraryFacade::getUserItemName()
     return name;
 }
 
-int FoodLibraryFacade::getUserItemCalories(const std::string name)
+double FoodLibraryFacade::getUserItemCalories(const std::string name)
 {
     std::string prompt = "";
     std::string placeHolder = "";
-    int calories = 0;
+    double calories = 0;
 
-    prompt = "How many calories are in " + name + "?";
+    prompt = "How many calories are in 100g of " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
-    calories = Utility::convertStringToInt(placeHolder);
+    calories = Utility::convertStringToDouble(placeHolder);
     return calories;
 
 }
@@ -76,9 +76,9 @@ double FoodLibraryFacade::getUserItemProteins(const std::string name)
 {
     std::string prompt = "";
     std::string placeHolder = "";
-    float proteins = 0;
+    double proteins = 0;
 
-    prompt = "How many proteins are in " + name + "?";
+    prompt = "How many proteins are in 100g of " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     proteins = Utility::convertStringToDouble(placeHolder);
@@ -90,9 +90,9 @@ double FoodLibraryFacade::getUserItemFats(const std::string name)
 {
     std::string prompt = "";
     std::string placeHolder = "";
-    float fats = 0;
+    double fats = 0;
 
-    prompt = "How many fats are in " + name + "?";
+    prompt = "How many fats are in 100g of " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     fats = Utility::convertStringToDouble(placeHolder);
@@ -104,9 +104,9 @@ double FoodLibraryFacade::getUserItemCarbs(const std::string name)
 {
     std::string prompt = "";
     std::string placeHolder = "";
-    float carbs = 0;
+    double carbs = 0;
 
-    prompt = "How many carbs are in " + name + "?";
+    prompt = "How many carbs are in 100g of " + name + "?";
     ui->displayMessage(prompt);
     std::cin >> placeHolder;
     carbs = Utility::convertStringToDouble(placeHolder);
@@ -114,22 +114,22 @@ double FoodLibraryFacade::getUserItemCarbs(const std::string name)
     return carbs;
 }
 
-int FoodLibraryFacade::getItemCalories(const std::string name)
+double FoodLibraryFacade::getItemCaloriesPerGram(const std::string name)
 {
-    return foodLibraryService->getItemCalories(name);
+    return foodLibraryService->getItemCaloriesPerGram(name);
 }
 
-double FoodLibraryFacade::getItemProteins(const std::string name)
+double FoodLibraryFacade::getItemProteinsPerGram(const std::string name)
 {
-    return foodLibraryService->getItemProteins(name);
+    return foodLibraryService->getItemProteinsPerGram(name);
 }
 
-double FoodLibraryFacade::getItemFats(const std::string name)
+double FoodLibraryFacade::getItemFatsPerGram(const std::string name)
 {
-    return foodLibraryService->getItemFats(name);
+    return foodLibraryService->getItemFatsPerGram(name);
 }
 
-double FoodLibraryFacade::getItemCarbs(const std::string name)
+double FoodLibraryFacade::getItemCarbsPerGram(const std::string name)
 {
-    return foodLibraryService->getItemCarbs(name);
+    return foodLibraryService->getItemCarbsPerGram(name);
 }

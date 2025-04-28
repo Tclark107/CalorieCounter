@@ -8,22 +8,22 @@ class FoodItem {
     public:
         FoodItem();
         FoodItem(std::string name,
-                 int calories, 
-                 double proteins, 
-                 double fats, 
-                 double carbohydrates);
+                 double caloriesPerGram, 
+                 double proteinsPerGram, 
+                 double fatsPerGram, 
+                 double carbsPerGram);
 
         std::string getName();
-        int getCalories();
-        double getProteins();
-        double getFats();
-        double getCarbohydrates();
+        double getCaloriesPerGram();
+        double getProteinsPerGram();
+        double getFatsPerGram();
+        double getCarbsPerGram();
 
         void setName(std::string name);
-        void setCalories(int calories);
-        void setProteins(double proteins);
-        void setFats(double fats);
-        void setCarbohydrates(double carbohydrates);
+        void setCaloriesPerGram(double caloriesPerGram);
+        void setProteinsPerGram(double proteinsPerGram);
+        void setFatsPerGram(double fatsPerGram);
+        void setCarbsPerGram(double carbsPerGram);
 
 		//google why we should use const here
 		//friend std::ostream& operator<<(std::ostream& os, const FoodItem& food);
@@ -31,10 +31,10 @@ class FoodItem {
 
     private:
         std::string name;
-        int calories;
-        double proteins;
-        double fats;
-        double carbohydrates;
+        double caloriesPerGram;
+        double proteinsPerGram;
+        double fatsPerGram;
+        double carbsPerGram;
 };
 
 #endif
