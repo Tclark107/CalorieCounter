@@ -53,6 +53,7 @@ void CalorieTrackerManager::showHistory()
 void CalorieTrackerManager::trackItemToday()
 {
     std::string date = Utility::getDate();
+    std::cout << "Would you like to track an item by ounce or serving?";
 
     std::string userItem = fl->getUserItemName();
     if(!fl->inLibrary(userItem))
