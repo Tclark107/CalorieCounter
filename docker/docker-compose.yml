@@ -13,6 +13,7 @@ services:
             - "5432:5432"
         volumes:
             - pgdata:/var/lib/postgresql/data
+            - ./01_create_weight_table.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
 volumes:
     pgdata:
